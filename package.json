@@ -1,0 +1,32 @@
+{
+  "name": "weeat",
+  "version": "1.0.0",
+  "description": "Social App",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Le0198/CS498RK_WeEat.git"
+  },
+  "author": "Leo Lopez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Le0198/CS498RK_WeEat/issues"
+  },
+  "homepage": "https://github.com/Le0198/CS498RK_WeEat#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
+  }
+}
