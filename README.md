@@ -18,11 +18,11 @@ npm run server
 
 npm run client
 
-#Other Info
+# Other Info
 
 Server runs on http://localhost:4000 and client on http://localhost:3000
 
-#Resources Used For Setup
+# Resources Used For Setup
 
 https://www.youtube.com/watch?v=5yTazHkDR4o
 https://www.youtube.com/watch?v=R54neaLznFA&t=384s
