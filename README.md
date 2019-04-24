@@ -22,8 +22,9 @@ npm run client
 
 Server runs on http://localhost:4000 and client on http://localhost:3000
 
-# Resources Used For Setup
+# Resources
 
 https://www.youtube.com/watch?v=5yTazHkDR4o
 https://www.youtube.com/watch?v=R54neaLznFA&t=384s
+https://medium.freecodecamp.org/learn-how-to-handle-authentication-with-node-using-passport-js-4a56ed18e81e
 
