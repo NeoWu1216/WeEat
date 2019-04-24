@@ -1,25 +1,36 @@
 const mongoose = require('mongoose');
 const router = require('express').Router();
+const auth = require('../auth');
 const EatingRooms = mongoose.model('EatingRooms');
+const Users = mongoose.model('Users');
+
 
 // create eating room
-router.post('/', (req, res) => {
+router.post('/', auth.required, (req, res) => {
     if (!req.body) {
         return res.status(400).json({
             "message": "Error: empty body",
             "data": {}
         });
     }
-
+    const { payload: { id } } = req;
     // create new task
     const eatingroom = new EatingRooms({
+        user: id,
         title: req.body.title,
         date: req.body.title.date,
         address: req.body.title.address,
         restaurant: req.body.title.restaurant,
         party_size: req.body.title.party_size,
     });
-
+    // add the eating room to user's list
+    Users.findByIdAndUpdate(id,
+        {
+            $push: {eatingrooms: eatingroom._id}
+        })
+        .then()
+        .catch()
+    
     eatingroom.save()
         .then(data => {
             res.status(201).json({
