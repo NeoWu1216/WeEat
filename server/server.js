@@ -49,6 +49,7 @@ app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000 }, resave
 //Models & routes
 require('./models/Users');
 require('./config/passport');
+require('./models/EatingRooms');
 app.use(require('./routes'));
 
 app.use((err, req, res) => {

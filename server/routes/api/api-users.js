@@ -10,17 +10,13 @@ router.post('/signup', auth.optional, (req, res, next) => {
 
   if (!user.email) {
     return res.status(422).json({
-      errors: {
-        email: 'is required',
-      },
+      error: "email is required",
     });
   }
 
   if (!user.password) {
     return res.status(422).json({
-      errors: {
-        password: 'is required',
-      },
+      error: "password is required",
     });
   }
 
@@ -29,7 +25,12 @@ router.post('/signup', auth.optional, (req, res, next) => {
   finalUser.setPassword(user.password);
 
   return finalUser.save()
-    .then(() => res.json({ user: finalUser.toAuthJSON() }));
+    .then(() => res.json({ user: finalUser.toAuthJSON() }))
+    .catch(err => {
+      res.status(500).json({
+        error: err,
+      });
+    })
 });
 
 // POST login route (optional, everyone has access)
@@ -38,23 +39,21 @@ router.post('/login', auth.optional, (req, res, next) => {
 
   if (!user.email) {
     return res.status(422).json({
-      errors: {
-        email: 'is required',
-      },
+      error: "email is required",
     });
   }
 
   if (!user.password) {
     return res.status(422).json({
-      errors: {
-        password: 'is required',
-      },
+      error: "password is required",
     });
   }
 
   return passport.authenticate('local', { session: false }, (err, passportUser, info) => {
     if (err) {
-      return next(err);
+      return res.status(400).json({
+        error: 'error while authenticating'
+      });
     }
 
     if (passportUser) {
@@ -75,10 +74,17 @@ router.get('/current', auth.required, (req, res, next) => {
   return Users.findById(id)
     .then((user) => {
       if (!user) {
-        return res.sendStatus(400);
+        return res.sendStatus(400).json({
+          error: "user not found"
+        });
       }
 
       return res.json({ user: user.toAuthJSON() });
+    })
+    .catch(err => {
+      return res.status(500).send({
+          error: err.message
+      })
     });
 });
 
