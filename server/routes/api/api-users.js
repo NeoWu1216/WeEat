@@ -3,6 +3,7 @@ const passport = require('passport');
 const router = require('express').Router();
 const auth = require('../auth');
 const Users = mongoose.model('Users');
+const EatingRooms = mongoose.model('EatingRooms');
 
 // POST signup route (optional, everyone has access)
 router.post('/signup', auth.optional, (req, res, next) => {
@@ -106,7 +107,7 @@ router.get('/:id', auth.required, (req, res) => {
       });
     }
     res.status(200).send({
-      "data": user[0]
+      data: user[0]
     });
   }).catch(err => {
     if (err.kind === 'ObjectId') {
@@ -122,27 +123,89 @@ router.get('/:id', auth.required, (req, res) => {
 
 // Delete a user with the specified id in the request
 router.delete('/:id', auth.required, (req, res) => {
-  Users.findByIdAndRemove(req.params.id)
-      .then(user => {
-          if (!user || user.length == 0) {
-              return res.status(404).send({
-                  error: "User not found with id " + req.params.id,
-              });
-          }
-          res.status(200).send({
-              message: "User deleted successfully!",
-              data: {}
-          });
-      }).catch(err => {
-          if (err.kind === 'ObjectId') {
-              return res.status(404).send({
-                  error: err,
-              });
-          }
-          return res.status(500).send({
-              error: err,
-          });
+
+  EatingRooms.findByIdAndDelete({ user: req.params.id })
+    .then()
+    .catch(err => {
+      return res.status(500).send({
+        error: err,
       });
+    })
+
+  Users.findByIdAndRemove(req.params.id)
+    .then(user => {
+      if (!user || user.length == 0) {
+        return res.status(404).send({
+          error: "User not found with id " + req.params.id,
+        });
+      }
+      res.status(200).send({
+        data: {}
+      });
+    }).catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          error: err,
+        });
+      }
+      return res.status(500).send({
+        error: err,
+      });
+    });
+});
+
+// Update a user identified by the id in the request
+router.put('/:id', auth.required, (req, res) => {
+  // empty body
+  if (!req.body) {
+    return res.status(400).send({
+      error: "Request body can not be empty"
+    });
+  }
+  // case for updating password
+  if (req.body.password) {
+    Users.findById(req.params.id).then(user => {
+      if (!user || user.length == 0) {
+        return res.status(404).send({
+          error: "User not found with id " + req.params.id
+        })
+      }
+      user.setPassword(req.body.password);
+      return user.save()
+        .then(() => res.json({ data: user }))
+        .catch(err => {
+          res.status(500).json({
+            error: err
+          });
+        });
+    });
+  }
+  // Find user and update it with the request body
+  Users.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true, runValidators: true })
+    .then(user => {
+      if (!user || user.length == 0) {
+        return res.status(404).send({
+          error: "User not found with id " + req.params.id
+        });
+      }
+      res.status(200).send({
+        data: user
+      });
+    }).catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          error: "User not found with id " + req.params.id
+        });
+      }
+      if (err.name === 'ValidationError') {
+        return res.status(500).send({
+          error: "ValidationError"
+        });
+      }
+      res.status(500).send({
+        error: "Internal server error"
+      });
+    });
 });
 
 // for testing purpose

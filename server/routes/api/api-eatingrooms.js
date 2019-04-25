@@ -7,68 +7,158 @@ const Users = mongoose.model('Users');
 
 // create eating room
 router.post('/', auth.required, (req, res) => {
-    if (!req.body) {
-        return res.status(400).json({
-            "message": "Error: empty body",
-            "data": {}
-        });
-    }
-    const { payload: { id } } = req;
-    // create new task
-    const eatingroom = new EatingRooms({
-        user: id,
-        title: req.body.title,
-        date: req.body.title.date,
-        address: req.body.title.address,
-        restaurant: req.body.title.restaurant,
-        party_size: req.body.title.party_size,
+  if (!req.body) {
+    return res.status(400).json({
+      data: {}
     });
-    // add the eating room to user's list
-    Users.findByIdAndUpdate(id,
-        {
-            $push: {eatingrooms: eatingroom._id}
-        })
-        .then()
-        .catch()
-    
-    eatingroom.save()
-        .then(data => {
-            res.status(201).json({
-                "message": "Created",
-                "data": data
-            });
-        }).catch(err => {
-            res.status(500).json({
-                "message": "Internal server error.",
-                "data": {}
-            });
+  }
+  const { payload: { user_id } } = req;
+  // create new task
+  const eatingroom = new EatingRooms({
+    user: user_id,
+    title: req.body.title,
+    date: req.body.date,
+    address: req.body.address,
+    restaurant: req.body.restaurant,
+    party_size: req.body.party_size,
+  });
+  // add the eating room to user's list
+  Users.findByIdAndUpdate(user_id,
+    {
+      $push: { eatingrooms: eatingroom._id }
+    })
+    .then()
+    .catch()
+
+  eatingroom.save()
+    .then(data => {
+      res.status(201).json({
+        data: data
+      });
+    }).catch(err => {
+      res.status(500).json({
+        error: err
+      });
+    });
+});
+
+// Delete an eating room
+router.delete('/:id', auth.required, (req, res) => {
+  const { payload: { user_id } } = req;
+
+  // delete other people's eating room detection
+  EatingRooms.findById(req.params.id)
+    .then(eatingroom => {
+      if (eatingroom.user != user_id) {
+        return res.status(500).send({
+          error: "Fuck u, you r deleting someone else's eating room!",
         });
+      }
+    })
+    .catch(err => {
+      return res.status(500).send({
+        error: err,
+      });
+    })
+
+  Users.findById(user_id,
+    {
+      $pull: { eatingrooms: req.params.id }
+    })
+    .then()
+    .catch(err => {
+      return res.status(500).send({
+        error: err,
+      });
+    })
+
+  EatingRooms.findByIdAndRemove(req.params.id)
+    .then(eatingroom => {
+      if (!eatingroom || eatingroom.length == 0) {
+        return res.status(404).send({
+          error: "eatingroom not found with id " + req.params.id,
+        });
+      }
+      res.status(200).send({
+        data: {}
+      });
+    }).catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          error: err,
+        });
+      }
+      return res.status(500).send({
+        error: err,
+      });
+    });
+});
+
+
+// Update a eatingroom
+router.put('/:id', auth.required, (req, res) => {
+  const { payload: { user_id } } = req;
+
+  // editing other people's eating room detection
+  EatingRooms.findById(req.params.id)
+    .then(eatingroom => {
+      if (eatingroom.user != user_id) {
+        return res.status(500).send({
+          error: "Fuck u, you r editing someone else's eating room!",
+        });
+      }
+    })
+    .catch(err => {
+      return res.status(500).send({
+        error: err,
+      });
+    })
+  // empty body
+  if (!req.body) {
+    return res.status(400).send({
+      error: "Request body can not be empty"
+    });
+  }
+  // Find user and update it with the request body
+  EatingRooms.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true, runValidators: true })
+    .then(eatingroom => {
+      if (!eatingroom || eatingroom.length == 0) {
+        return res.status(404).send({
+          error: "eatingroom not found with id " + req.params.id
+        });
+      }
+      res.status(200).send({
+        data: eatingroom
+      });
+    }).catch(err => {
+      res.status(500).send({
+        error: err
+      });
+    });
 });
 
 
 // get all eating rooms
 router.get('/', (req, res) => {
-    if (req.query.where) var where = JSON.parse(req.query.where);
-    if (req.query.sort) var sort = JSON.parse(req.query.sort);
-    if (req.query.select) var select = JSON.parse(req.query.select);
-    if (req.query.skip) var skip = JSON.parse(req.query.skip);
-    if (req.query.limit) var limit = JSON.parse(req.query.limit);
-    if (req.query.count) var count = JSON.parse(req.query.count);
+  if (req.query.where) var where = JSON.parse(req.query.where);
+  if (req.query.sort) var sort = JSON.parse(req.query.sort);
+  if (req.query.select) var select = JSON.parse(req.query.select);
+  if (req.query.skip) var skip = JSON.parse(req.query.skip);
+  if (req.query.limit) var limit = JSON.parse(req.query.limit);
+  if (req.query.count) var count = JSON.parse(req.query.count);
 
-    var tmp = EatingRooms.find(where).sort(sort).select(select).skip(skip).limit(limit);
-    if (count) tmp = tmp.count();
-    tmp.then(data => {
-        res.status(200).json({
-            "message": "OK",
-            "data": data
-        })
-    }).catch(err => {
-        res.status(500).json({
-            "message": "Some error occurred while retrieving tasks.",
-            "data": {}
-        });
-
+  var tmp = EatingRooms.find(where).sort(sort).select(select).skip(skip).limit(limit);
+  if (count) tmp = tmp.count();
+  tmp.then(data => {
+    res.status(200).json({
+      data: data
+    })
+  }).catch(err => {
+    res.status(500).json({
+      error: "Some error occurred while retrieving tasks."
     });
+
+  });
 });
 
 module.exports = router;
