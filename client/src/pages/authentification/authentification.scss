@@ -5,7 +5,7 @@ $color4: hsla(208%, 53%, 32%, 1);
 $color5: hsla(34%, 100%, 59%, 1);
 
 :local(.authentification) {
-  color: #300f0c;
+  color: $color3;
   width: 100%;
   height: 100%;
   font-size: 2em;
@@ -35,9 +35,9 @@ $color5: hsla(34%, 100%, 59%, 1);
       margin: auto;
       width: 90%;
       height: 90%;
-      border: solid #300f0c 5px;
+      border: solid $color3 5px;
       border-radius: 3px;
-      background: #fa5754;
+      background: $color1;
       .logo-title {
         font-family: "Pacifico", cursive;
         font-size: 3em;
@@ -45,9 +45,42 @@ $color5: hsla(34%, 100%, 59%, 1);
         text-align: center;
         height: 1.4em;
         margin-bottom: 0.1em;
-        border-bottom: solid #300f0c 7px;
+        border-bottom: solid $color3 7px;
         border-radius: 5px;
       }
+      .entry {
+        i {
+          color: $color3;
+          margin: auto 0.75em auto -0.75em;
+          font-size: 0.75em;
+        }
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        border-radius: 15px;
+        background-color: $color2;
+        color: $color2;
+        margin: 1.1em auto;
+        width: 10em;
+        height: 1.2em;
+      }
+    }
+    input {
+      font-family: "Roboto Slab", serif;
+      background: none;
+      border: none;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      font-size: 0.4em;
+      width: 60%;
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+    .auth-message {
+      font-size: 0.4em;
     }
   }
 }

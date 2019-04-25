@@ -6,7 +6,7 @@ import Signup from "../../components/signup/signup.js";
 
 class Authentification extends Component {
   state = {
-    shouldDisplayLogin: true
+    shouldDisplayLogin: false
   };
 
   onUpdateAuthDisplay() {

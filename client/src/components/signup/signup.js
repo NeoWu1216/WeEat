@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styles from "./signup.scss";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 
@@ -14,22 +13,22 @@ class Signup extends Component {
 
   render() {
     return (
-      <div className={styles.signup}>
+      <div>
         <Grid item>
-          <div className="signup-entry">
-            <i class="fas fa-user" />
+          <div className="entry">
+            <i className="fas fa-user" />
             <input type="text" placeholder="Name*" name="uname" required />
           </div>
         </Grid>
         <Grid item>
-          <div className="signup-entry">
-            <i class="fas fa-envelope" />
+          <div className="entry">
+            <i className="fas fa-envelope" />
             <input type="text" placeholder="Email*" name="uemail" required />
           </div>
         </Grid>
         <Grid item>
-          <div className="signup-entry">
-            <i class="fas fa-key" />
+          <div className="entry">
+            <i className="fas fa-key" />
             <input
               type="password"
               placeholder="Password*"
@@ -47,18 +46,17 @@ class Signup extends Component {
             style={{ margin: "20px 0" }}
           >
             <Grid item xs>
-              <div className="login-message">
+              <div className="auth-message">
                 Already have an account?
                 <Button
                   size="small"
                   style={{
-                    "font-family": '"Roboto Slab", serif',
-                    "text-transform": "capitalize",
+                    fontFamily: '"Roboto Slab", serif',
+                    textTransform: "capitalize",
                     color: "#FFA630",
-                    margin: 0,
                     padding: 0,
-                    "font-weight": "bolder",
-                    "margin-left": "-1em"
+                    fontWeight: "bolder",
+                    marginLeft: "-1em"
                   }}
                   onClick={this.displayChangeHandler}
                 >
