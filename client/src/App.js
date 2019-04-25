@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.scss";
-import Login from "./pages/login/login.js";
 import { HashRouter, Route, Switch } from "react-router-dom";
+import Authentification from "./pages/authentification/authentification";
 
 class App extends Component {
   render() {
@@ -10,7 +9,7 @@ class App extends Component {
       <HashRouter>
         <div className="App">
           <Switch>
-            <Route exact path={"/"} component={props => <Login />} />
+            <Route exact path={"/"} component={props => <Authentification />} />
           </Switch>
         </div>
       </HashRouter>

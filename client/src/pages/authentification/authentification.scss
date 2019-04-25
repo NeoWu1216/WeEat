@@ -1,0 +1,53 @@
+$color1: hsla(1%, 94%, 65%, 1);
+$color2: hsla(351%, 100%, 96%, 1);
+$color3: hsla(5%, 60%, 12%, 1);
+$color4: hsla(208%, 53%, 32%, 1);
+$color5: hsla(34%, 100%, 59%, 1);
+
+:local(.authentification) {
+  color: #300f0c;
+  width: 100%;
+  height: 100%;
+  font-size: 2em;
+  .auth-img {
+    height: 100%;
+    width: 50%;
+    float: left;
+    background-image: url("https://images.unsplash.com/photo-1555090866-dfd8c22e9b35?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2468&q=80");
+    background-size: cover;
+    background-position: bottom;
+    box-sizing: border-box;
+  }
+  .auth {
+    background: repeating-linear-gradient(
+      45deg,
+      #fa5754,
+      #fa5754 10px,
+      #ea5654 10px,
+      #ea5654 20px
+    );
+    height: 100%;
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+    display: flex;
+    .auth-content {
+      margin: auto;
+      width: 90%;
+      height: 90%;
+      border: solid #300f0c 5px;
+      border-radius: 3px;
+      background: #fa5754;
+      .logo-title {
+        font-family: "Pacifico", cursive;
+        font-size: 3em;
+        width: 100%;
+        text-align: center;
+        height: 1.4em;
+        margin-bottom: 0.1em;
+        border-bottom: solid #300f0c 7px;
+        border-radius: 5px;
+      }
+    }
+  }
+}
