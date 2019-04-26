@@ -5,10 +5,11 @@ const jwt = require('jsonwebtoken');
 const { Schema } = mongoose;
 
 const UsersSchema = new Schema({
+  name: { type: String },
   email: { type: String, required: true, unique: true },
   hash: { type: String },
   salt: { type: String },
-  eatingrooms: [{type: String}],
+  eatingrooms: [{ type: String }],
 });
 
 UsersSchema.methods.setPassword = function (password) {
