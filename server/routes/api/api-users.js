@@ -9,6 +9,12 @@ const EatingRooms = mongoose.model('EatingRooms');
 router.post('/signup', auth.optional, (req, res, next) => {
   const { body: { user } } = req;
 
+  if (!user.name) {
+    return res.status(422).json({
+      error: "name is required",
+    });
+  }
+
   if (!user.email) {
     return res.status(422).json({
       error: "email is required",
