@@ -7,7 +7,7 @@ class Signup extends Component {
     super();
   }
 
-  displayChangeHandler = () => {
+  displaySignupHandler = () => {
     this.props.changeDisplay();
   };
 
@@ -58,7 +58,7 @@ class Signup extends Component {
                     fontWeight: "bolder",
                     marginLeft: "-1em"
                   }}
-                  onClick={this.displayChangeHandler}
+                  onClick={this.displaySignupHandler}
                 >
                   Login
                 </Button>

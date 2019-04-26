@@ -5,9 +5,15 @@ import Login from "../../components/login/login.js";
 import Signup from "../../components/signup/signup.js";
 
 class Authentification extends Component {
-  state = {
-    shouldDisplayLogin: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      shouldDisplayLogin: true,
+      name: "",
+      email: "",
+      password: ""
+    };
+  }
 
   onUpdateAuthDisplay() {
     let currVal = this.state.shouldDisplayLogin;
@@ -26,6 +32,7 @@ class Authentification extends Component {
   render() {
     return (
       <div className={styles.authentification}>
+        <h1>{this.state.name}</h1>
         <div className="auth-img" />
         <div className="auth">
           <div className="auth-content">

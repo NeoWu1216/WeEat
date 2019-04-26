@@ -7,7 +7,7 @@ class Login extends Component {
     super();
   }
 
-  displayChangeHandler = () => {
+  displayLoginHandler = () => {
     this.props.changeDisplay();
   };
 
@@ -33,7 +33,7 @@ class Login extends Component {
             justify="center"
             direction="row"
             style={{ margin: "20px 0" }}
-            onClick={this.displayChangeHandler}
+            onClick={this.displayLoginHandler}
           >
             <Grid item xs>
               <div className="auth-message">
@@ -60,7 +60,10 @@ class Login extends Component {
                   width: "125px",
                   color: "#FFEBEE",
                   background: "#26547C",
-                  float: "right"
+                  float: "right",
+                  "&:hover": {
+                    background: "#2bd5c6 !important"
+                  }
                 }}
                 className=".auth-button"
               >

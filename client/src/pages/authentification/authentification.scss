@@ -1,11 +1,11 @@
-$color1: hsla(1%, 94%, 65%, 1);
-$color2: hsla(351%, 100%, 96%, 1);
-$color3: hsla(5%, 60%, 12%, 1);
-$color4: hsla(208%, 53%, 32%, 1);
-$color5: hsla(34%, 100%, 59%, 1);
+$primary: hsla(1%, 94%, 65%, 1);
+$light: hsla(351%, 100%, 96%, 1);
+$dark: hsla(5%, 60%, 12%, 1);
+$secondary: hsla(208%, 53%, 32%, 1);
+$alt-text: hsla(34%, 100%, 59%, 1);
 
 :local(.authentification) {
-  color: $color3;
+  color: $dark;
   width: 100%;
   height: 100%;
   font-size: 2em;
@@ -33,34 +33,34 @@ $color5: hsla(34%, 100%, 59%, 1);
     display: flex;
     .auth-content {
       margin: auto;
-      width: 90%;
-      height: 90%;
-      border: solid $color3 5px;
+      width: 92%;
+      height: 92%;
+      border: solid $dark 5px;
       border-radius: 3px;
-      background: $color1;
+      background: $primary;
       .logo-title {
         font-family: "Pacifico", cursive;
         font-size: 3em;
         width: 100%;
         text-align: center;
         height: 1.4em;
-        margin-bottom: 0.1em;
-        border-bottom: solid $color3 7px;
+        margin: 0.2em 0;
+        border-bottom: solid $dark 7px;
         border-radius: 5px;
       }
       .entry {
         i {
-          color: $color3;
-          margin: auto 0.75em auto -0.75em;
-          font-size: 0.75em;
+          color: $dark;
+          margin: auto 0.8em auto -0.8em;
+          font-size: 0.8em;
         }
         display: flex;
         justify-content: center;
         align-content: center;
         border-radius: 15px;
-        background-color: $color2;
-        color: $color2;
-        margin: 1.1em auto;
+        background-color: $light;
+        color: $dark;
+        margin: 1.2em auto;
         width: 10em;
         height: 1.2em;
       }
