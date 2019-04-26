@@ -41,6 +41,7 @@ class Authentification extends Component {
               direction="column"
               justify="center"
               alignItems="center"
+              style={{ height: "100%" }}
             >
               <Grid item>
                 <div className="logo-title">weEat!</div>
