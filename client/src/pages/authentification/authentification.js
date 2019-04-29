@@ -14,7 +14,19 @@ class Authentification extends Component {
       password: ""
     };
   }
-
+  componentDidMount() {
+    if (this.props.location && this.props.location.state) {
+      if (this.props.location.state.is_login) {
+        this.setState({
+          shouldDisplayLogin: true
+        });
+      } else {
+        this.setState({
+          shouldDisplayLogin: false
+        })
+      }
+    }
+  }
   onUpdateAuthDisplay() {
     let currVal = this.state.shouldDisplayLogin;
     this.setState({

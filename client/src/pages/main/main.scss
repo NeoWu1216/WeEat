@@ -1,0 +1,68 @@
+#main_outer {
+  background-image: url(http://www.ox.ac.uk/sites/files/oxford/styles/ow_medium_feature/public/field/field_image_main/Meal%20banner.jpg?itok=t_iAg-1M);
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-size: cover;
+  height: 100%;
+  background-position: auto;
+
+  #main_navbar {
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 80px 10px;
+    transition: 0.2s;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+
+    #main_logo {
+      display: inline-block;
+      color: white;
+      font-family: "Pacifico", cursive;
+      text-decoration: None;
+      font-size: 3em;
+      height: 1.4em;
+    }
+
+    #navbar-right {
+      float: right;
+      margin-right: 20px;
+      #joinnow,
+      #signin {
+        display: inline-block;
+        color: white;
+        font-size: 30px;
+        background: transparent;
+        border-color: #fa5754;
+        margin: 10px;
+        padding: 15px;
+        cursor: pointer;
+        outline: 0;
+        -webkit-appearance: none;
+        border-radius: 5px;
+      }
+      #joinnow:hover {
+        font-size: 40px;
+        transition-duration: 0.4s;
+        font-weight: bolder;
+      }
+      #signin:hover {
+        transition-duration: 0.4s;
+        background-color: #fa5754;
+      }
+      #joinnow {
+        border: 0;
+      }
+    }
+  }
+
+  #main_description {
+    font-size: 100px;
+    color: white;
+    padding-top: 300px;
+    padding-left: 100px;
+    text-decoration: blink;
+    font-weight: bold;
+  }
+}
