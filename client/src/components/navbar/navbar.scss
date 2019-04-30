@@ -15,7 +15,7 @@
     text-decoration: None;
     font-size: 3em;
     height: 1.4em;
-    text-shadow: black 2px 0 10px;
+    text-shadow: gray 2px 0 10px;
   }
   #navbar_right {
     float: right;
@@ -23,7 +23,8 @@
     .navbar_button {
       display: inline-block;
       color: white;
-      font-size: 30px;
+      font-size: 25px;
+      text-shadow: black 2px 0 8px;
       background: transparent;
       border: None;
       margin: 10px;
@@ -43,6 +44,7 @@
       color: white;
       border: None;
       cursor: pointer;
+      text-shadow: darkgray 2px 0 8px;
     }
     #profile_icon:hover {
       transition-duration: 0.4s;

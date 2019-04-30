@@ -29,7 +29,7 @@ $alt-text: hsla(34%, 100%, 59%, 1);
       margin: auto;
       width: 92%;
       height: 92%;
-      border: solid $dark 8px;
+      border: solid white 8px;
       border-radius: 3px;
       background: $primary;
       .logo-title {
@@ -39,9 +39,9 @@ $alt-text: hsla(34%, 100%, 59%, 1);
         width: 100%;
         text-align: center;
         height: 1.4em;
-        border-bottom: solid $dark 6px;
+        // border-bottom: solid $dark 6px;
         border-radius: 5px;
-        text-shadow: black 2px 0 10px;
+        text-shadow: gray 2px 0 10px;
       }
       .entry {
         i {

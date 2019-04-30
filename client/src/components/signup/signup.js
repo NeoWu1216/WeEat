@@ -17,13 +17,13 @@ class Signup extends Component {
         <Grid item>
           <div className="entry">
             <i className="fas fa-user" />
-            <input type="text" placeholder="Name*" name="uname" required />
+            <input type="text" placeholder="Name *" name="uname" required />
           </div>
         </Grid>
         <Grid item>
           <div className="entry">
             <i className="fas fa-envelope" />
-            <input type="text" placeholder="Email*" name="uemail" required />
+            <input type="text" placeholder="Email *" name="uemail" required />
           </div>
         </Grid>
         <Grid item>
@@ -31,7 +31,7 @@ class Signup extends Component {
             <i className="fas fa-key" />
             <input
               type="password"
-              placeholder="Password*"
+              placeholder="Password *"
               name="psw"
               required
             />
