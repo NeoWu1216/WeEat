@@ -3,3 +3,48 @@
   background-size: cover;
   height: 100%;
 }
+
+.list_background {
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  width: 60%;
+  height: 600px;
+  padding: 10px;
+  margin-top: 200px;
+  background-color: rgb(250, 87, 84);
+  border-style: solid;
+  border-width: medium;
+  border-color: pink;
+  border-radius: 10px;
+
+  .eatingroom-list {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: scroll;
+    justify-content: space-around;
+    width: 95%;
+    height: 92%;
+    padding: 10px;
+    margin: 10px;
+    background-color: white;
+
+    .eatingroom-button {
+      width: 90%;
+      height: 300px;
+      margin: 10px;
+      background-color: white;
+      border-style: solid;
+      border-width: small;
+      border-color:  rgb(250, 87, 84);
+      border-radius: 10px;
+
+      .align-left {
+        margin-left: 20px;
+        text-align: left;
+        font-size: 20px;
+        font-weight: bold;
+      }
+    }
+  }
+}
