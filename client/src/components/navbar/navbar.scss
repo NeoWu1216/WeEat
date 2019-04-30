@@ -14,6 +14,7 @@
     text-decoration: None;
     font-size: 3em;
     height: 1.4em;
+    text-shadow: black 2px 0 10px;
   }
   #navbar_right {
     float: right;
@@ -30,6 +31,10 @@
       outline: 0;
       -webkit-appearance: none;
     }
+    .navbar_button:hover {
+      transition-duration: 0.4s;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
     #profile_icon {
       display: inline-block;
       background: transparent;
@@ -37,6 +42,10 @@
       color: white;
       border: None;
       cursor: pointer;
+    }
+    #profile_icon:hover {
+      transition-duration: 0.4s;
+      background-color: rgba(0, 0, 0, 0.3);
     }
   }
 }

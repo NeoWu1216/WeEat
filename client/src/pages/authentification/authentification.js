@@ -56,7 +56,7 @@ class Authentification extends Component {
               style={{ height: "100%" }}
             >
               <Grid item>
-                <div className="logo-title">weEat!</div>
+                <div className="logo-title">WeEat!</div>
               </Grid>
               {this.selectContentDisplay()}
             </Grid>

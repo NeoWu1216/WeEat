@@ -2,47 +2,4 @@
   background-color: white;
   background-size: cover;
   height: 100%;
-  #eatingroom_navbar {
-    overflow: hidden;
-    background: rgb(250, 87, 84);
-    padding: 30px 10px;
-    transition: 0.2s;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 100;
-  }
-
-  #eatingroom_logo {
-    display: inline-block;
-    color: white;
-    font-family: "Pacifico", cursive;
-    text-decoration: None;
-    font-size: 3em;
-    height: 1.4em;
-  }
-  #eatingroom_navbar_right {
-    float: right;
-    margin-right: 5%;
-    #restaurants_button {
-      display: inline-block;
-      color: white;
-      font-size: 30px;
-      background: transparent;
-      border: None;
-      margin: 10px;
-      padding: 15px;
-      cursor: pointer;
-      outline: 0;
-      -webkit-appearance: none;
-    }
-    #profile_icon {
-      display: inline-block;
-      background: transparent;
-      font-size: 35px;
-      color: white;
-      border: None;
-      cursor: pointer;
-    }
-  }
 }

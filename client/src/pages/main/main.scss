@@ -1,23 +1,21 @@
 #main_outer {
-  background-image: url(http://www.ox.ac.uk/sites/files/oxford/styles/ow_medium_feature/public/field/field_image_main/Meal%20banner.jpg?itok=t_iAg-1M);
-  background-repeat: no-repeat;
-  background-color: rgba(0, 0, 0, 0.5);
-  background-size: cover;
-  height: 100%;
-  background-position: auto;
-  border-style: solid;
-  border-color: #fa5754;
-  border-width: 5px;
-
+  #main_first {
+    background-image: url(http://www.ox.ac.uk/sites/files/oxford/styles/ow_medium_feature/public/field/field_image_main/Meal%20banner.jpg?itok=t_iAg-1M);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 800px;
+    background-position: auto;
+  }
   #main_navbar {
+    position: fixed;
     overflow: hidden;
     background: rgba(0, 0, 0, 0.5);
-    padding: 50px 10px;
+    padding: 30px 10px;
     transition: 0.2s;
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 100;
+    z-index: 1;
 
     #main_logo {
       display: inline-block;
@@ -26,36 +24,48 @@
       text-decoration: None;
       font-size: 3em;
       height: 1.4em;
+      text-shadow: #fa5754 2px 0 10px;
     }
 
     #navbar-right {
       float: right;
       margin-right: 20px;
-      #joinnow,
-      #signin {
+      #joinnow {
         display: inline-block;
-        color: white;
-        font-size: 30px;
         background: transparent;
-        border-color: #fa5754;
+        font-size: 20px;
+        color: white;
         margin: 10px;
         padding: 15px;
+        font-weight: bolder;
         cursor: pointer;
         outline: 0;
         -webkit-appearance: none;
+        border: 0;
+      }
+      #signin {
+        display: inline-block;
+        background: transparent;
+        font-size: 20px;
+        color: #fa5754;
+        border-color: #fa5754;
         border-radius: 5px;
+        border-width: 3px;
+        margin: 10px;
+        padding: 15px;
+        font-weight: bolder;
+        cursor: pointer;
+        outline: 0;
+        -webkit-appearance: none;
       }
       #joinnow:hover {
-        font-size: 40px;
+        font-size: 25px;
         transition-duration: 0.4s;
         font-weight: bolder;
       }
       #signin:hover {
         transition-duration: 0.4s;
-        background-color: #fa5754;
-      }
-      #joinnow {
-        border: 0;
+        background-color: rgba(250, 87, 84, 0.5);
       }
     }
   }
@@ -67,5 +77,25 @@
     padding-left: 100px;
     text-decoration: blink;
     font-weight: bold;
+    text-shadow: #fa5754 2px 0 10px;
   }
+}
+
+footer {
+  display: inline-block;
+  height: 200px;
+  position: relative;
+  padding-left: 10px;
+  width: 100%;
+  background-color: rgb(250, 87, 84);
+  color: white;
+}
+
+#footer_msg {
+  margin: auto;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
