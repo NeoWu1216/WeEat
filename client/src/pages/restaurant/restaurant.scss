@@ -1,0 +1,64 @@
+#restaurant_outer {
+  background-color: white;
+  height: 100%;
+}
+form {
+  /* margin:20% auto 0 auto; */
+  margin-top: 200px;
+  padding: 30px;
+  width: 400px;
+  height: auto;
+  overflow: hidden;
+  background: #b22222;
+  border-radius: 10px;
+}
+form label {
+  font-size: 14px;
+  color: darkgray;
+  cursor: pointer;
+}
+form input {
+  margin: 15px 0;
+  padding: 15px 10px;
+  width: 100%;
+  outline: none;
+  border: 1px solid #bbb;
+  border-radius: 20px;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -ms-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+}
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+  border-color: cornflowerblue;
+}
+input[type="submit"] {
+  padding: 15px 180px;
+  width: auto;
+  background: #ffa500;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  clear: right;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -ms-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+}
+input[type="submit"]:hover {
+  opacity: 0.8;
+}
+input[type="submit"]:active {
+  opacity: 0.4;
+}
+#open {
+  padding-right: 40px;
+}

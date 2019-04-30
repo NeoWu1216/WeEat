@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import NavBar from "../../components/navbar/navbar";
 
 import "./eatingroom.scss";
 
@@ -12,13 +13,7 @@ class EatingRoom extends Component {
   render() {
     return (
       <div id="eatingroom_outer">
-        <div id="eatingroom_navbar">
-          <a href="/" id="eatingroom_logo">WeEat</a>
-          <div id="eatingroom_navbar_right">
-            <button type="button" id="restaurants_button">Restaurants</button>
-            <button type="button" id="profile_icon"><i class="fa fa-user-circle"></i></button>
-          </div>
-        </div>
+        <NavBar />
       </div>
     );
   }
