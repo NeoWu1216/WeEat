@@ -10,10 +10,12 @@ class NavBar extends Component {
     }
 
     handleClick(url) {
-        this.setState({
-            redirect: true,
-            redirect_url: url
-        });
+        if (!window.location.href.includes(url)) {
+            this.setState({
+                redirect: true,
+                redirect_url: url
+            });
+        }
     }
 
     render() {
@@ -30,7 +32,7 @@ class NavBar extends Component {
                 <div id="navbar_right">
                     <button type="button" className="navbar_button" onClick={() => this.handleClick("/eatingroom")}>Eating Rooms</button>
                     <button type="button" className="navbar_button" onClick={() => this.handleClick("/restaurant")}>Restaurants</button>
-                    <button type="button" id="profile_icon"><i class="fa fa-user-circle"></i></button>
+                    <button type="button" id="profile_icon"><i className="fa fa-user-circle"></i></button>
                 </div>
             </div>
         )
