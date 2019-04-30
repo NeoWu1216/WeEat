@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router';
-
+import Footer from "../../components/footer/footer";
 import "./main.scss";
 
 class Main extends Component {
@@ -40,13 +40,7 @@ class Main extends Component {
           </div>
           <div id="main_description"><span>A place<br /> to find friends for food!</span></div>
         </div>
-        <footer>
-          <div id="footer_msg">
-            <p>Create by: CS 498 RK Team Pikachu</p>
-            <p>Contact information: abc@abc.com</p>
-            <p>© 2019 WeEat. All Rights Reserved</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     );
   }

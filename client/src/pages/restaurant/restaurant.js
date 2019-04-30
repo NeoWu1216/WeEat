@@ -2,21 +2,23 @@ import React, { Component } from 'react';
 import './restaurant.scss';
 import axios from 'axios';
 import NavBar from "../../components/navbar/navbar";
+import Footer from "../../components/footer/footer";
 
 
-class Restaurant extends React.Component {
+class Restaurant extends Component {
   render() {
     return (
       <div id="restaurant_outer">
         <NavBar />
         <ContactForm />
+        <Footer />
       </div>
     )
   }
 }
 
 
-class ContactForm extends React.Component {
+class ContactForm extends Component {
 
   constructor(props) {
     super(props);
@@ -86,22 +88,22 @@ class ContactForm extends React.Component {
       <div id="form_outer">
         <form onSubmit={this.handleSubmit} >
           <div className="form-group">
-            <label for="LocationInput">Location</label>
+            <label htmlFor="LocationInput">Location</label>
             <input type="text" name="location" required value={this.state.location} onChange={this.handleChange} className="form-control" id="LocationInput" />
           </div>
           <div className="form-group">
-            <label for="KeyInput">Keyword</label>
+            <label htmlFor="KeyInput">Keyword</label>
             <input name="keyword" type="text" value={this.state.keyword} onChange={this.handleChange} className="form-control" id="KeyInput" />
           </div>
           <div className="form-group">
-            <label for="CategoryInput">Eating Category</label><br />
+            <label htmlFor="CategoryInput">Eating Category</label><br />
             <select name="category" value={this.state.category} onChange={this.handleChange}>
               <option value='' disabled></option>
               {selectOptionsList}
             </select>
           </div>
           <div className="form-group">
-            <label for="SortInput">Sort by</label><br />
+            <label htmlFor="SortInput">Sort by</label><br />
             <select name="sort_idx" value={this.state.sort_idx} onChange={this.handleChange}>
               <option value='' disabled></option>
               {sortOptionsList}
@@ -110,7 +112,7 @@ class ContactForm extends React.Component {
           <div className="form-group">
             <input name="open_now" type="checkbox" value={this.state.open_now} onChange={this.handleChange} className="form-control" id="OpenInput" />
             <div id='open'>
-              <label for="OpenInput">Open Now?</label>
+              <label htmlFor="OpenInput">Open Now?</label>
             </div>
           </div>
           <input type="submit" value="Search" className="btn btn-primary" />

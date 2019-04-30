@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import NavBar from "../../components/navbar/navbar";
+import Footer from "../../components/footer/footer";
 
 import "./eatingroom.scss";
 
@@ -16,6 +17,7 @@ class EatingRoom extends Component {
         <NavBar />
         <EatingRoomList />
         <FiterBox />
+        <Footer />
       </div>
     );
   }

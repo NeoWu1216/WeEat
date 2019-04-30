@@ -74,7 +74,7 @@ class Signup extends Component {
                   float: "right"
                 }}
               >
-                Signup
+                Sign up
               </Button>
             </Grid>
           </Grid>

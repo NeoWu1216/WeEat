@@ -80,22 +80,3 @@
     text-shadow: #fa5754 2px 0 10px;
   }
 }
-
-footer {
-  display: inline-block;
-  height: 200px;
-  position: relative;
-  padding-left: 10px;
-  width: 100%;
-  background-color: rgb(250, 87, 84);
-  color: white;
-}
-
-#footer_msg {
-  margin: auto;
-  font-size: 20px;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
