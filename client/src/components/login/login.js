@@ -5,6 +5,7 @@ import {login} from '../../api/auth'
 import {getMessage} from '../../api/parser'
 import {withRouter} from 'react-router-dom'
 import {setToken} from '../../storage/token'
+import {setId} from '../../storage/id'
 
 class Login extends Component {
   constructor(props) {
@@ -23,10 +24,12 @@ class Login extends Component {
     // for safety, parse correct fields first
     let {email, password} = this.state
     let data = {email, password}
-    login(data).then(({token}) => {
+    login(data).then(({token, _id}) => {
       setToken(token)
-    }).then(()=>{
-      this.props.history.replace('restaurant')
+      setId(_id)
+      return _id
+    }).then((_id)=>{
+      this.props.history.replace('profile/'+_id)
     })
     .catch((err)=>{
       alert(getMessage(err))
