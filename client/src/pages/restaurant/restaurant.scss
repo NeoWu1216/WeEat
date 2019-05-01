@@ -1,26 +1,31 @@
 #restaurant_outer {
-  background-color: white;
+  background-image: url("https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/2096239/1360/816/m1/fpnw/wm1/uqjpga6azzmsalgr0h74sfyp1z6wbpuuomjdvbz37olr43h5z0lwcan4fbgn4ihb-.jpg?1483703240&s=0c6d0f13a8332e966bd509c7d8dfb53c");
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
   height: 100%;
 }
+
 #form_outer {
-  padding-left: 20px;
+  width: 90%;
+  padding-top: 10%;
 }
+
 form {
-  margin-top: 200px;
-  margin-left: 5%;
+  margin-left: 10%;
   padding: 30px;
-  width: 65%;
-  height: auto;
+  width: 70%;
   overflow: hidden;
-  background: rgb(250, 87, 84);
+  background: lightblue;
   border-radius: 10px;
 }
 form label {
-  font-size: 14px;
+  font-size: 16px;
   color: black;
   cursor: pointer;
 }
 form input {
+  font-size: 15px;
   margin: 15px 0;
   padding: 15px 10px;
   width: 100%;
@@ -70,13 +75,12 @@ input[type="submit"]:active {
 .left {
   float: left;
   width: 40%;
+  position: fixed;
+  z-index: 1;
 }
 .right {
   float: right;
   width: 55%;
-  margin-top: 13%;
-  margin-right: 5%;
-  margin-bottom: 5%;
 }
 
 .list_container {
@@ -84,16 +88,9 @@ input[type="submit"]:active {
   flex-wrap: wrap;
   overflow: scroll;
   justify-content: space-around;
-  width: 60%;
-  height: 10%;
-  padding: 0px;
-  margin-top: 200px;
-  background-color: aqua;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 .card {
   background: transparent;
-  margin-top: 200px;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -155,7 +152,7 @@ input[type="submit"]:active {
       color: black;
       font-family: "Montserrat", sans-serif;
       font-weight: 140;
-      font-size: 15px;
+      font-size: 18px;
       padding: 0 40px 0 0;
     }
   }
@@ -186,4 +183,8 @@ input[type="submit"]:active {
   }
   padding: 0 0 0 40px;
   margin: 30px 0 0 0;
+}
+
+.btn-primary{
+  font-size: 15px;
 }

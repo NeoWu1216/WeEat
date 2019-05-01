@@ -101,7 +101,6 @@ class ContactForm extends Component {
         <div className="left">
           <form onSubmit={this.handleSubmit} >
             <div className="form-group">
-
               <input type="text" placeholder="Location" name="location" required value={this.state.location} onChange={this.handleChange} className="form-control" id="LocationInput" />
             </div>
             <div className="form-group">
@@ -109,17 +108,21 @@ class ContactForm extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="CategoryInput">Eating Category</label><br />
+              <div id="select_style">
               <select name="category" value={this.state.category} onChange={this.handleChange}>
                 <option value='' disabled></option>
                 {selectOptionsList}
               </select>
+              </div>
             </div>
             <div className="form-group">
               <label htmlFor="SortInput">Sort by</label><br />
+              <div id="select_style">
               <select name="sort_idx" value={this.state.sort_idx} onChange={this.handleChange}>
                 <option value='' disabled></option>
                 {sortOptionsList}
               </select>
+              </div>
             </div>
             <div className="form-group">
               <input name="open_now" type="checkbox" value={this.state.open_now} onChange={this.handleChange} className="form-control" id="OpenInput" />
@@ -171,7 +174,7 @@ class RestaurantEntry extends Component {
               <ul>
                 <li>Rating: {r.rating}</li>
                 <li>Phone: {r.display_phone}</li>
-                <li>Location: {r.location.display_address[0]}{r.location.display_address[1]}</li>
+                <li>Location: {r.location.display_address[0] + " "}{r.location.display_address[1]}</li>
               </ul>
               <div className="button">
                 <a href="https://www.w3schools.com">WeEat Now!</a>
@@ -225,6 +228,44 @@ var TEST_DATA = {
       "phone": "+12173449334",
       "display_phone": "(217) 344-9334",
       "distance": 1251.8136816166234
+    },
+    {
+      "id": "VIJ2KiDKhUVhhpNylEIfog",
+      "alias": "maize-mexican-grill-champaign",
+      "name": "Maize Mexican Grill",
+      "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/dU3DV0ENRuyUvMyFgPglUA/o.jpg",
+      "is_closed": false,
+      "url": "https://www.yelp.com/biz/maize-mexican-grill-champaign?adjust_creative=EF1LVTfdsDuyWdMT_EVVSg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=EF1LVTfdsDuyWdMT_EVVSg",
+      "review_count": 546,
+      "categories": [
+        {
+          "alias": "mexican",
+          "title": "Mexican"
+        }
+      ],
+      "rating": 4.5,
+      "coordinates": {
+        "latitude": 40.11037,
+        "longitude": -88.23891
+      },
+      "transactions": [],
+      "price": "$",
+      "location": {
+        "address1": "60 E Green Street",
+        "address2": null,
+        "address3": "",
+        "city": "Champaign",
+        "zip_code": "61820",
+        "country": "US",
+        "state": "IL",
+        "display_address": [
+          "60 E Green Street",
+          "Champaign, IL 61820"
+        ]
+      },
+      "phone": "+12173556400",
+      "display_phone": "(217) 355-6400",
+      "distance": 1606.1486452942813
     },
     {
       "id": "VIJ2KiDKhUVhhpNylEIfog",
