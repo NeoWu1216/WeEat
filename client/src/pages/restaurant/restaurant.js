@@ -29,7 +29,8 @@ class ContactForm extends Component {
       open_now: false,
       sort_idx: 0,
       category_map: ['', 'african', 'tradamerican', 'arabian', 'asianfusion', 'baguettes', 'bbq', 'bistros', 'breakfast_brunch', 'burgers', 'cafes', 'chinese', 'hotdogs', 'indpak', 'italian', 'japanese', 'korean', 'mediterranean', 'mexican', 'pizza', 'salad', 'sandwiches', 'thai', 'vegetarian'],
-      sort_map: ['best_match', 'rating', 'review_count', 'distance']
+      sort_map: ['', 'rating', 'review_count', 'distance'],
+      result: TEST_DATA.businesses
     };
 
     this.handleChange = this.handleInputChange.bind(this);
@@ -60,15 +61,26 @@ class ContactForm extends Component {
         open_now: this.state.open_now,
         sort_by: this.state.sort_map[this.state.sort_idx]
       }
+    }).then((res) => {
+      this.setState({
+        result: res.data.businesses
+      });
     })
-      .then((res) => {
-        console.log(res.data.businesses)
-      })
       .catch((err) => {
         console.log(err)
       })
 
     // alert('A form was submitted: ' + this.state.location + ' // ' + this.state.keyword+ this.state.open_now+ this.state.category_map[this.state.category]);
+    event.preventDefault();
+
+  }
+  handleSubmit2(event) {
+    // console.log(TEST_DATA.businesses);
+    // console.log("hahaha", TEST_DATA.businesses);
+    //     this.setState({
+    //       result:TEST_DATA.businesses
+    //     });
+    console.log(this.state.result);
     event.preventDefault();
 
   }
@@ -86,41 +98,172 @@ class ContactForm extends Component {
     });
     return (
       <div id="form_outer">
-        <form onSubmit={this.handleSubmit} >
-          <div className="form-group">
-            <label htmlFor="LocationInput">Location</label>
-            <input type="text" name="location" required value={this.state.location} onChange={this.handleChange} className="form-control" id="LocationInput" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="KeyInput">Keyword</label>
-            <input name="keyword" type="text" value={this.state.keyword} onChange={this.handleChange} className="form-control" id="KeyInput" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="CategoryInput">Eating Category</label><br />
-            <select name="category" value={this.state.category} onChange={this.handleChange}>
-              <option value='' disabled></option>
-              {selectOptionsList}
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="SortInput">Sort by</label><br />
-            <select name="sort_idx" value={this.state.sort_idx} onChange={this.handleChange}>
-              <option value='' disabled></option>
-              {sortOptionsList}
-            </select>
-          </div>
-          <div className="form-group">
-            <input name="open_now" type="checkbox" value={this.state.open_now} onChange={this.handleChange} className="form-control" id="OpenInput" />
-            <div id='open'>
-              <label htmlFor="OpenInput">Open Now?</label>
+        <div className="left">
+          <form onSubmit={this.handleSubmit} >
+            <div className="form-group">
+
+              <input type="text" placeholder="Location" name="location" required value={this.state.location} onChange={this.handleChange} className="form-control" id="LocationInput" />
             </div>
-          </div>
-          <input type="submit" value="Search" className="btn btn-primary" />
-        </form>
+            <div className="form-group">
+              <input name="keyword" placeholder="Keyword" type="text" value={this.state.keyword} onChange={this.handleChange} className="form-control" id="KeyInput" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="CategoryInput">Eating Category</label><br />
+              <select name="category" value={this.state.category} onChange={this.handleChange}>
+                <option value='' disabled></option>
+                {selectOptionsList}
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="SortInput">Sort by</label><br />
+              <select name="sort_idx" value={this.state.sort_idx} onChange={this.handleChange}>
+                <option value='' disabled></option>
+                {sortOptionsList}
+              </select>
+            </div>
+            <div className="form-group">
+              <input name="open_now" type="checkbox" value={this.state.open_now} onChange={this.handleChange} className="form-control" id="OpenInput" />
+              <div id='open'>
+                <label htmlFor="OpenInput">Open Now?</label>
+              </div>
+            </div>
+            <input type="submit" value="Search" className="btn btn-primary" />
+          </form>
+        </div>
+        <div className="right">
+          <RestaurantList result={this.state.result} />
+        </div>
       </div>
     )
   }
 }
 
+class RestaurantList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    return (
+      <div id="list_container">
+        {this.props.result.map((r, index) => <RestaurantEntry r={r} key={index} />)}
+      </div>
+    )
+  }
+}
 
+class RestaurantEntry extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    let r = this.props.r
+    return (
+      <div key={r.name}>
+        <div className="card">
+          <div className="card_left">
+            <img src={r.image_url} alt="img" />
+          </div>
+          <div className="card_right">
+            <h1>{r.name}</h1>
+            <div className="card_right__details">
+              <ul>
+                <li>Rating: {r.rating}</li>
+                <li>Phone: {r.display_phone}</li>
+                <li>Location: {r.location.display_address[0]}{r.location.display_address[1]}</li>
+              </ul>
+              <div className="button">
+                <a href="https://www.w3schools.com">WeEat Now!</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    )
+  }
+}
+
+var TEST_DATA = {
+  "businesses": [
+    {
+      "id": "9MnbQg7kfb_WgxoV0hXKSQ",
+      "alias": "black-dog-smoke-and-ale-house-urbana",
+      "name": "Black Dog Smoke & Ale House",
+      "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/lJOnFchw-mzW6H5IdKh8Zg/o.jpg",
+      "is_closed": false,
+      "url": "https://www.yelp.com/biz/black-dog-smoke-and-ale-house-urbana?adjust_creative=EF1LVTfdsDuyWdMT_EVVSg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=EF1LVTfdsDuyWdMT_EVVSg",
+      "review_count": 803,
+      "categories": [
+        {
+          "alias": "bbq",
+          "title": "Barbeque"
+        }
+      ],
+      "rating": 4.5,
+      "coordinates": {
+        "latitude": 40.113818215463,
+        "longitude": -88.207689252733
+      },
+      "transactions": [],
+      "price": "$$",
+      "location": {
+        "address1": "201 N Broadway Ave",
+        "address2": "",
+        "address3": "",
+        "city": "Urbana",
+        "zip_code": "61801",
+        "country": "US",
+        "state": "IL",
+        "display_address": [
+          "201 N Broadway Ave",
+          "Urbana, IL 61801"
+        ]
+      },
+      "phone": "+12173449334",
+      "display_phone": "(217) 344-9334",
+      "distance": 1251.8136816166234
+    },
+    {
+      "id": "VIJ2KiDKhUVhhpNylEIfog",
+      "alias": "maize-mexican-grill-champaign",
+      "name": "Maize Mexican Grill",
+      "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/dU3DV0ENRuyUvMyFgPglUA/o.jpg",
+      "is_closed": false,
+      "url": "https://www.yelp.com/biz/maize-mexican-grill-champaign?adjust_creative=EF1LVTfdsDuyWdMT_EVVSg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=EF1LVTfdsDuyWdMT_EVVSg",
+      "review_count": 546,
+      "categories": [
+        {
+          "alias": "mexican",
+          "title": "Mexican"
+        }
+      ],
+      "rating": 4.5,
+      "coordinates": {
+        "latitude": 40.11037,
+        "longitude": -88.23891
+      },
+      "transactions": [],
+      "price": "$",
+      "location": {
+        "address1": "60 E Green Street",
+        "address2": null,
+        "address3": "",
+        "city": "Champaign",
+        "zip_code": "61820",
+        "country": "US",
+        "state": "IL",
+        "display_address": [
+          "60 E Green Street",
+          "Champaign, IL 61820"
+        ]
+      },
+      "phone": "+12173556400",
+      "display_phone": "(217) 355-6400",
+      "distance": 1606.1486452942813
+    }
+  ]
+};
 export default Restaurant;

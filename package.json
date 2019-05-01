@@ -22,8 +22,10 @@
   "homepage": "https://github.com/Le0198/CS498RK_WeEat#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "bootstrap": "^4.3.1",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
+    "css-loader": "^2.1.1",
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
     "express-session": "^1.16.1",
@@ -31,7 +33,10 @@
     "mongoose": "^5.5.2",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "react-flexbox-grid": "^2.1.2",
+    "reactstrap": "^8.0.0",
+    "style-loader": "^0.23.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.11"
