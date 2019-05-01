@@ -62,7 +62,6 @@ class ContactForm extends Component {
         sort_by: this.state.sort_map[this.state.sort_idx]
       }
     }).then((res) => {
-      // console.log(res.data.businesses)
       this.setState({
         result: res.data.businesses
       });
@@ -87,7 +86,6 @@ class ContactForm extends Component {
   }
 
   render() {
-    // console.log("result: ", this.state.result);
     const category_list = 'None, African, American, Arabian, Asian Fusion, Baguettes, Barbeque, Bistros, Breakfast & Brunch, Burgers, Cafes, Chinese, Fast Food, Indian, Italian, Japanese, Korean, Mediterranean, Mexican, Pizza, Salad, Sandwiches, Thai, Vegetarian';
     const selectOptions = category_list.split(', ');
     const selectOptionsList = selectOptions.map((selectOption, index) => {
@@ -100,7 +98,7 @@ class ContactForm extends Component {
     });
     return (
       <div id="form_outer">
-        <div class="left">
+        <div className="left">
           <form onSubmit={this.handleSubmit} >
             <div className="form-group">
 
@@ -110,14 +108,14 @@ class ContactForm extends Component {
               <input name="keyword" placeholder="Keyword" type="text" value={this.state.keyword} onChange={this.handleChange} className="form-control" id="KeyInput" />
             </div>
             <div className="form-group">
-              <label for="CategoryInput">Eating Category</label><br />
+              <label htmlFor="CategoryInput">Eating Category</label><br />
               <select name="category" value={this.state.category} onChange={this.handleChange}>
                 <option value='' disabled></option>
                 {selectOptionsList}
               </select>
             </div>
             <div className="form-group">
-              <label for="SortInput">Sort by</label><br />
+              <label htmlFor="SortInput">Sort by</label><br />
               <select name="sort_idx" value={this.state.sort_idx} onChange={this.handleChange}>
                 <option value='' disabled></option>
                 {sortOptionsList}
@@ -126,13 +124,13 @@ class ContactForm extends Component {
             <div className="form-group">
               <input name="open_now" type="checkbox" value={this.state.open_now} onChange={this.handleChange} className="form-control" id="OpenInput" />
               <div id='open'>
-                <label for="OpenInput">Open Now?</label>
+                <label htmlFor="OpenInput">Open Now?</label>
               </div>
             </div>
             <input type="submit" value="Search" className="btn btn-primary" />
           </form>
         </div>
-        <div className="restaurantrender" class="right">
+        <div className="right">
           <RestaurantList result={this.state.result} />
         </div>
       </div>
@@ -148,7 +146,7 @@ class RestaurantList extends Component {
   render() {
     return (
       <div id="list_container">
-        {this.props.result.map((r, index) => <RestaurantEntry r={r} />)}
+        {this.props.result.map((r, index) => <RestaurantEntry r={r} key={index} />)}
       </div>
     )
   }
@@ -165,7 +163,7 @@ class RestaurantEntry extends Component {
       <div key={r.name}>
         <div className="card">
           <div className="card_left">
-            <img src={r.image_url} />
+            <img src={r.image_url} alt="img" />
           </div>
           <div className="card_right">
             <h1>{r.name}</h1>
