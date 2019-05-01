@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import NavBar from "../../components/navbar/navbar";
 import { Card, Icon, Image, Button } from 'semantic-ui-react'
 import { getId } from '../../storage/id'
-
+import Footer from "../../components/footer/footer";
 
 class Profile extends Component {
   constructor(props) {
@@ -10,18 +10,18 @@ class Profile extends Component {
   }
 
   render() {
-    let {_id, name, email, description, onEdit} = this.props
+    let { _id, name, email, description, onEdit } = this.props
     description = description ? description : "This user haven't posted anything"
     let extra = null
-    if (getId() == _id) 
+    if (getId() == _id)
       extra = (<Card.Content extra>
-            <Button primary onClick={onEdit} >
-              Edit Profile
+        <Button primary onClick={onEdit} >
+          Edit Profile
             </Button>
       </Card.Content>)
     return (
       <div className="Profile">
-        <NavBar/>
+        <NavBar />
         <Card>
           <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' />
           <Card.Content>
@@ -36,6 +36,7 @@ class Profile extends Component {
           </Card.Content>
           {extra}
         </Card>
+        <Footer />
       </div>
     )
   }
