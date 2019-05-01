@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './navbar.scss';
 import { Redirect } from 'react-router';
+import { getId } from '../../storage/id'
 
 class NavBar extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class NavBar extends Component {
         <div id="navbar_right">
           <button type="button" className="navbar_button" onClick={() => this.handleClick("/eatingroom")}>Eating Rooms</button>
           <button type="button" className="navbar_button" onClick={() => this.handleClick("/restaurant")}>Restaurants</button>
-          <button type="button" id="profile_icon"><i className="fa fa-user-circle"></i></button>
+          <button type="button" id="profile_icon" onClick={() => this.handleClick("/profile/"+getId())}><i className="fa fa-user-circle"></i></button>
         </div>
       </div>
     )

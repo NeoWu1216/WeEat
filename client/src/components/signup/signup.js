@@ -5,7 +5,7 @@ import {signUp} from '../../api/auth'
 import {getMessage} from '../../api/parser'
 import {withRouter} from 'react-router-dom'
 import {setToken} from '../../storage/token'
-
+import {setId} from '../../storage/id'
 
 class Signup extends Component {
   constructor(props) {
@@ -25,12 +25,15 @@ class Signup extends Component {
     // for safety, parse correct fields first
     let {email, password, name} = this.state
     let data = {email, password, name}
-    signUp(data).then(({token}) => {
+    signUp(data).then(({token, _id}) => {
       setToken(token)
-    }).then(()=>{
-      this.props.history.replace('restaurant')
+      setId(_id)
+      return _id
+    }).then((_id)=>{
+      this.props.history.replace('profile/'+_id)
     })
     .catch((err)=>{
+      //TODO: make it a message instead of alert
       alert(getMessage(err))
     })
   }

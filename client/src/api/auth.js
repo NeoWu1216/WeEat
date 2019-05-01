@@ -8,8 +8,8 @@ function signUp(data) {
     .then(getData)
     .then((data)=> {
       //unnecessary, but for documentary
-      let {token, email} = data
-      return {token, email}
+      let {token, email, _id} = data
+      return {token, email, _id}
     })
 }
 
@@ -18,8 +18,8 @@ function login(data) {
   return axios.post(rootUrl+'users/login', { user: data })
     .then(getData)
     .then((data)=> {
-      let {token, email} = data
-      return {token, email}
+      let {token, email, _id} = data
+      return {token, email, _id}
     })
 }
 
