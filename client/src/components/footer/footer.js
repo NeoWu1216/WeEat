@@ -23,7 +23,7 @@ class Footer extends Component {
     <div class="container">
       <div class="row">
         <div>
-          <p class="copyright-text">Copyright &copy; © 2019 WeEat. All Rights Reserved.
+          <p class="copyright-text">Copyright &copy; 2019 WeEat. All Rights Reserved.
           </p>
         </div>
 
