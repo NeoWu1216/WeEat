@@ -29,7 +29,7 @@ class ContactForm extends Component {
       open_now: false,
       sort_idx: 0,
       category_map: ['', 'african', 'tradamerican', 'arabian', 'asianfusion', 'baguettes', 'bbq', 'bistros', 'breakfast_brunch', 'burgers', 'cafes', 'chinese', 'hotdogs', 'indpak', 'italian', 'japanese', 'korean', 'mediterranean', 'mexican', 'pizza', 'salad', 'sandwiches', 'thai', 'vegetarian'],
-      sort_map: ['', 'rating', 'review_count', 'distance']
+      sort_map: ['best_match', 'rating', 'review_count', 'distance']
     };
 
     this.handleChange = this.handleInputChange.bind(this);
