@@ -11,7 +11,7 @@ class Profile extends Component {
 
   render() {
     let {_id, name, email, description, onEdit} = this.props
-    description = description ? description : "This author haven't post anything"
+    description = description ? description : "This user haven't posted anything"
     let extra = null
     if (getId() == _id) 
       extra = (<Card.Content extra>

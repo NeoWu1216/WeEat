@@ -1,4 +1,5 @@
 import ProfileView from '../../components/profile/profile'
+import ProfileEditView from '../../components/profile/edit-profile'
 import {getUser, setUser} from '../../api/user'
 import {getMessage} from '../../api/parser'
 import React, { Component } from 'react'
@@ -15,7 +16,8 @@ export default class Profile extends Component {
     }
   }
 
-  getUser = (_id) => {
+  getUser = () => {
+    let _id = this.props.match.params.id;
     return getUser(_id).then(({name, email, description})=>{
       this.setState({_id, name, email, description})
     }).catch((err)=>{
@@ -24,8 +26,7 @@ export default class Profile extends Component {
   }
 
   componentDidMount() {
-    let _id = this.props.match.params.id;
-    this.getUser(_id)
+    this.getUser()
   }
 
   onEdit = () => {
@@ -33,7 +34,9 @@ export default class Profile extends Component {
   }
 
   onView = () => {
-    this.setState({edit: false})
+    this.getUser().then(()=>{
+      this.setState({edit: false})
+    })
   }
 
   render() {
@@ -42,6 +45,7 @@ export default class Profile extends Component {
     if (!edit) 
       return <ProfileView name={name} email={email} 
         description={description} onEdit={this.onEdit} _id={_id}/>
-    return null
+    return <ProfileEditView name={name} email={email}
+      description={description} onSubmit={this.onView} _id={_id}/>
   }
 }

@@ -209,7 +209,7 @@ router.put('/:id', auth.required, (req, res) => {
         });
       }
       res.status(500).send({
-        error: "Internal server error"
+        error: err
       });
     });
 });
