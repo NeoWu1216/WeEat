@@ -2,47 +2,49 @@
   background-color: white;
   background-size: cover;
   height: 100%;
-  #eatingroom_navbar {
-    overflow: hidden;
-    background: rgb(250, 87, 84);
-    padding: 30px 10px;
-    transition: 0.2s;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 100;
-  }
+}
 
-  #eatingroom_logo {
-    display: inline-block;
-    color: white;
-    font-family: "Pacifico", cursive;
-    text-decoration: None;
-    font-size: 3em;
-    height: 1.4em;
-  }
-  #eatingroom_navbar_right {
-    float: right;
-    margin-right: 5%;
-    #restaurants_button {
-      display: inline-block;
-      color: white;
-      font-size: 30px;
-      background: transparent;
-      border: None;
+.list_background {
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  width: 60%;
+  height: 600px;
+  padding: 10px;
+  margin-top: 200px;
+  background-color: rgb(250, 87, 84);
+  border-style: solid;
+  border-width: medium;
+  border-color: pink;
+  border-radius: 10px;
+
+  .eatingroom-list {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: scroll;
+    justify-content: space-around;
+    width: 95%;
+    height: 92%;
+    padding: 10px;
+    margin: 10px;
+    background-color: white;
+
+    .eatingroom-button {
+      width: 90%;
+      height: 300px;
       margin: 10px;
-      padding: 15px;
-      cursor: pointer;
-      outline: 0;
-      -webkit-appearance: none;
-    }
-    #profile_icon {
-      display: inline-block;
-      background: transparent;
-      font-size: 35px;
-      color: white;
-      border: None;
-      cursor: pointer;
+      background-color: white;
+      border-style: solid;
+      border-width: small;
+      border-color:  rgb(250, 87, 84);
+      border-radius: 10px;
+
+      .align-left {
+        margin-left: 20px;
+        text-align: left;
+        font-size: 20px;
+        font-weight: bold;
+      }
     }
   }
 }

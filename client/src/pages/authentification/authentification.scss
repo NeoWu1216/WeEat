@@ -19,13 +19,7 @@ $alt-text: hsla(34%, 100%, 59%, 1);
     box-sizing: border-box;
   }
   .auth {
-    background: repeating-linear-gradient(
-      45deg,
-      #fa5754,
-      #fa5754 10px,
-      #ea5654 10px,
-      #ea5654 20px
-    );
+    background: repeating-linear-gradient(45deg, #fa5754, #fa5754 10px, #ea5654 10px, #ea5654 20px);
     height: 100%;
     width: 50%;
     float: left;
@@ -35,17 +29,19 @@ $alt-text: hsla(34%, 100%, 59%, 1);
       margin: auto;
       width: 92%;
       height: 92%;
-      border: solid $dark 5px;
+      border: solid white 8px;
       border-radius: 3px;
       background: $primary;
       .logo-title {
         font-family: "Pacifico", cursive;
+        color: white;
         font-size: 3em;
         width: 100%;
         text-align: center;
         height: 1.4em;
-        border-bottom: solid $dark 6px;
+        // border-bottom: solid $dark 6px;
         border-radius: 5px;
+        text-shadow: gray 2px 0 10px;
       }
       .entry {
         i {
@@ -71,7 +67,7 @@ $alt-text: hsla(34%, 100%, 59%, 1);
       font-weight: 800;
       letter-spacing: 0.15em;
       font-size: 0.4em;
-      width: 60%;
+      width: 70%;
     }
 
     input:focus {
@@ -80,6 +76,7 @@ $alt-text: hsla(34%, 100%, 59%, 1);
 
     .auth-message {
       font-size: 0.4em;
+      font-weight: bold;
     }
   }
 }

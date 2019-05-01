@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router';
-
+import Footer from "../../components/footer/footer";
 import "./main.scss";
 
 class Main extends Component {
@@ -22,23 +22,25 @@ class Main extends Component {
 
   render() {
     if (this.state.redirect) {
-      let tmp = this.state.is_login
       return <Redirect to={{
         pathname: "/auth",
-        state: { is_login: tmp }
+        state: { is_login: this.state.is_login }
       }}
       />
     }
     return (
       <div id="main_outer">
-        <div id="main_navbar">
-          <a href="/" id="main_logo">WeEat</a>
-          <div id="navbar-right">
-            <button type="button" id="joinnow" onClick={() => this.handleClick(false)}>Join now</button>
-            <button type="button" id="signin" onClick={() => this.handleClick(true)}>Sign in</button>
+        <div id="main_first">
+          <div id="main_navbar">
+            <a href="/" id="main_logo">WeEat!</a>
+            <div id="navbar-right">
+              <button type="button" id="joinnow" onClick={() => this.handleClick(false)}>Join now</button>
+              <button type="button" id="signin" onClick={() => this.handleClick(true)}>Sign in</button>
+            </div>
           </div>
+          <div id="main_description"><span>A place<br /> to find friends for food!</span></div>
         </div>
-        <div id="main_description"><span>A place<br /> to find friends for food!</span></div>
+        <Footer />
       </div>
     );
   }

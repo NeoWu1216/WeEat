@@ -1,15 +1,41 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import {login} from '../../api/auth'
+import {getMessage} from '../../api/parser'
+import {withRouter} from 'react-router-dom'
+import {setToken} from '../../storage/token'
 
 class Login extends Component {
   constructor(props) {
-    super();
+    super(props);
+    this.state = {
+      email: "",
+      password: ""
+    }
   }
 
   displayLoginHandler = () => {
     this.props.changeDisplay();
   };
+
+  onSubmit = (e) => {
+    // for safety, parse correct fields first
+    let {email, password} = this.state
+    let data = {email, password}
+    login(data).then(({token}) => {
+      setToken(token)
+    }).then(()=>{
+      this.props.history.replace('restaurant')
+    })
+    .catch((err)=>{
+      alert(getMessage(err))
+    })
+  }
+
+  onInputChange = (e) => {
+    this.setState({[e.target.id]: e.target.value})
+  }
 
   render() {
     return (
@@ -17,13 +43,17 @@ class Login extends Component {
         <Grid item>
           <div className="entry">
             <i className="fas fa-envelope" />
-            <input type="text" placeholder="Email" name="uname" required />
+            <input type="text" placeholder="Email" 
+              id = "email" value = {this.state.email} onChange={this.onInputChange}
+              name="uname" required />
           </div>
         </Grid>
         <Grid item>
           <div className="entry">
             <i className="fas fa-key" />
-            <input type="password" placeholder="Password" name="psw" required />
+            <input type="password" placeholder="Password" 
+              id = "password" value = {this.state.password} onChange={this.onInputChange}
+              name="psw" required />
           </div>
         </Grid>
         <Grid item xs>
@@ -33,13 +63,13 @@ class Login extends Component {
             justify="center"
             direction="row"
             style={{ margin: "20px 0" }}
-            onClick={this.displayLoginHandler}
           >
             <Grid item xs>
               <div className="auth-message">
                 Don't have an account?
                 <Button
                   size="small"
+                  onClick={this.displayLoginHandler}
                   style={{
                     fontFamily: '"Roboto Slab", serif',
                     textTransform: "capitalize",
@@ -66,6 +96,7 @@ class Login extends Component {
                   }
                 }}
                 className=".auth-button"
+                onClick={this.onSubmit}
               >
                 Login
               </Button>
@@ -77,4 +108,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

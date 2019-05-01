@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import './restaurant.scss';
 import axios from 'axios';
 import NavBar from "../../components/navbar/navbar";
-
-
+import Footer from "../../components/footer/footer";
 
 
 class Restaurant extends Component {
@@ -12,6 +11,7 @@ class Restaurant extends Component {
       <div id="restaurant_outer">
         <NavBar />
         <ContactForm />
+        <Footer />
       </div>
     )
   }
