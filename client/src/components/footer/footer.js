@@ -9,35 +9,35 @@ class Footer extends Component {
 
   render() {
     return (
-  <footer class="site-footer">
-    <div class="container">
-      <div class="row">
-        <div class="testalign">
-          <h6>About</h6>
-          <p class="text-justify">Create by: CS 498 RK Team Pikachu</p>
-          <p class="text-justify">Contact information: abc@abc.com</p>
+      <footer className="site-footer">
+        <div className="container">
+          <div className="row">
+            <div className="testalign">
+              <h6>About</h6>
+              <p className="text-justify">Create by: CS 498 RK Team Pikachu</p>
+              <p className="text-justify">Contact information: abc@abc.com</p>
+            </div>
+          </div>
+          <hr />
         </div>
-      </div>
-      <hr />
-    </div>
-    <div class="container">
-      <div class="row">
-        <div>
-          <p class="copyright-text">Copyright &copy; 2019 WeEat. All Rights Reserved.
+        <div className="container">
+          <div className="row">
+            <div>
+              <p className="copyright-text">Copyright &copy; 2019 WeEat. All Rights Reserved.
           </p>
-        </div>
+            </div>
 
-        <div class="col-md-4 col-sm-6 col-xs-12">
-          <ul class="social-icons">
-            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-            <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
-            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-          </ul>
+            <div className="col-md-4 col-sm-6 col-xs-12">
+              <ul className="social-icons">
+                <li><a className="facebook" href="https://www.facebook.com/"><i className="fa fa-facebook"></i></a></li>
+                <li><a className="twitter" href="https://www.twitter.com/"><i className="fa fa-twitter"></i></a></li>
+                <li><a className="github" href="https://www.github.com/"><i className="fa fa-github"></i></a></li>
+                <li><a className="linkedin" href="https://www.linkedin.com/"><i className="fa fa-linkedin"></i></a></li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-</footer>
+      </footer>
     );
   }
 }
