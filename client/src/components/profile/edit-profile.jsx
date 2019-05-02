@@ -34,7 +34,7 @@ class Profile extends Component {
   render() {
     let {name, email, description, error} = this.state
     return (
-      <div className="gg">
+      <div className="profile">
         <NavBar/>
         <Form error={error!==null}>
           <Form.Field>

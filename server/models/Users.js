@@ -10,7 +10,8 @@ const UsersSchema = new Schema({
   hash: { type: String },
   salt: { type: String },
   eatingrooms: [{ type: String }],
-  description: { type: String }
+  description: { type: String },
+  avatar : { data: Buffer, contentType: String }
 });
 
 UsersSchema.methods.setPassword = function (password) {

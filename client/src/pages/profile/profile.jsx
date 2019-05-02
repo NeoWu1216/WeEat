@@ -3,6 +3,7 @@ import ProfileEditView from '../../components/profile/edit-profile'
 import {getUser, setUser} from '../../api/user'
 import {getMessage} from '../../api/parser'
 import React, { Component } from 'react'
+import './profile.scss'
 
 export default class Profile extends Component {
   constructor(props) {
