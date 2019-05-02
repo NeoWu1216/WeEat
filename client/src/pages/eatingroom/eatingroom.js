@@ -69,7 +69,7 @@ class EatingRoomEntry extends Component {
                 <li>Entry5: 5</li><br />
               </ul>
               <div className="eating_room_button">
-                <a>Join now!</a>
+                <a href="/">Join now!</a>
               </div>
             </div>
           </div>

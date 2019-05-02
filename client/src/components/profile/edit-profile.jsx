@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import NavBar from "../../components/navbar/navbar";
-import { Card, Icon, Image, Button, Message, Form} from 'semantic-ui-react'
-import { getId } from '../../storage/id'
+import { Button, Message, Form} from 'semantic-ui-react'
 import { setUser } from '../../api/user'
 import { getMessage } from '../../api/parser'
 
