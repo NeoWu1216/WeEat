@@ -10,7 +10,7 @@ class Restaurant extends Component {
     return (
       <div id="restaurant_outer">
         <NavBar />
-        <ContactForm />
+        <Container />
         <Footer />
       </div>
     )
@@ -18,7 +18,7 @@ class Restaurant extends Component {
 }
 
 
-class ContactForm extends Component {
+class Container extends Component {
 
   constructor(props) {
     super(props);
