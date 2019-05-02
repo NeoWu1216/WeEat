@@ -109,19 +109,19 @@ class ContactForm extends Component {
             <div className="form-group">
               <label htmlFor="CategoryInput">Eating Category</label><br />
               <div id="select_style">
-              <select name="category" value={this.state.category} onChange={this.handleChange}>
-                <option value='' disabled></option>
-                {selectOptionsList}
-              </select>
+                <select name="category" value={this.state.category} onChange={this.handleChange}>
+                  <option value='' disabled></option>
+                  {selectOptionsList}
+                </select>
               </div>
             </div>
             <div className="form-group">
               <label htmlFor="SortInput">Sort by</label><br />
               <div id="select_style">
-              <select name="sort_idx" value={this.state.sort_idx} onChange={this.handleChange}>
-                <option value='' disabled></option>
-                {sortOptionsList}
-              </select>
+                <select name="sort_idx" value={this.state.sort_idx} onChange={this.handleChange}>
+                  <option value='' disabled></option>
+                  {sortOptionsList}
+                </select>
               </div>
             </div>
             <div className="form-group">
@@ -172,18 +172,18 @@ class RestaurantEntry extends Component {
             <h1>{r.name}</h1>
             <div className="card_right__details">
               <ul>
-                <li>Rating: {r.rating}</li>
-                <li>Phone: {r.display_phone}</li>
-                <li>Location: {r.location.display_address[0] + " "}{r.location.display_address[1]}</li>
+                <li>Rating: {r.rating}</li><br />
+                <li>Phone: {r.display_phone}</li><br />
+                <li>Location: {r.location.display_address[0] + " "}{r.location.display_address[1]}</li><br />
+                <li>Price: {r.price}</li><br />
+                <li>Details: <a href={r.url}>Yelp</a></li>
               </ul>
               <div className="button">
                 <a href="https://www.w3schools.com">WeEat Now!</a>
               </div>
             </div>
-
           </div>
         </div>
-
       </div>
     )
   }
