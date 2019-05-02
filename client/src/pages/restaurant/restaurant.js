@@ -29,8 +29,8 @@ class Container extends Component {
       open_now: false,
       sort_idx: 0,
       category_map: ['', 'african', 'tradamerican', 'arabian', 'asianfusion', 'baguettes', 'bbq', 'bistros', 'breakfast_brunch', 'burgers', 'cafes', 'chinese', 'hotdogs', 'indpak', 'italian', 'japanese', 'korean', 'mediterranean', 'mexican', 'pizza', 'salad', 'sandwiches', 'thai', 'vegetarian'],
-      sort_map: ['', 'rating', 'review_count', 'distance'],
-      result: TEST_DATA.businesses
+      sort_map: ['best_match', 'rating', 'review_count', 'distance'],
+      result: []
     };
 
     this.handleChange = this.handleInputChange.bind(this);
@@ -50,7 +50,7 @@ class Container extends Component {
   }
 
   handleSubmit(event) {
-    axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, {
+    axios.get(`http://localhost:8010/proxy/v3/businesses/search`, {
       headers: {
         'Authorization': `Bearer ITSKhNoa4exeX_bVQ5_3q44kTeAvTJWOq05ilkdTkTLK7ShsqVpDWL89_5R5O3e3x7paO7-Ugj-rvLUcivOfLxq8v51-TKKnwSGVCHePcGvied7biNPvF3gpKmayXHYx`
       },
@@ -189,122 +189,4 @@ class RestaurantEntry extends Component {
   }
 }
 
-var TEST_DATA = {
-  "businesses": [
-    {
-      "id": "9MnbQg7kfb_WgxoV0hXKSQ",
-      "alias": "black-dog-smoke-and-ale-house-urbana",
-      "name": "Black Dog Smoke & Ale House",
-      "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/lJOnFchw-mzW6H5IdKh8Zg/o.jpg",
-      "is_closed": false,
-      "url": "https://www.yelp.com/biz/black-dog-smoke-and-ale-house-urbana?adjust_creative=EF1LVTfdsDuyWdMT_EVVSg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=EF1LVTfdsDuyWdMT_EVVSg",
-      "review_count": 803,
-      "categories": [
-        {
-          "alias": "bbq",
-          "title": "Barbeque"
-        }
-      ],
-      "rating": 4.5,
-      "coordinates": {
-        "latitude": 40.113818215463,
-        "longitude": -88.207689252733
-      },
-      "transactions": [],
-      "price": "$$",
-      "location": {
-        "address1": "201 N Broadway Ave",
-        "address2": "",
-        "address3": "",
-        "city": "Urbana",
-        "zip_code": "61801",
-        "country": "US",
-        "state": "IL",
-        "display_address": [
-          "201 N Broadway Ave",
-          "Urbana, IL 61801"
-        ]
-      },
-      "phone": "+12173449334",
-      "display_phone": "(217) 344-9334",
-      "distance": 1251.8136816166234
-    },
-    {
-      "id": "VIJ2KiDKhUVhhpNylEIfog",
-      "alias": "maize-mexican-grill-champaign",
-      "name": "Maize Mexican Grill",
-      "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/dU3DV0ENRuyUvMyFgPglUA/o.jpg",
-      "is_closed": false,
-      "url": "https://www.yelp.com/biz/maize-mexican-grill-champaign?adjust_creative=EF1LVTfdsDuyWdMT_EVVSg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=EF1LVTfdsDuyWdMT_EVVSg",
-      "review_count": 546,
-      "categories": [
-        {
-          "alias": "mexican",
-          "title": "Mexican"
-        }
-      ],
-      "rating": 4.5,
-      "coordinates": {
-        "latitude": 40.11037,
-        "longitude": -88.23891
-      },
-      "transactions": [],
-      "price": "$",
-      "location": {
-        "address1": "60 E Green Street",
-        "address2": null,
-        "address3": "",
-        "city": "Champaign",
-        "zip_code": "61820",
-        "country": "US",
-        "state": "IL",
-        "display_address": [
-          "60 E Green Street",
-          "Champaign, IL 61820"
-        ]
-      },
-      "phone": "+12173556400",
-      "display_phone": "(217) 355-6400",
-      "distance": 1606.1486452942813
-    },
-    {
-      "id": "VIJ2KiDKhUVhhpNylEIfog",
-      "alias": "maize-mexican-grill-champaign",
-      "name": "Maize Mexican Grill",
-      "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/dU3DV0ENRuyUvMyFgPglUA/o.jpg",
-      "is_closed": false,
-      "url": "https://www.yelp.com/biz/maize-mexican-grill-champaign?adjust_creative=EF1LVTfdsDuyWdMT_EVVSg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=EF1LVTfdsDuyWdMT_EVVSg",
-      "review_count": 546,
-      "categories": [
-        {
-          "alias": "mexican",
-          "title": "Mexican"
-        }
-      ],
-      "rating": 4.5,
-      "coordinates": {
-        "latitude": 40.11037,
-        "longitude": -88.23891
-      },
-      "transactions": [],
-      "price": "$",
-      "location": {
-        "address1": "60 E Green Street",
-        "address2": null,
-        "address3": "",
-        "city": "Champaign",
-        "zip_code": "61820",
-        "country": "US",
-        "state": "IL",
-        "display_address": [
-          "60 E Green Street",
-          "Champaign, IL 61820"
-        ]
-      },
-      "phone": "+12173556400",
-      "display_phone": "(217) 355-6400",
-      "distance": 1606.1486452942813
-    }
-  ]
-};
 export default Restaurant;
