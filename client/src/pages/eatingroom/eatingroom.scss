@@ -1,4 +1,4 @@
-.eatingroom_outer {
+#eatingroom_background{
   background-image: url("https://previews.123rf.com/images/annapustynnikova/annapustynnikova1602/annapustynnikova160200321/52327530-italian-food-background-with-vine-tomatoes-basil-spaghetti-olives-parmesan-olive-oil-garlic-ingredie.jpg");
   background-size: cover;
   background-position: center center;
@@ -10,6 +10,7 @@
   float: left;
   width: 55%;
   margin-top: 10%;
+  min-height: 600px
 }
 
 .eating_room_list_container {

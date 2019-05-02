@@ -9,9 +9,11 @@ class Restaurant extends Component {
   render() {
     return (
       <div id="restaurant_outer">
+        <div id="rest_background">
         <NavBar />
         <Container />
         <Footer />
+        </div>
       </div>
     )
   }
@@ -46,7 +48,7 @@ class Container extends Component {
     this.setState({
       [name]: value
     });
-    console.log('Change detected. State updated' + name + ' = ' + value);
+    // console.log('Change detected. State updated' + name + ' = ' + value);
   }
 
   handleSubmit(event) {
@@ -70,17 +72,11 @@ class Container extends Component {
         console.log(err)
       })
 
-    // alert('A form was submitted: ' + this.state.location + ' // ' + this.state.keyword+ this.state.open_now+ this.state.category_map[this.state.category]);
     event.preventDefault();
 
   }
   handleSubmit2(event) {
-    // console.log(TEST_DATA.businesses);
-    // console.log("hahaha", TEST_DATA.businesses);
-    //     this.setState({
-    //       result:TEST_DATA.businesses
-    //     });
-    console.log(this.state.result);
+    // console.log(this.state.result);
     event.preventDefault();
 
   }

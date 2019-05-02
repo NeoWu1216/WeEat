@@ -7,22 +7,23 @@ import "./eatingroom.scss";
 class EatingRoom extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
   render() {
     return (
       <div id="eatingroom_outer">
-        <NavBar />
-        <div id="eating_room_container">
-          <div id="filter_box">
+        <div id="eatingroom_background">
+          <NavBar />
+          <div id="eating_room_container">
+            <div id="filter_box">
+            </div>
+            <div className="eating_room_left">
+              <EatingRoomList />
+            </div>
           </div>
-          <div className="eating_room_left">
-            <EatingRoomList />
-          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
     );
   }
