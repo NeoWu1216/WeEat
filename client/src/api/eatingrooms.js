@@ -17,20 +17,19 @@ export function postNewRoom(data) {
   return postRoom(data)
 }
 
-export function getRoom(_id, data) {
-  let {headers} = getAuthHeader;
-  let params = data
-  return axios.get(rootUrl+'eatingrooms/'+_id, {headers, params})
+export function getRoom(_id) {
+  console.log(rootUrl+'eatingrooms/'+_id)
+  return axios.get(rootUrl+'eatingrooms/'+_id, getAuthHeader())
     .then(getData)
     
 }
 
 export function getRooms(where) {
   console.log(where)
-  const url = rootUrl+'eatingrooms'
+  let url = rootUrl+'eatingrooms'
   let extra = ""
   for (const key in where)
-    extra+='"'+key+'"'+":"+where[key]+","
+    extra+='"'+key+'"'+":"+'"'+where[key]+'"'+","
   if (extra) {
     extra = extra.slice(0, -1)
     url+="?where={"+extra+"}"
@@ -39,9 +38,6 @@ export function getRooms(where) {
   return axios.get(url, getAuthHeader()).then(getData)
 }
 
-export function postMember(_id, member) {
-  return getRoom(_id).then((data)=>{
-    data.participants.push_back(member)
-    return postRoom(data)
-  })
+export function postMember(_id) {
+  return axios.post(rootUrl+'eatingrooms/join/'+_id, {}, getAuthHeader()).then(getData)
 }

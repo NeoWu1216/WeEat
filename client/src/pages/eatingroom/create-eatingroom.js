@@ -31,7 +31,6 @@ class EatingForm extends Component{
     let now = new Date()
     now.setHours(this.state.date.substr(0,2))
     now.setMinutes(this.state.date.substr(3,2))
-    console.log(now.toString())
     postNewRoom({...this.state, date: now.toString()}).then((response)=>{
       console.log('hello?')
       this.props.history.goBack()

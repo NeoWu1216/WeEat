@@ -3,26 +3,27 @@ import NavBar from "../../components/navbar/navbar";
 import Footer from "../../components/footer/footer";
 import EatingForm from './eatingform'
 import { withRouter } from 'react-router-dom'
-import { getRooms } from "../../api/eatingrooms"
+import { getRooms, postMember } from "../../api/eatingrooms"
 import { getMessage } from "../../api/parser"
-
+import { getId } from '../../storage/id'
 import "./eatingroom.scss";
 
 class EatingRoom extends Component {
   constructor(props) {
     super(props);
-    this.state = {eatingrooms:[]};
+    this.state = {eatingrooms:[], mounted: false};
   }
 
   componentDidMount() {
+    if (!this.state.mounted)
     getRooms({}).then((data)=> {
-      console.log('data',data)
-      this.setState({eatingrooms:data})
+      this.setState({eatingrooms:data, mounted:true})
     }).catch(err=>alert(getMessage(err)))
   }
 
-  onSubmit(data) {
+  onSubmit = (data) => {
     getRooms(data).then((data)=> {
+      console.log(data)
       this.setState({eatingrooms:data})
     }).catch(err=>alert(getMessage(err)))
   }
@@ -43,7 +44,7 @@ class EatingRoom extends Component {
             </div>
             
             <div className="eating_room_right">
-              <EatingForm/>
+              <EatingForm onSubmit={this.onSubmit}/>
             </div>
 
           </div>
@@ -77,9 +78,26 @@ class EatingRoomList extends Component {
 class EatingRoomEntry extends Component {
   constructor(props) {
     super(props);
+    this.state = {room: this.props.r}
   }
+  onJoin(e, _id) {
+    e.preventDefault()
+    e.stopPropagation()
+    postMember(_id).then((data)=> {
+      console.log('join',data)
+      this.setState({room: data})
+    }).catch(err=> {
+      alert(getMessage(err)) 
+      console.log(err.response)
+    })
+  }
+
   render() {
-    let room = this.props.r
+    let {room} = this.state
+    if (!room) return null
+    if ( room.participants===undefined) return null
+    if ( room.participants===null ) 
+      room.participants = []
     return (
       <div>
         <div className="eating_room_card">
@@ -94,9 +112,9 @@ class EatingRoomEntry extends Component {
 
             <div className="eating_room_card_right_details">
               <ul>
-                {room.participants.map((uid)=>(<li>{uid}</li>))}
+                {room.participants.map((uid)=>(<li key={uid}>{uid}</li>))}
               </ul>
-              <div className="eating_room_button">
+              <div className="eating_room_button" onClick={(e)=>this.onJoin(e, room._id)}>
                 <a href="/">Join now!</a>
               </div>
             </div>

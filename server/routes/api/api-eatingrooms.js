@@ -12,10 +12,10 @@ router.post('/', auth.required, (req, res) => {
       data: {}
     });
   }
-  const { payload: { user_id } } = req;
+  const { payload: { id } } = req;
   // create new task
   const eatingroom = new EatingRooms({
-    user: user_id,
+    user: id,
     title: req.body.title,
     date: req.body.date,
     address: req.body.address,
@@ -24,7 +24,7 @@ router.post('/', auth.required, (req, res) => {
     participants: req.body.participants
   });
   // add the eating room to user's list
-  Users.findByIdAndUpdate(user_id,
+  Users.findByIdAndUpdate(id,
     {
       $push: { eatingrooms: eatingroom._id }
     })
@@ -45,12 +45,12 @@ router.post('/', auth.required, (req, res) => {
 
 // Delete an eating room
 router.delete('/:id', auth.required, (req, res) => {
-  const { payload: { user_id } } = req;
+  const { payload: { id } } = req;
 
   // delete other people's eating room detection
   EatingRooms.findById(req.params.id)
     .then(eatingroom => {
-      if (eatingroom.user != user_id) {
+      if (eatingroom.user != id) {
         return res.status(500).send({
           error: "Fuck u, you r deleting someone else's eating room!",
         });
@@ -62,7 +62,7 @@ router.delete('/:id', auth.required, (req, res) => {
       });
     })
 
-  Users.findById(user_id,
+  Users.findById(id,
     {
       $pull: { eatingrooms: req.params.id }
     })
@@ -98,12 +98,12 @@ router.delete('/:id', auth.required, (req, res) => {
 
 // Update a eatingroom
 router.put('/:id', auth.required, (req, res) => {
-  const { payload: { user_id } } = req;
+  const { payload: { id } } = req;
 
   // editing other people's eating room detection
   EatingRooms.findById(req.params.id)
     .then(eatingroom => {
-      if (eatingroom.user != user_id) {
+      if (eatingroom.user != id) {
         return res.status(500).send({
           error: "Fuck u, you r editing someone else's eating room!",
         });
@@ -138,6 +138,38 @@ router.put('/:id', auth.required, (req, res) => {
     });
 });
 
+
+router.post('/join/:id', auth.required, (req, res)=> {
+  const { payload: { id } } = req;
+  EatingRooms.findById(req.params.id)
+    .then(eatingroom => {
+      let participants = eatingroom.participants
+      if (!participants) participants = []
+      if (participants.find(x=>x==id)) {
+        throw "Fuck u, you r already joined"
+      }
+      participants.push(id)
+      return participants
+    }).then((participants)=> {
+      console.log('participants', participants)
+      EatingRooms.findByIdAndUpdate(req.params.id, { $set: {participants: participants}}, { new: true, runValidators: true })
+      .then(eatingroom => {
+        console.log(eatingroom)
+        if (!eatingroom || eatingroom.length == 0) {
+          throw ("eatingroom not found with id " + req.params.id)
+        }
+        res.status(200).send({
+          data: eatingroom
+        });
+      })
+    })
+    .catch(err => {
+      res.status(500).send({
+        error: err,
+      });
+    })
+  
+})
 
 // get all eating rooms
 router.get('/', (req, res) => {
