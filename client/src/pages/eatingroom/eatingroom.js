@@ -97,7 +97,7 @@ class EatingRoomEntry extends Component {
                 {room.participants.map((uid)=>(<li>{uid}</li>))}
               </ul>
               <div className="eating_room_button">
-                <a>Join now!</a>
+                <a href="/">Join now!</a>
               </div>
             </div>
           </div>

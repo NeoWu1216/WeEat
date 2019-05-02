@@ -1,6 +1,7 @@
 import ProfileView from '../../components/profile/profile'
 import ProfileEditView from '../../components/profile/edit-profile'
-import {getUser, setUser} from '../../api/user'
+import {getUser} from '../../api/user'
+// import {getUser, setUser} from '../../api/user'
 import {getMessage} from '../../api/parser'
 import React, { Component } from 'react'
 import './profile.scss'
