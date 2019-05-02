@@ -9,6 +9,7 @@ const EatingRoomsSchema = new Schema({
     address: { type: String },
     restaurant: { type: String },
     party_size: { type: Number },
+    participants: [{ type: String }]
 });
 
 

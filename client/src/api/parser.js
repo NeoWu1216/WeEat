@@ -10,8 +10,9 @@ export function getMessage(err) {
 function getError(data) {
   let error = data.error
   if (error === undefined) return data.toString()
-  if (error.errmsg === undefined) return error.toString()
-  return error.errmsg
+  if (error.message !== undefined) return error.message
+  if (error.errmsg !== undefined) return error.errmsg
+  return error.toString()
 }
 
 export function validate(data, keys) {

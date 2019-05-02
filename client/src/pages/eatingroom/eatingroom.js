@@ -1,13 +1,30 @@
 import React, { Component } from "react";
 import NavBar from "../../components/navbar/navbar";
 import Footer from "../../components/footer/footer";
+import EatingForm from './eatingform'
+import { withRouter } from 'react-router-dom'
+import { getRooms } from "../../api/eatingrooms"
+import { getMessage } from "../../api/parser"
 
 import "./eatingroom.scss";
 
 class EatingRoom extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {eatingrooms:[]};
+  }
+
+  componentDidMount() {
+    getRooms({}).then((data)=> {
+      console.log('data',data)
+      this.setState({eatingrooms:data})
+    }).catch(err=>alert(getMessage(err)))
+  }
+
+  onSubmit(data) {
+    getRooms(data).then((data)=> {
+      this.setState({eatingrooms:data})
+    }).catch(err=>alert(getMessage(err)))
   }
 
   render() {
@@ -19,8 +36,16 @@ class EatingRoom extends Component {
             <div id="filter_box">
             </div>
             <div className="eating_room_left">
-              <EatingRoomList />
+              <EatingRoomList eatingrooms={this.state.eatingrooms}/>
+              <button className="eating_room_button" onClick={()=>this.props.history.push('create-eatingroom')}>
+                Click me!
+              </button>
             </div>
+            
+            <div className="eating_room_right">
+              <EatingForm/>
+            </div>
+
           </div>
           <Footer />
         </div>
@@ -30,14 +55,17 @@ class EatingRoom extends Component {
 }
 
 
+
+
 class EatingRoomList extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
+  
+
   render() {
-    // TODO: eating rooms
-    let result = [{}, {}, {}]
+    let result = this.props.eatingrooms
+    console.log(result)
     return (
       <div id="eating_room_list_container">
         {result.map((r, index) => <EatingRoomEntry r={r} key={index} />)}
@@ -49,9 +77,9 @@ class EatingRoomList extends Component {
 class EatingRoomEntry extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
   render() {
+    let room = this.props.r
     return (
       <div>
         <div className="eating_room_card">
@@ -59,14 +87,14 @@ class EatingRoomEntry extends Component {
             <img src={"https://s3-media1.fl.yelpcdn.com/bphoto/lJOnFchw-mzW6H5IdKh8Zg/o.jpg"} alt="img" />
           </div>
           <div className="eating_room_card_right">
-            <h1>title</h1>
+            <h1>{room.title}</h1>
+            <h1>{room.restaurant}</h1>
+            <h1>{room.address}</h1>
+            <h1>{room.date}</h1>
+
             <div className="eating_room_card_right_details">
               <ul>
-                <li>Entry1: 1</li><br />
-                <li>Entry2: 2</li><br />
-                <li>Entry3: 3</li><br />
-                <li>Entry4: 4</li><br />
-                <li>Entry5: 5</li><br />
+                {room.participants.map((uid)=>(<li>{uid}</li>))}
               </ul>
               <div className="eating_room_button">
                 <a>Join now!</a>
@@ -79,4 +107,4 @@ class EatingRoomEntry extends Component {
   }
 }
 
-export default EatingRoom;
+export default withRouter(EatingRoom);
