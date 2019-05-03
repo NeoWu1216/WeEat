@@ -83,7 +83,7 @@ class NavBar extends Component {
                     Eating Rooms
                   </Button>
                 </Grid>
-                <Grid item>
+                <Grid item style={{ paddingLeft: "1em" }}>
                   <a onClick={() => this.handleClick("/profile/" + getId())}>
                     <img src={user ? user.avatar : ""} alt="t" />
                   </a>

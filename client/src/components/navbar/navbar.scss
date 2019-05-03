@@ -24,7 +24,6 @@ $alt-text: hsla(34, 100, 59, 1);
       5px 5px $dark, 6px 6px $dark;
   }
   .navbutton {
-    padding: 0 1.2em;
     transition: 0.5s;
   }
   .navbutton:hover {
@@ -36,6 +35,7 @@ $alt-text: hsla(34, 100, 59, 1);
       height: 2em;
       width: 2em;
       border-radius: 50%;
+      transition: 0.5s;
     }
     img:hover {
       cursor: pointer;

@@ -241,7 +241,8 @@ class EatingRoomEntry extends Component {
                     </div>
                   </Grid>
                   <Grid item>
-                    {room.users.length === room.party_size ? (
+                    {room.users.length === room.party_size ||
+                    room.participants.indexOf(getId()) >= 0 ? (
                       <Button
                         size="small"
                         variant="contained"
