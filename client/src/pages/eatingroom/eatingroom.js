@@ -194,13 +194,11 @@ class EatingRoomEntry extends Component {
                 >
                   <Grid item style={{ width: "70%" }}>
                     <div className="eatingroom-participants">
-                      {room.participants.map(uid => {
-                        if (uid === getId()) {
-                          return <i class="fas fa-user current-user" />;
-                        } else {
-                          return <i class="fas fa-user" />;
-                        }
-                      })}
+                      {room.participants.map(uid =>(<a onClick={()=>this.props.history.push('/profile/'+uid)}>
+                        { (uid === getId()) ? <i class="fas fa-user current-user" /> : <i class="fas fa-user" /> }
+                      </a>
+                      )
+                    )}
                     </div>
                   </Grid>
                   <Grid item>
@@ -222,5 +220,5 @@ class EatingRoomEntry extends Component {
     );
   }
 }
-
+EatingRoomEntry = withRouter(EatingRoomEntry)
 export default withRouter(EatingRoom);
