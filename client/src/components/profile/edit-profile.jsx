@@ -4,6 +4,8 @@ import { Card, Icon, Image, Button, Message, Form} from 'semantic-ui-react'
 import { getId } from '../../storage/id'
 import { setUser } from '../../api/user'
 import { getMessage } from '../../api/parser'
+import Footer from "../../components/footer/footer";
+import './edit-profile.scss'
 
 class Profile extends Component {
   constructor(props) {
@@ -34,7 +36,7 @@ class Profile extends Component {
   render() {
     let {name, email, description, error} = this.state
     return (
-      <div className="profile">
+      <div className="edit-profile">
         <NavBar/>
         <Form error={error!==null}>
           <Form.Field>
@@ -54,6 +56,7 @@ class Profile extends Component {
         <Button primary onClick={this.onSubmit} >
               Submit Changes
         </Button>
+        <Footer />
       </div>
     )
   }
