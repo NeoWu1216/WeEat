@@ -60,3 +60,8 @@ export function postMember(_id) {
       })
     })
 }
+
+export function deleteRoom(_id) {
+  return axios.delete(rootUrl+'eatingrooms/'+_id, getAuthHeader())
+    .then(getData)
+}

@@ -9,11 +9,12 @@ import './edit-profile.scss'
 class Profile extends Component {
   constructor(props) {
     super(props)
-    let { _id, name, email, description, avatar } = this.props
+    let { _id, name, email, phone, description, avatar } = this.props
     this.state = {
       _id: _id,
       name: name,
       email: email,
+      phone: phone,
       description: description,
       avatar: avatar,
       error: null,
@@ -25,8 +26,8 @@ class Profile extends Component {
   }
 
   onSubmit = () => {
-    let { _id, name, email, description, avatar } = this.state
-    setUser(_id, { name, email, description, avatar }).then(() => {
+    let { _id, name, email, phone, description, avatar } = this.state
+    setUser(_id, { name, email, phone, description, avatar }).then(() => {
       this.props.onSubmit()
     }).catch((err) => {
       alert(getMessage(err))
@@ -34,7 +35,7 @@ class Profile extends Component {
   }
 
   render() {
-    let { name, email, description, avatar, error } = this.state
+    let { name, email, phone, description, avatar, error } = this.state
     return (
       <div>
         <NavBar />
@@ -53,6 +54,10 @@ class Profile extends Component {
               <Form.Field>
                 <label>Email</label>
                 <input id="email" value={email} onChange={this.onInputChange} />
+              </Form.Field>
+              <Form.Field>
+                <label>Phone number</label>
+                <input id="phone" value={phone} onChange={this.onInputChange} />
               </Form.Field>
               <Form.Field>
                 <label>Description</label>

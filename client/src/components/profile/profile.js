@@ -10,7 +10,7 @@ class Profile extends Component {
   }
 
   render() {
-    let { _id, name, email, description, avatar, onEdit } = this.props
+    let { _id, name, email, phone, description, avatar, onEdit } = this.props
     description = description ? description : "This user haven't posted anything"
     let extra = null
     if (getId() === _id)
@@ -28,8 +28,9 @@ class Profile extends Component {
             <div className="profile_fields">
               <img className="avatar" style={imgstyle} src={avatar} alt="avatar" />
               <hr />
-              <div><h3> Name: {name} </h3></div>
+              <h3> Name: {name} </h3>
               <h3> Email : {email} </h3>
+              <h3> Phone number : {phone} </h3>
               <hr />
               <h4> Description: {description} </h4>
               {extra}

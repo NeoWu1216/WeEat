@@ -3,7 +3,7 @@ import NavBar from "../../components/navbar/navbar";
 import Footer from "../../components/footer/footer";
 import EatingForm from "./eatingform";
 import { withRouter } from "react-router-dom";
-import { getRooms, postMember } from "../../api/eatingrooms";
+import { getRooms, postMember, deleteRoom } from "../../api/eatingrooms";
 import { getMessage } from "../../api/parser";
 import { getId } from "../../storage/id";
 import styles from "./eatingroom.scss";
@@ -37,10 +37,16 @@ class EatingRoom extends Component {
         .catch(err => alert(getMessage(err)));
   }
 
-  notify = (data, ix) => {
-    let { eatingrooms } = this.state;
-    eatingrooms[ix] = data;
-    this.setState({ eatingrooms });
+  notify = (data, ix, mess) => {
+    if (mess === 'join') {
+      let { eatingrooms } = this.state;
+      eatingrooms[ix] = data;
+      this.setState({ eatingrooms });
+    } else if (mess == 'delete') {
+      let { eatingrooms } = this.state
+      eatingrooms.splice(ix)
+      this.setState({eatingrooms})
+    }
   };
 
   onSubmit = data => {
@@ -136,8 +142,8 @@ class EatingRoom extends Component {
 }
 
 class EatingRoomList extends Component {
-  notifyParent(data, ix) {
-    this.props.notify(data, ix);
+  notifyParent(data, ix, mess) {
+    this.props.notify(data, ix, mess);
   }
 
   render() {
@@ -148,7 +154,7 @@ class EatingRoomList extends Component {
           <EatingRoomEntry
             r={r}
             key={index}
-            notify={data => this.notifyParent(data, index)}
+            notify={(data, mess) => this.notifyParent(data, index, mess)}
           />
         ))}
       </div>
@@ -161,13 +167,24 @@ class EatingRoomEntry extends Component {
     super(props);
     this.state = {};
   }
+  onDelete(e, _id) {
+    e.preventDefault();
+    e.stopPropagation();
+    deleteRoom(_id)
+      .then(data => {
+        this.props.notify(data, 'delete');
+      })
+      .catch(err => {
+        alert(getMessage(err));
+      });
+  }
+
   onJoin(e, _id) {
     e.preventDefault();
     e.stopPropagation();
     postMember(_id)
       .then(data => {
-        this.props.notify(data);
-        // this.setState({ room: data });
+        this.props.notify(data, 'join');
       })
       .catch(err => {
         alert(getMessage(err));
@@ -297,6 +314,16 @@ class EatingRoomEntry extends Component {
                         Join
                       </Button>
                     )}
+
+                      <Button
+                        size="small"
+                        variant="contained"
+                        disabled={getId()!==room.user}
+                        color="primary"
+                        onClick={(e)=>this.onDelete(e, room._id)}
+                      >
+                        Delete
+                      </Button>
                   </Grid>
                 </Grid>
               </CardContent>

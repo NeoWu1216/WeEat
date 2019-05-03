@@ -13,6 +13,7 @@ export default class Profile extends Component {
       _id: "",
       name: "",
       email: "",
+      phone: "",
       description: "",
       avatar: "",
       edit: false
@@ -21,8 +22,8 @@ export default class Profile extends Component {
 
   getUser = () => {
     let _id = this.props.match.params.id;
-    return getUser(_id).then(({ name, email, description, avatar }) => {
-      this.setState({ _id, name, email, description, avatar })
+    return getUser(_id).then(({ name, email, phone, description, avatar }) => {
+      this.setState({ _id, name, email, phone, description, avatar })
     }).catch((err) => {
       alert(getMessage(err))
     })
@@ -43,12 +44,12 @@ export default class Profile extends Component {
   }
 
   render() {
-    let { _id, name, email, description, avatar, edit } = this.state
+    let { _id, name, email, phone, description, avatar, edit } = this.state
     if (!_id) return <h1> User not found</h1>
     if (!edit)
-      return <ProfileView name={name} email={email}
+      return <ProfileView name={name} email={email} phone={phone}
         description={description} avatar={avatar} onEdit={this.onEdit} _id={_id} />
-    return <ProfileEditView name={name} email={email}
+    return <ProfileEditView name={name} email={email} phone={phone}
       description={description} avatar={avatar} onSubmit={this.onView} _id={_id} />
   }
 }
