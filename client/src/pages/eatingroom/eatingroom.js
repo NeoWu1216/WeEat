@@ -86,10 +86,11 @@ class EatingRoom extends Component {
             container
             direction="row"
             justify="space-between"
-            // alignItems="center"
+            alignItems="center"
           >
             <Grid
               item
+              container
               style={{
                 width: "65%",
                 height: "525px",
@@ -102,8 +103,7 @@ class EatingRoom extends Component {
               item
               style={{
                 width: "34%",
-                height: "75vh"
-                // overflowY: "auto"
+                height: "525px"
               }}
             >
               <EatingForm onSubmit={this.onSubmit} />
@@ -156,8 +156,8 @@ class EatingRoomEntry extends Component {
       <MuiThemeProvider theme={theme}>
         <Card
           style={{
-            margin: "1em 2px",
-            width: "95%",
+            margin: ".6em 0",
+            width: "96%",
             height: "250px"
           }}
         >
@@ -203,19 +203,19 @@ class EatingRoomEntry extends Component {
               <CardContent>
                 <div className="card-infolabel">
                   <div className="card-label">
-                    <i class="fas fa-utensils" />:
+                    <i class="fas fa-utensils" />
                   </div>
                   {room.restaurant}
                 </div>
                 <div className="card-infolabel">
                   <div className="card-label">
-                    <i class="fas fa-map-marker-alt" />:
+                    <i class="fas fa-map-marker-alt" />
                   </div>
                   {room.address}
                 </div>
                 <div className="card-infolabel">
                   <div className="card-label">
-                    <i class="fas fa-calendar-day" />:
+                    <i class="fas fa-calendar-day" />
                   </div>
                   {room.date}
                 </div>
@@ -231,6 +231,7 @@ class EatingRoomEntry extends Component {
                     <div className="eatingroom-participants">
                       {room.users.map(user => (
                         <a
+                          href
                           onClick={() =>
                             this.props.history.push("/profile/" + user._id)
                           }

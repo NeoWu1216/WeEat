@@ -15,7 +15,7 @@ $alt-text: hsla(34, 100, 59, 1);
     color: $light;
     font-family: "Pacifico", cursive;
     text-decoration: None;
-    font-size: 2em;
+    font-size: 2.4em;
     padding-left: 0.75em;
     transition: 0.2s;
   }
@@ -24,6 +24,7 @@ $alt-text: hsla(34, 100, 59, 1);
       5px 5px $dark, 6px 6px $dark;
   }
   .navbutton {
+    font-size: 0.9em;
     transition: 0.5s;
   }
   .navbutton:hover {

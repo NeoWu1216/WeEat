@@ -14,6 +14,9 @@ $alt-text: hsla(34, 100, 59, 1);
     padding: 5em 1em 1em 1em;
     .eatingroom-list {
       width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
       .card-infolabel {
         margin: 0.25em 0;
         .card-label {
@@ -38,13 +41,69 @@ $alt-text: hsla(34, 100, 59, 1);
             height: 30px;
             border-radius: 50px;
           }
+          cursor: pointer;
         }
       }
     }
     .eatingform {
       width: 100%;
       height: 100%;
-      background: red;
+      background: $dark;
+      color: $light;
+      border-radius: 3px;
+      form {
+        height: 100%;
+        .form-title {
+          font-size: 3.5em;
+          text-align: center;
+        }
+        .form-group {
+          height: 100%;
+          width: 90%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 50px auto;
+          margin: 0 auto;
+          label {
+            float: left;
+          }
+          .entry.time {
+            input {
+              font-size: 0.85em;
+            }
+          }
+          .entry {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            width: 65%;
+            float: right;
+            border-radius: 50px;
+            background-color: $light;
+            color: $dark;
+            height: 30px;
+            input {
+              width: 90%;
+              background: none;
+              font-family: "Roboto Slab", serif;
+              border: none;
+              font-weight: 800;
+              font-size: 1em;
+            }
+            input:focus {
+              outline: none;
+            }
+          }
+          .entry-dropdown {
+            background: $light;
+            color: $dark;
+            width: 5em;
+            text-align: center;
+            border-radius: 50px;
+          }
+        }
+      }
     }
   }
 }

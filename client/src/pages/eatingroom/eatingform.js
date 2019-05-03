@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import Grid from "@material-ui/core/Grid";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
 
 class EatingForm extends Component {
   constructor(props) {
@@ -29,71 +33,116 @@ class EatingForm extends Component {
   render() {
     const selectOptionsList = this.selectOptions.map((selectOption, index) => {
       return (
-        <option key={index} value={index}>
+        <MenuItem key={index} value={index}>
           {selectOption}
-        </option>
+        </MenuItem>
       );
     });
 
     return (
       <div className="eatingform">
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="TitleInput">Room Name</label>
-            <input
-              type="text"
-              id="title"
-              value={this.state.title}
-              onChange={this.handleChange}
-              className="form-control"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="MeetInput">Meet At</label>
-            <input
-              type="text"
-              id="address"
-              value={this.state.address}
-              onChange={this.handleChange}
-              className="form-control"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="ResInput">What to Eat?</label>
-            <input
-              type="text"
-              id="restaurant"
-              value={this.state.restaurant}
-              onChange={this.handleChange}
-              className="form-control"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="SizeInput">Approximate time (+-1hr)</label>
-            <input
-              type="datetime-local"
-              id="date"
-              value={this.state.date}
-              onChange={this.handleChange}
-              className="form-control"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="SizeInput">Party Size</label>
-            <br />
-            <select
-              id="party_size"
-              value={this.state.party_size}
-              onChange={this.handleInputChange}
-            >
-              <option value="" disabled />
-              {selectOptionsList}
-            </select>
-          </div>
-
-          <input type="submit" value="Search" className="btn btn-primary" />
-        </form>
+        <Grid
+          container
+          direction="row"
+          alignItems="top"
+          justify="center"
+          style={{ height: "100%" }}
+        >
+          <Grid item style={{ padding: "1em 2em" }}>
+            <form onSubmit={this.handleSubmit}>
+              <Grid
+                container
+                direction="column"
+                justify="space-evenly"
+                style={{ height: "100%" }}
+              >
+                <Grid item>
+                  <div className="form-title">Filter</div>
+                </Grid>
+                <Grid item>
+                  <div className="form-group">
+                    <label htmlFor="TitleInput">Room Name: </label>
+                    <div className="entry">
+                      <input
+                        type="text"
+                        id="title"
+                        value={this.state.title}
+                        onChange={this.handleChange}
+                        className="form-control"
+                      />
+                    </div>
+                  </div>
+                </Grid>
+                <Grid item>
+                  <div className="form-group">
+                    <label htmlFor="MeetInput">Meet At: </label>
+                    <div className="entry">
+                      <input
+                        type="text"
+                        id="address"
+                        value={this.state.address}
+                        onChange={this.handleChange}
+                        className="form-control"
+                      />
+                    </div>
+                  </div>
+                </Grid>
+                <Grid item>
+                  <div className="form-group">
+                    <label htmlFor="ResInput">What to Eat?: </label>
+                    <div className="entry">
+                      <input
+                        type="text"
+                        id="restaurant"
+                        value={this.state.restaurant}
+                        onChange={this.handleChange}
+                        className="form-control"
+                      />
+                    </div>
+                  </div>
+                </Grid>
+                <Grid item>
+                  <div className="form-group">
+                    <label htmlFor="SizeInput">
+                      Approximate time (+-1hr):{" "}
+                    </label>
+                    <div className="entry time">
+                      <input
+                        type="datetime-local"
+                        id="date"
+                        value={this.state.date}
+                        onChange={this.handleChange}
+                        className="form-control"
+                      />
+                    </div>
+                  </div>
+                </Grid>
+                <Grid item>
+                  <div className="form-group">
+                    <label htmlFor="SizeInput">Party Size: </label>
+                    <div className="entry-dropdown">
+                      <Select
+                        className=".entry-dropdown"
+                        value={this.state.party_size}
+                        onChange={this.handleInputChange}
+                      >
+                        {/* <option value="" disabled /> */}
+                        {selectOptionsList}
+                      </Select>
+                    </div>
+                  </div>
+                </Grid>
+                <Grid item>
+                  <input
+                    type="submit"
+                    value="Search"
+                    className="btn btn-primary"
+                  />
+                </Grid>
+              </Grid>
+            </form>
+          </Grid>
+        </Grid>
       </div>
     );
   }
