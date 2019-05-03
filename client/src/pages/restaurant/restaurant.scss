@@ -1,4 +1,4 @@
-#rest_background{
+#rest_background {
   background-image: url("https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/2096239/1360/816/m1/fpnw/wm1/uqjpga6azzmsalgr0h74sfyp1z6wbpuuomjdvbz37olr43h5z0lwcan4fbgn4ihb-.jpg?1483703240&s=0c6d0f13a8332e966bd509c7d8dfb53c");
   background-size: cover;
   background-position: center center;
@@ -68,11 +68,9 @@ input[type="submit"]:hover {
 input[type="submit"]:active {
   opacity: 0.4;
 }
-#open {
-  padding-right: 40px;
-}
 
 .left {
+  text-align: center;
   float: left;
   width: 40%;
   position: fixed;
@@ -159,33 +157,55 @@ input[type="submit"]:active {
   }
 }
 
-.button {
-  a {
-    color: #ff0000;
-    text-decoration: none;
-    font-family: "Montserrat", sans-serif;
-    border: 1px solid #ff0000;
-    padding: 10px 10px 10px 10px;
-    font-size: 12px;
-    border-radius: 9px;
-    -webkit-transition-property: all;
-    transition-property: all;
-    -webkit-transition-duration: 0.5s;
-    transition-duration: 0.5s;
-  }
+.eating_room_button {
   float: right;
-  a:hover {
-    color: #000000;
-    cursor: pointer;
-    -webkit-transition-property: all;
-    transition-property: all;
-    -webkit-transition-duration: 0.5s;
-    transition-duration: 0.5s;
-  }
-  padding: 0 0 0 40px;
-  margin: 30px 0 0 0;
+  color: #ff0000;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  border: 1px solid #ff0000;
+  padding: 10px 10px 10px 10px;
+  font-size: 12px;
+  border-radius: 9px;
+  -webkit-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+.eating_room_button:hover {
+  color: #000000;
+  cursor: pointer;
+  -webkit-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
 }
 
 .btn-primary {
   font-size: 15px;
+}
+
+.custom-select {
+  text-align: center;
+  margin: 2%;
+  padding: 1%;
+  border: 3px solid #ccc;
+  width: 90%;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #fafafa url("data:image/png;base64,R0lGODlhDwAUAIABAAAAAP///yH5BAEAAAEALAAAAAAPABQAAAIXjI+py+0Po5wH2HsXzmw//lHiSJZmUAAAOw==") no-repeat 90% 50%;
+}
+
+.custom-select select {
+  font-size: 15px;
+  padding: 5px 8px;
+  width: 130%;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+}
+
+.custom-select select:focus {
+  outline: none;
 }

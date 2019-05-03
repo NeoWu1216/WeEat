@@ -12,8 +12,7 @@ function postRoom(data) {
 export function postNewRoom(data) {
   let user = getId()
   data.user = user
-  data.participants = [user] 
-  data.party_size = 1
+  data.participants = [user]
   return postRoom(data)
 }
 

@@ -65,12 +65,6 @@ class EatingRoom extends Component {
               }}
             >
               <EatingRoomList eatingrooms={this.state.eatingrooms} />
-              {/* <button
-                className="eating_room_button"
-                onClick={() => this.props.history.push("create-eatingroom")}
-              >
-                Click me!
-              </button> */}
             </Grid>
             <Grid item>
               <EatingForm onSubmit={this.onSubmit} />

@@ -3,7 +3,7 @@ import './restaurant.scss';
 import axios from 'axios';
 import NavBar from "../../components/navbar/navbar";
 import Footer from "../../components/footer/footer";
-
+import {Redirect, withRouter} from 'react-router-dom'
 
 class Restaurant extends Component {
   render() {
@@ -104,7 +104,7 @@ class Container extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="CategoryInput">Eating Category</label><br />
-              <div id="select_style">
+              <div className="custom-select">
                 <select name="category" value={this.state.category} onChange={this.handleChange}>
                   <option value='' disabled></option>
                   {selectOptionsList}
@@ -113,17 +113,11 @@ class Container extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="SortInput">Sort by</label><br />
-              <div id="select_style">
+              <div className="custom-select">
                 <select name="sort_idx" value={this.state.sort_idx} onChange={this.handleChange}>
                   <option value='' disabled></option>
                   {sortOptionsList}
                 </select>
-              </div>
-            </div>
-            <div className="form-group">
-              <input name="open_now" type="checkbox" value={this.state.open_now} onChange={this.handleChange} className="form-control" id="OpenInput" />
-              <div id='open'>
-                <label htmlFor="OpenInput">Open Now?</label>
               </div>
             </div>
             <input type="submit" value="Search" className="btn btn-primary" />
@@ -140,8 +134,8 @@ class Container extends Component {
 class RestaurantList extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
+  
   render() {
     return (
       <div id="list_container">
@@ -154,10 +148,21 @@ class RestaurantList extends Component {
 class RestaurantEntry extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    // this.state = {redirect : false};
   }
+
+  onRedirect = (e) => {
+    let r = this.props.r
+    e.preventDefault()
+    e.stopPropagation()
+    this.props.history.push({pathname: '/create-eatingroom', state: r})
+    // this.setState({redirect: true})
+  }
+
   render() {
     let r = this.props.r
+    // if (this.state.redirect) 
+    //   return <Redirect to={{pathname: '/create-eatingroom', state: r}}/>
     return (
       <div key={r.name}>
         <div className="card">
@@ -174,9 +179,9 @@ class RestaurantEntry extends Component {
                 <li>Price: {r.price}</li><br />
                 <li>Details: <a href={r.url}>Yelp</a></li>
               </ul>
-              <div className="button">
-                <a href="https://www.w3schools.com">WeEat Now!</a>
-              </div>
+              <button className="eating_room_button" onClick={this.onRedirect}>
+                WeEat Now!
+              </button>
             </div>
           </div>
         </div>
@@ -185,4 +190,5 @@ class RestaurantEntry extends Component {
   }
 }
 
-export default Restaurant;
+RestaurantEntry = withRouter(RestaurantEntry)
+export default withRouter(Restaurant);

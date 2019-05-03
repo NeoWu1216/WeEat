@@ -31,9 +31,9 @@ class NavBar extends Component {
       <div id="navbar">
         <a href="/" id="logo">WeEat</a>
         <div id="navbar_right">
+          <button type="button" className="navbar_button" onClick={() => this.handleClick("/restaurant")}>Find Restaurants</button>
           <button type="button" className="navbar_button" onClick={() => this.handleClick("/eatingroom")}>Eating Rooms</button>
-          <button type="button" className="navbar_button" onClick={() => this.handleClick("/restaurant")}>Restaurants</button>
-          <button type="button" id="profile_icon" onClick={() => this.handleClick("/profile/"+getId())}><i className="fa fa-user-circle"></i></button>
+          <button type="button" id="profile_icon" onClick={() => this.handleClick("/profile/" + getId())}><i className="fa fa-user-circle"></i></button>
         </div>
       </div>
     )
