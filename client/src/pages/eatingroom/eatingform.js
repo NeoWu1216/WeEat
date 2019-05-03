@@ -48,7 +48,6 @@ class EatingForm extends Component {
         <Grid
           container
           direction="row"
-          alignItems="top"
           justify="center"
           style={{ height: "100%" }}
         >

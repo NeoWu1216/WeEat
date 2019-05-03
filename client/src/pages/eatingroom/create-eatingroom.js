@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-import NavBar from "../../components/navbar/navbar";
-import Footer from "../../components/footer/footer";
 import { withRouter } from "react-router-dom";
 import { postNewRoom } from "../../api/eatingrooms";
 import { getMessage } from "../../api/parser";
-import styles from "./eatingroom.scss";
-import axios from "axios";
 
 class EatingForm extends Component {
   constructor(props) {

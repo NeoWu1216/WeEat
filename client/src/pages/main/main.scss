@@ -5,8 +5,9 @@ $secondary: hsla(208, 53, 32, 1);
 $alt-text: hsla(34, 100, 59, 1);
 
 :local(.main) {
+  height: 100%;
   .main-bg {
-    height: 625px;
+    height: 100%;
     position: relative;
     .main-navbar {
       position: relative;

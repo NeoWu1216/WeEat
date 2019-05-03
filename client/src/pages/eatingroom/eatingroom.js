@@ -69,7 +69,7 @@ class EatingRoom extends Component {
     eatingrooms =
       data.party_size && data.party_size !== "any"
         ? eatingrooms.filter(
-            x => x.party_size && x.party_size == data.party_size
+            x => x.party_size && x.party_size === data.party_size
           )
         : eatingrooms;
     eatingrooms = data.date
@@ -90,15 +90,18 @@ class EatingRoom extends Component {
             direction="row"
             justify="space-between"
             alignItems="center"
+            style={{
+              height: "90%"
+            }}
           >
             <Grid
               item
               container
               style={{
                 width: "65%",
-                height: "525px",
-                overflowY: "auto"
-              }}
+                height: "90%",
+                overflowY: "auto",
+                background: "rgba(0,0,0,0.5)"              }}
             >
               <EatingRoomList
                 eatingrooms={this.state.eatingrooms}
@@ -146,6 +149,7 @@ class EatingRoomList extends Component {
 class EatingRoomEntry extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
   onJoin(e, _id) {
     e.preventDefault();
@@ -176,7 +180,7 @@ class EatingRoomEntry extends Component {
       <MuiThemeProvider theme={theme}>
         <Card
           style={{
-            margin: ".6em 0",
+            margin: "1% auto 0 auto",
             width: "96%",
             height: "250px"
           }}
@@ -223,19 +227,19 @@ class EatingRoomEntry extends Component {
               <CardContent>
                 <div className="card-infolabel">
                   <div className="card-label">
-                    <i class="fas fa-utensils" />
+                    <i className="fas fa-utensils" />
                   </div>
                   {room.restaurant}
                 </div>
                 <div className="card-infolabel">
                   <div className="card-label">
-                    <i class="fas fa-map-marker-alt" />
+                    <i className="fas fa-map-marker-alt" />
                   </div>
                   {room.address}
                 </div>
                 <div className="card-infolabel">
                   <div className="card-label">
-                    <i class="fas fa-calendar-day" />
+                    <i className="fas fa-calendar-day" />
                   </div>
                   {localdate}
                 </div>

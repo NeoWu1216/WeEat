@@ -13,8 +13,8 @@ class Profile extends Component {
     let { _id, name, email, description, avatar, onEdit } = this.props
     description = description ? description : "This user haven't posted anything"
     let extra = null
-    if (getId() == _id)
-      extra = (<button className="button1" primary onClick={onEdit} >
+    if (getId() === _id)
+      extra = (<button className="button1" onClick={onEdit} >
         Edit Profile
         </button>)
     var imgstyle = {
@@ -26,7 +26,7 @@ class Profile extends Component {
         <div className="profile">
           <div className="profile_left">
             <div className="profile_fields">
-              <img className="avatar" style={imgstyle} src={avatar} />
+              <img className="avatar" style={imgstyle} src={avatar} alt="avatar" />
               <hr />
               <div><h3> Name: {name} </h3></div>
               <h3> Email : {email} </h3>

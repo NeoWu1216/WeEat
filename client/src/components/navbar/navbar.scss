@@ -31,7 +31,9 @@ $alt-text: hsla(34, 100, 59, 1);
     background: none;
     text-shadow: 1px 1px $dark, 2px 2px $dark, 3px 3px $dark;
   }
-  a {
+  button {
+    background: transparent;
+    border: None;
     img {
       height: 2em;
       width: 2em;
