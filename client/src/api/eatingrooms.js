@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {rootUrl, getAuthHeader} from './config'
 import {getData, validate} from './parser'
+import {getUser} from './user'
 import {getId} from '../storage/id'
 
 function postRoom(data) {
@@ -23,18 +24,22 @@ export function getRoom(_id) {
     
 }
 
-export function getRooms(where) {
-  console.log(where)
+export function getRooms() {
   let url = rootUrl+'eatingrooms'
-  let extra = ""
-  for (const key in where)
-    extra+='"'+key+'"'+":"+'"'+where[key]+'"'+","
-  if (extra) {
-    extra = extra.slice(0, -1)
-    url+="?where={"+extra+"}"
-  }
-  console.log(url)
   return axios.get(url, getAuthHeader()).then(getData)
+    .then((alldata)=>{
+      return Promise.all(alldata.map((data)=>{
+        let {participants} = data
+        data.users = []
+        if (participants)
+          Promise.all(participants.map((uid)=>{
+            return getUser(uid).then((user)=>{
+              data.users.push(user)
+            })
+          }))
+        return data
+      }))
+    })
 }
 
 export function postMember(_id) {

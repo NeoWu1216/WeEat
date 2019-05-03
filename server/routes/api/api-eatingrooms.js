@@ -149,6 +149,9 @@ router.post('/join/:id', auth.required, (req, res)=> {
       if (participants.find(x=>x==id)) {
         throw "Fuck u, you r already joined"
       }
+      if (participants.length === eatingroom.party_size) {
+        throw "Fuck u, the room is full"
+      }
       participants.push(id)
       return Users.findByIdAndUpdate(id,
         {
