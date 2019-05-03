@@ -53,7 +53,7 @@ router.delete('/:id', auth.required, (req, res) => {
     .then(eatingroom => {
       if (eatingroom.user != id) {
         return res.status(500).send({
-          error: "Fuck u, you r deleting someone else's eating room!",
+          error: "You r deleting someone else's eating room!",
         });
       }
     })
@@ -106,7 +106,7 @@ router.put('/:id', auth.required, (req, res) => {
     .then(eatingroom => {
       if (eatingroom.user != id) {
         return res.status(500).send({
-          error: "Fuck u, you r editing someone else's eating room!",
+          error: "You r editing someone else's eating room!",
         });
       }
     })
@@ -147,10 +147,10 @@ router.post('/join/:id', auth.required, (req, res)=> {
       let participants = eatingroom.participants
       if (!participants) participants = []
       if (participants.find(x=>x==id)) {
-        throw "Fuck u, you r already joined"
+        throw "You already joined"
       }
       if (participants.length === eatingroom.party_size) {
-        throw "Fuck u, the room is full"
+        throw "the room is full"
       }
       participants.push(id)
       return Users.findByIdAndUpdate(id,
