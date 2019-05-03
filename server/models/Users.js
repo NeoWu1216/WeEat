@@ -11,7 +11,7 @@ const UsersSchema = new Schema({
   salt: { type: String },
   eatingrooms: [{ type: String }],
   description: { type: String },
-  avatar : { data: Buffer, contentType: String }
+  avatar: { type: String, default: "https://react.semantic-ui.com/images/avatar/large/daniel.jpg" }
 });
 
 UsersSchema.methods.setPassword = function (password) {

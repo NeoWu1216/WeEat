@@ -10,12 +10,12 @@ class Profile extends Component {
   }
 
   render() {
-    let { _id, name, email, description, onEdit } = this.props
+    let { _id, name, email, description, avatar, onEdit } = this.props
     description = description ? description : "This user haven't posted anything"
     let extra = null
     if (getId() == _id)
       extra = (<button className="button1" primary onClick={onEdit} >
-          Edit Profile
+        Edit Profile
         </button>)
     var imgstyle = {
       width: "300px",
@@ -24,14 +24,18 @@ class Profile extends Component {
       <div>
         <NavBar />
         <div className="profile">
-          <div className="left11">
-            <img className="avatar" style={imgstyle} src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg'/>
-            <h3> Name: {name} </h3>
-            <h3> Email : {email} </h3>
-            <h4> Description: {description} </h4>
+          <div className="profile_left">
+            <div className="profile_fields">
+              <img className="avatar" style={imgstyle} src={avatar} />
+              <hr />
+              <div><h3> Name: {name} </h3></div>
+              <h3> Email : {email} </h3>
+              <hr />
+              <h4> Description: {description} </h4>
               {extra}
+            </div>
           </div>
-          <div className="right11">
+          <div className="profile_right">
 
           </div>
         </div>
