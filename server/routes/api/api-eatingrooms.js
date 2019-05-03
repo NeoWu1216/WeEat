@@ -52,48 +52,35 @@ router.delete('/:id', auth.required, (req, res) => {
   EatingRooms.findById(req.params.id)
     .then(eatingroom => {
       if (eatingroom.user != id) {
-        return res.status(500).send({
-          error: "You r deleting someone else's eating room!",
-        });
+        throw "You r deleting someone else's eating room!";
       }
-    })
-    .catch(err => {
-      return res.status(500).send({
-        error: err,
-      });
-    })
-
-  Users.findById(id,
-    {
-      $pull: { eatingrooms: req.params.id }
-    })
-    .then()
-    .catch(err => {
-      return res.status(500).send({
-        error: err,
-      });
-    })
-
-  EatingRooms.findByIdAndRemove(req.params.id)
-    .then(eatingroom => {
-      if (!eatingroom || eatingroom.length == 0) {
-        return res.status(404).send({
+    }).then(()=>{
+      Users.findByIdAndUpdate(id,
+        {
+          $pull: { eatingrooms: req.params.id }
+        })
+    }).then(()=>{
+      EatingRooms.findByIdAndRemove(req.params.id)
+      .then(eatingroom => {
+        if (!eatingroom || eatingroom.length == 0) {
+          throw "not found"
+        }
+        res.status(200).send({
+          data: {}
+        });
+      })
+    }).catch(err => {
+      if (err == "not found") {
+        res.status(404).send({
           error: "eatingroom not found with id " + req.params.id,
         });
       }
-      res.status(200).send({
-        data: {}
-      });
-    }).catch(err => {
-      if (err.kind === 'ObjectId') {
-        return res.status(404).send({
-          error: err,
+      else {
+        res.status(500).json({
+          error: err
         });
       }
-      return res.status(500).send({
-        error: err,
-      });
-    });
+    })
 });
 
 
@@ -159,7 +146,7 @@ router.post('/join/:id', auth.required, (req, res)=> {
         })
         .then(()=>participants)
   }).then((participants)=> {
-      EatingRooms.findByIdAndUpdate(req.params.id, { $set: {participants: participants}}, { new: true, runValidators: true })
+      return EatingRooms.findByIdAndUpdate(req.params.id, { $set: {participants: participants}}, { new: true, runValidators: true })
       .then(eatingroom => {
         if (!eatingroom || eatingroom.length == 0) {
           throw ("eatingroom not found with id " + req.params.id)
@@ -196,8 +183,48 @@ router.get('/', (req, res) => {
     res.status(500).json({
       error: "Some error occurred while retrieving tasks."
     });
-
   });
 });
+
+router.delete('/leave/:id', auth.required, (req, res)=> {
+  const { payload: { id } } = req;
+  EatingRooms.findById(req.params.id)
+    .then(eatingroom => {
+      let participants = eatingroom.participants
+      if (!participants) participants = []
+      if (!participants.find(x=>x==id)) {
+        throw "You are not yet joined"
+      }
+      for (var i=participants.length-1; i>=0; i--) {
+        if (participants[i] === id) {
+            participants.splice(i, 1);
+            break;
+        }
+      }
+
+      return Users.findByIdAndUpdate(id,
+        {
+          $pull: { eatingrooms: eatingroom._id }
+        })
+        .then(()=>participants)
+  }).then((participants)=> {
+      return EatingRooms.findByIdAndUpdate(req.params.id, { $set: {participants: participants}}, { new: true, runValidators: true })
+      .then(eatingroom => {
+        if (!eatingroom || eatingroom.length == 0) {
+          throw ("eatingroom not found with id " + req.params.id)
+        }
+        res.status(200).send({
+          data: eatingroom
+        });
+      })
+    })
+    .catch(err => {
+      res.status(500).send({
+        error: err,
+      });
+    })
+  
+})
+
 
 module.exports = router;

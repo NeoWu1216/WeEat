@@ -61,6 +61,17 @@ export function postMember(_id) {
     })
 }
 
+export function deleteMember(_id) {
+  return axios.delete(rootUrl+'eatingrooms/leave/'+_id, getAuthHeader())
+    .then(getData)
+    .then((data)=>{
+      return getUserInfo(data.participants).then((users)=>{
+        data.users = users
+        return data
+      })
+    })
+}
+
 export function deleteRoom(_id) {
   return axios.delete(rootUrl+'eatingrooms/'+_id, getAuthHeader())
     .then(getData)
