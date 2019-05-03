@@ -10,17 +10,17 @@ class EatingForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "First post",
-      // date: '20:59', // start date
-      address: "Champaign", //meet point
-      restaurant: "Black Dog",
-      party_size: "1"
+    	title: '',
+      address:'', 
+      restaurant:'',
+      party_size: 0,
+      date: '',
     };
     this.handleChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.selectOptions = ['any',2,3,4,5,6,7,8]
   }
   handleInputChange = e => {
-    console.log(e.target.value);
     this.setState({ [e.target.id]: e.target.value });
   };
 
@@ -29,20 +29,12 @@ class EatingForm extends Component {
     event.preventDefault();
     event.stopPropagation();
 
-    // let now = new Date()
-    // now.setHours(this.state.date.substr(0,2))
-    // now.setMinutes(this.state.date.substr(3,2))
-    this.props.onSubmit({ ...this.state });
+    let party_size = this.selectOptions[this.state.party_size]
+    this.props.onSubmit({...this.state, party_size})
   };
   render() {
-    const party = "0, 1, 2, 3, 4, 5, 6, 7, 8";
-    const selectOptions = party.split(", ");
-    const selectOptionsList = selectOptions.map((selectOption, index) => {
-      return (
-        <option key={index} value={index}>
-          {selectOption}
-        </option>
-      );
+    const selectOptionsList = this.selectOptions.map((selectOption, index) => {
+      return <option key={index} value={index}>{selectOption}</option>
     });
 
     return (
@@ -53,22 +45,16 @@ class EatingForm extends Component {
             <input
               type="text"
               id="title"
-              required
               value={this.state.title}
               onChange={this.handleChange}
               className="form-control"
             />
           </div>
-          {/* <div className="form-group">
-            <label htmlFor="TimeInput">Start From</label>
-            <input id="date" name="start_time" type="time" min="10:00" max="21:00" required value={this.state.date} onChange={this.handleChange} className="form-control" />
-          </div> */}
           <div className="form-group">
             <label htmlFor="MeetInput">Meet At</label>
             <input
               type="text"
               id="address"
-              required
               value={this.state.address}
               onChange={this.handleChange}
               className="form-control"
@@ -79,12 +65,22 @@ class EatingForm extends Component {
             <input
               type="text"
               id="restaurant"
-              required
               value={this.state.restaurant}
               onChange={this.handleChange}
               className="form-control"
             />
           </div>
+          <div className="form-group">
+            <label htmlFor="SizeInput">Approximate time (+-1hr)</label>
+            <input
+              type="datetime-local"
+              id="date"
+              value={this.state.date}
+              onChange={this.handleChange}
+              className="form-control"
+            />
+          </div>
+
           <div className="form-group">
             <label htmlFor="SizeInput">Party Size</label>
             <br />

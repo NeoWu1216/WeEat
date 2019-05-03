@@ -150,12 +150,14 @@ router.post('/join/:id', auth.required, (req, res)=> {
         throw "Fuck u, you r already joined"
       }
       participants.push(id)
-      return participants
-    }).then((participants)=> {
-      console.log('participants', participants)
+      return Users.findByIdAndUpdate(id,
+        {
+          $push: { eatingrooms: eatingroom._id }
+        })
+        .then(()=>participants)
+  }).then((participants)=> {
       EatingRooms.findByIdAndUpdate(req.params.id, { $set: {participants: participants}}, { new: true, runValidators: true })
       .then(eatingroom => {
-        console.log(eatingroom)
         if (!eatingroom || eatingroom.length == 0) {
           throw ("eatingroom not found with id " + req.params.id)
         }

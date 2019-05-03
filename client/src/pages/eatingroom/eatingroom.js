@@ -24,25 +24,29 @@ const theme = createMuiTheme({
 class EatingRoom extends Component {
   constructor(props) {
     super(props);
-    this.state = { eatingrooms: [], mounted: false };
+    this.state = {all:[], eatingrooms:[], mounted: false};
   }
 
   componentDidMount() {
     if (!this.state.mounted)
       getRooms({})
         .then(data => {
-          this.setState({ eatingrooms: data, mounted: true });
+          this.setState({ eatingrooms: data, all:data, mounted: true });
         })
         .catch(err => alert(getMessage(err)));
   }
 
   onSubmit = data => {
-    getRooms(data)
-      .then(data => {
-        console.log(data);
-        this.setState({ eatingrooms: data });
-      })
-      .catch(err => alert(getMessage(err)));
+    console.log(data)
+    let {all} = this.state
+    let eatingrooms = all
+    eatingrooms = data.title ? eatingrooms.filter((x)=>(x.title && x.title.toLowerCase().includes(data.title.toLowerCase()))) : eatingrooms
+    eatingrooms = data.address ? eatingrooms.filter((x)=>(x.address && x.address.toLowerCase().includes(data.address.toLowerCase()))) : eatingrooms
+    eatingrooms = data.restaurant ? eatingrooms.filter((x)=>(x.restaurant && x.restaurant.toLowerCase().includes(data.restaurant.toLowerCase()))) : eatingrooms
+    eatingrooms = (data.party_size && data.party_size!=='any') ? eatingrooms.filter((x)=>(x.party_size && x.party_size == data.party_size)) : eatingrooms
+    eatingrooms = data.date ? eatingrooms.filter((x)=>(Math.abs(Date.parse(data.date)-Date.parse(x.date)) < 3600000)) : eatingrooms
+    console.log('submit',all, eatingrooms.map(x=>x.title))
+    this.setState({eatingrooms})
   };
 
   render() {
@@ -101,12 +105,10 @@ class EatingRoomEntry extends Component {
     e.stopPropagation();
     postMember(_id)
       .then(data => {
-        console.log("join", data);
         this.setState({ room: data });
       })
       .catch(err => {
         alert(getMessage(err));
-        console.log(err.response);
       });
   }
 
