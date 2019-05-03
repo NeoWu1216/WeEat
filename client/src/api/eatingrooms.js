@@ -41,7 +41,7 @@ export function getRooms() {
         let {participants} = data
         data.users = []
         if (participants)
-          getUserInfo(participants).then((users)=>{
+          return getUserInfo(participants).then((users)=>{
             data.users = users
             return data
           })
