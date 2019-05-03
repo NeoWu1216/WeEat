@@ -54,34 +54,34 @@ class EatingRoom extends Component {
     let eatingrooms = all;
     eatingrooms = data.title
       ? eatingrooms.filter(
-          x =>
-            x.title && x.title.toLowerCase().includes(data.title.toLowerCase())
-        )
+        x =>
+          x.title && x.title.toLowerCase().includes(data.title.toLowerCase())
+      )
       : eatingrooms;
     eatingrooms = data.address
       ? eatingrooms.filter(
-          x =>
-            x.address &&
-            x.address.toLowerCase().includes(data.address.toLowerCase())
-        )
+        x =>
+          x.address &&
+          x.address.toLowerCase().includes(data.address.toLowerCase())
+      )
       : eatingrooms;
     eatingrooms = data.restaurant
       ? eatingrooms.filter(
-          x =>
-            x.restaurant &&
-            x.restaurant.toLowerCase().includes(data.restaurant.toLowerCase())
-        )
+        x =>
+          x.restaurant &&
+          x.restaurant.toLowerCase().includes(data.restaurant.toLowerCase())
+      )
       : eatingrooms;
     eatingrooms =
       data.party_size && data.party_size !== "any"
         ? eatingrooms.filter(
-            x => x.party_size && x.party_size === data.party_size
-          )
+          x => x.party_size && x.party_size === data.party_size
+        )
         : eatingrooms;
     eatingrooms = data.date
       ? eatingrooms.filter(
-          x => Math.abs(Date.parse(data.date) - Date.parse(x.date)) < 3600000
-        )
+        x => Math.abs(Date.parse(data.date) - Date.parse(x.date)) < 3600000
+      )
       : eatingrooms;
     this.setState({ eatingrooms });
   };
@@ -171,14 +171,16 @@ class EatingRoomList extends Component {
   render() {
     let result = this.props.eatingrooms;
     return (
-      <div className="eatingroom-list">
-        {result.map((r, index) => (
-          <EatingRoomEntry
-            r={r}
-            key={index}
-            notify={(data, mess) => this.notifyParent(data, index, mess)}
-          />
-        ))}
+      <div className={styles.eatingroom}>
+        <div className="eatingroom-list">
+          {result.map((r, index) => (
+            <EatingRoomEntry
+              r={r}
+              key={index}
+              notify={(data, mess) => this.notifyParent(data, index, mess)}
+            />
+          ))}
+        </div>
       </div>
     );
   }
@@ -315,38 +317,37 @@ class EatingRoomEntry extends Component {
                   </Grid>
                   <Grid item>
                     {room.users.length === room.party_size ||
-                    room.participants.indexOf(getId()) >= 0 ? (
-                      <Button
-                        size="small"
-                        variant="contained"
-                        disabled
-                        color="primary"
-                      >
-                        {room.users.length === room.party_size
-                          ? "Full"
-                          : "Joined"}
+                      room.participants.indexOf(getId()) >= 0 ? (
+                        <Button
+                          size="small"
+                          variant="contained"
+                          disabled
+                          color="primary"
+                        >
+                          {room.users.length === room.party_size
+                            ? "Full"
+                            : "Joined"}
+                        </Button>
+                      ) : (
+                        <Button
+                          size="small"
+                          variant="outlined"
+                          onClick={e => this.onJoin(e, room._id)}
+                          color="primary"
+                        >
+                          Join
                       </Button>
-                    ) : (
-                      <Button
-                        size="small"
-                        variant="outlined"
-                        onClick={e => this.onJoin(e, room._id)}
-                        color="primary"
-                      >
-                        Join
-                      </Button>
-                    )}
+                      )}
 
-                    { getId() === room.user ?
-                    (<Button
+                    <Button
                       size="small"
                       variant="contained"
+                      disabled={getId() !== room.user}
                       color="primary"
                       onClick={e => this.onDelete(e, room._id)}
                     >
                       Delete
-                    </Button>) : 
-                    null}
+                    </Button>
                   </Grid>
                 </Grid>
               </CardContent>
@@ -359,4 +360,4 @@ class EatingRoomEntry extends Component {
 }
 EatingRoomEntry = withRouter(EatingRoomEntry);
 export default withRouter(EatingRoom);
-export {EatingRoomList};
+export { EatingRoomList };

@@ -5,7 +5,7 @@ import { getMessage } from '../../api/parser'
 import { getRooms } from '../../api/eatingrooms'
 import Footer from "../../components/footer/footer";
 import { EatingRoomList } from '../../pages/eatingroom/eatingroom'
-
+import styles from '../../pages/profile/profile.scss'
 
 class Eatingroom extends Component {
   constructor(props) {
@@ -64,7 +64,7 @@ class Profile extends Component {
         Edit Profile
         </button>)
     return (
-      <div>
+      <div className={styles.profile}>
         <div id="profile_bg">
           <NavBar />
           <div className="profile">
