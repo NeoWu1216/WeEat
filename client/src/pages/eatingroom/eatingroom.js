@@ -38,8 +38,14 @@ class EatingRoom extends Component {
         .catch(err => alert(getMessage(err)));
   }
 
+  notify = (data, ix) => {
+    let {eatingrooms} = this.state
+    eatingrooms[ix] = data
+    this.setState({eatingrooms})
+  }
+
+
   onSubmit = data => {
-    console.log(data);
     let { all } = this.state;
     let eatingrooms = all;
     eatingrooms = data.title
@@ -73,7 +79,6 @@ class EatingRoom extends Component {
           x => Math.abs(Date.parse(data.date) - Date.parse(x.date)) < 3600000
         )
       : eatingrooms;
-    console.log("submit", all, eatingrooms.map(x => x.title));
     this.setState({ eatingrooms });
   };
 
@@ -97,7 +102,7 @@ class EatingRoom extends Component {
                 overflowY: "auto"
               }}
             >
-              <EatingRoomList eatingrooms={this.state.eatingrooms} />
+              <EatingRoomList eatingrooms={this.state.eatingrooms} notify={this.notify}/>
             </Grid>
             <Grid
               item
@@ -117,13 +122,16 @@ class EatingRoom extends Component {
 }
 
 class EatingRoomList extends Component {
+  notifyParent(data, ix) {
+    this.props.notify(data, ix)
+  }
+
   render() {
     let result = this.props.eatingrooms;
-    // console.log(result);
     return (
       <div className="eatingroom-list">
         {result.map((r, index) => (
-          <EatingRoomEntry r={r} key={index} />
+          <EatingRoomEntry r={r} key={index} notify={(data)=>this.notifyParent(data,index)}/>
         ))}
       </div>
     );
@@ -133,13 +141,13 @@ class EatingRoomList extends Component {
 class EatingRoomEntry extends Component {
   constructor(props) {
     super(props);
-    this.state = { room: this.props.r };
   }
   onJoin(e, _id) {
     e.preventDefault();
     e.stopPropagation();
     postMember(_id)
       .then(data => {
+        this.props.notify(data)
         // this.setState({ room: data });
       })
       .catch(err => {
@@ -147,8 +155,9 @@ class EatingRoomEntry extends Component {
       });
   }
 
+  
   render() {
-    let { room } = this.state;
+    let room = this.props.r;
     if (!room) return null;
     if (room.users === undefined) return null;
     if (room.users === null) room.users = [];
@@ -250,7 +259,7 @@ class EatingRoomEntry extends Component {
                         disabled
                         color="primary"
                       >
-                        Full
+                        {(room.users.length === room.party_size) ? 'Full' : 'Joined'}
                       </Button>
                     ) : (
                       <Button
