@@ -14,8 +14,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardHeader from "@material-ui/core/CardHeader";
 import { Button } from "@material-ui/core";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import { getUser } from "../../api/user.js";
 
 const theme = createMuiTheme({
   palette: {
@@ -33,16 +31,16 @@ class EatingRoom extends Component {
     if (!this.state.mounted)
       getRooms({})
         .then(data => {
-          data.sort((a, b)=>(new Date(b.date) - new Date(a.date)))
+          data.sort((a, b) => (new Date(b.date) - new Date(a.date)))
           this.setState({ eatingrooms: data, all: data, mounted: true });
         })
         .catch(err => alert(getMessage(err)));
   }
 
   notify = (data, ix) => {
-    let {eatingrooms} = this.state
+    let { eatingrooms } = this.state
     eatingrooms[ix] = data
-    this.setState({eatingrooms})
+    this.setState({ eatingrooms })
   }
 
 
@@ -51,34 +49,34 @@ class EatingRoom extends Component {
     let eatingrooms = all;
     eatingrooms = data.title
       ? eatingrooms.filter(
-          x =>
-            x.title && x.title.toLowerCase().includes(data.title.toLowerCase())
-        )
+        x =>
+          x.title && x.title.toLowerCase().includes(data.title.toLowerCase())
+      )
       : eatingrooms;
     eatingrooms = data.address
       ? eatingrooms.filter(
-          x =>
-            x.address &&
-            x.address.toLowerCase().includes(data.address.toLowerCase())
-        )
+        x =>
+          x.address &&
+          x.address.toLowerCase().includes(data.address.toLowerCase())
+      )
       : eatingrooms;
     eatingrooms = data.restaurant
       ? eatingrooms.filter(
-          x =>
-            x.restaurant &&
-            x.restaurant.toLowerCase().includes(data.restaurant.toLowerCase())
-        )
+        x =>
+          x.restaurant &&
+          x.restaurant.toLowerCase().includes(data.restaurant.toLowerCase())
+      )
       : eatingrooms;
     eatingrooms =
       data.party_size && data.party_size !== "any"
         ? eatingrooms.filter(
-            x => x.party_size && x.party_size == data.party_size
-          )
+          x => x.party_size && x.party_size === data.party_size
+        )
         : eatingrooms;
     eatingrooms = data.date
       ? eatingrooms.filter(
-          x => Math.abs(Date.parse(data.date) - Date.parse(x.date)) < 3600000
-        )
+        x => Math.abs(Date.parse(data.date) - Date.parse(x.date)) < 3600000
+      )
       : eatingrooms;
     this.setState({ eatingrooms });
   };
@@ -93,23 +91,27 @@ class EatingRoom extends Component {
             direction="row"
             justify="space-between"
             alignItems="center"
+            style={{
+              height: "90%",
+            }}
           >
             <Grid
               item
               container
               style={{
                 width: "65%",
-                height: "525px",
-                overflowY: "auto"
+                height: "90%",
+                overflowY: "auto",
+                background: "rgba(0,0,0,0.5)",
               }}
             >
-              <EatingRoomList eatingrooms={this.state.eatingrooms} notify={this.notify}/>
+              <EatingRoomList eatingrooms={this.state.eatingrooms} notify={this.notify} />
             </Grid>
             <Grid
               item
               style={{
                 width: "34%",
-                height: "525px"
+                height: "80%",
               }}
             >
               <EatingForm onSubmit={this.onSubmit} />
@@ -132,7 +134,7 @@ class EatingRoomList extends Component {
     return (
       <div className="eatingroom-list">
         {result.map((r, index) => (
-          <EatingRoomEntry r={r} key={index} notify={(data)=>this.notifyParent(data,index)}/>
+          <EatingRoomEntry r={r} key={index} notify={(data) => this.notifyParent(data, index)} />
         ))}
       </div>
     );
@@ -142,6 +144,7 @@ class EatingRoomList extends Component {
 class EatingRoomEntry extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
   onJoin(e, _id) {
     e.preventDefault();
@@ -156,7 +159,7 @@ class EatingRoomEntry extends Component {
       });
   }
 
-  
+
   render() {
     let room = this.props.r;
     if (!room) return null;
@@ -165,15 +168,16 @@ class EatingRoomEntry extends Component {
     let localdate = "Invalid date";
     if (room.date) {
       localdate = new Date(room.date).toLocaleDateString() + " " +
-                  new Date(room.date).toLocaleTimeString()
+        new Date(room.date).toLocaleTimeString()
     }
     return (
       <MuiThemeProvider theme={theme}>
         <Card
           style={{
-            margin: ".6em 0",
+            margin: "1% auto 0 auto",
             width: "96%",
-            height: "250px"
+            height: "250px",
+
           }}
         >
           <Grid
@@ -218,19 +222,19 @@ class EatingRoomEntry extends Component {
               <CardContent>
                 <div className="card-infolabel">
                   <div className="card-label">
-                    <i class="fas fa-utensils" />
+                    <i className="fas fa-utensils" />
                   </div>
                   {room.restaurant}
                 </div>
                 <div className="card-infolabel">
                   <div className="card-label">
-                    <i class="fas fa-map-marker-alt" />
+                    <i className="fas fa-map-marker-alt" />
                   </div>
                   {room.address}
                 </div>
                 <div className="card-infolabel">
                   <div className="card-label">
-                    <i class="fas fa-calendar-day" />
+                    <i className="fas fa-calendar-day" />
                   </div>
                   {localdate}
                 </div>
@@ -258,25 +262,25 @@ class EatingRoomEntry extends Component {
                   </Grid>
                   <Grid item>
                     {room.users.length === room.party_size ||
-                    room.participants.indexOf(getId()) >= 0 ? (
-                      <Button
-                        size="small"
-                        variant="contained"
-                        disabled
-                        color="primary"
-                      >
-                        {(room.users.length === room.party_size) ? 'Full' : 'Joined'}
+                      room.participants.indexOf(getId()) >= 0 ? (
+                        <Button
+                          size="small"
+                          variant="contained"
+                          disabled
+                          color="primary"
+                        >
+                          {(room.users.length === room.party_size) ? 'Full' : 'Joined'}
+                        </Button>
+                      ) : (
+                        <Button
+                          size="small"
+                          variant="outlined"
+                          onClick={e => this.onJoin(e, room._id)}
+                          color="primary"
+                        >
+                          Join
                       </Button>
-                    ) : (
-                      <Button
-                        size="small"
-                        variant="outlined"
-                        onClick={e => this.onJoin(e, room._id)}
-                        color="primary"
-                      >
-                        Join
-                      </Button>
-                    )}
+                      )}
                   </Grid>
                 </Grid>
               </CardContent>

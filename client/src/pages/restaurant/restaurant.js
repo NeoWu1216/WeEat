@@ -3,16 +3,16 @@ import './restaurant.scss';
 import axios from 'axios';
 import NavBar from "../../components/navbar/navbar";
 import Footer from "../../components/footer/footer";
-import {Redirect, withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 class Restaurant extends Component {
   render() {
     return (
       <div id="restaurant_outer">
         <div id="rest_background">
-        <NavBar />
-        <Container />
-        <Footer />
+          <NavBar />
+          <Container />
+          <Footer />
         </div>
       </div>
     )
@@ -134,8 +134,9 @@ class Container extends Component {
 class RestaurantList extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
-  
+
   render() {
     return (
       <div id="list_container">
@@ -149,13 +150,14 @@ class RestaurantEntry extends Component {
   constructor(props) {
     super(props);
     // this.state = {redirect : false};
+    this.state = {};
   }
 
   onRedirect = (e) => {
     let r = this.props.r
     e.preventDefault()
     e.stopPropagation()
-    this.props.history.push({pathname: '/create-eatingroom', state: r})
+    this.props.history.push({ pathname: '/create-eatingroom', state: r })
     // this.setState({redirect: true})
   }
 

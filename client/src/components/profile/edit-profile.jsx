@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import NavBar from "../../components/navbar/navbar";
-import { Button, Message, Form } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 import { setUser } from '../../api/user'
 import { getMessage } from '../../api/parser'
 import Footer from "../../components/footer/footer";
@@ -39,7 +39,7 @@ class Profile extends Component {
       <div className="edit-profile">
         <NavBar />
         <div className="edit_form">
-        <img src={avatar} />
+        <img src={avatar} alt="avatar" />
           <Form error={error !== null}>
             <Form.Field>
               <label>Avatar</label>

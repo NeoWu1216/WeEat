@@ -97,8 +97,8 @@ class Main extends Component {
               </Grid>
             </div>
           </div>
-          <Footer />
         </div>
+        <Footer />
       </MuiThemeProvider>
     );
   }

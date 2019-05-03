@@ -5,7 +5,6 @@ import { getId } from "../../storage/id";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
 import { getUser } from "../../api/user";
 
 const theme = createMuiTheme({
@@ -84,10 +83,7 @@ class NavBar extends Component {
                   </Button>
                 </Grid>
                 <Grid item style={{ paddingLeft: "1em" }}>
-                  <a
-                    href
-                    onClick={() => this.handleClick("/profile/" + getId())}
-                  >
+                  <button onClick={() => this.handleClick("/profile/" + getId())}>
                     <img
                       src={
                         user
@@ -96,7 +92,7 @@ class NavBar extends Component {
                       }
                       alt="avatar"
                     />
-                  </a>
+                  </button>
                 </Grid>
               </Grid>
             </Grid>
