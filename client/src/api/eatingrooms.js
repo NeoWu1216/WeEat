@@ -32,11 +32,13 @@ export function getRooms() {
         let {participants} = data
         data.users = []
         if (participants)
-          Promise.all(participants.map((uid)=>{
+          return Promise.all(participants.map((uid)=>{
             return getUser(uid).then((user)=>{
               data.users.push(user)
             })
-          }))
+          })).then(()=>{
+            return data
+          })
         return data
       }))
     })
