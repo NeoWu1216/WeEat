@@ -27,22 +27,28 @@ $alt-text: hsla(34, 100, 59, 1);
 
     .main-description {
       font-family: "Roboto Slab", serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
       height: 100%;
-      font-size: 7em;
+      text-align: center;
+      font-size: 6em;
       color: $light;
-      // font-weight: bold;
+      font-weight: bold;
+      text-shadow: 1px 1px $primary, 2px 2px $primary, 3px 3px $primary,
+        4px 4px $primary, 5px 5px $primary, 6px 6px $primary;
       // padding-left: 1em;
-      text-decoration: blink;
+      // text-decoration: blink;
       position: relative;
       z-index: 1;
+      .main-btn-signup {
+        width: 20%;
+        height: 100%;
+        color: $light;
+        background: $primary;
+      }
     }
   }
 
   .main-bg:before {
-    background: linear-gradient(hsla(1, 94%, 65%, 0.35)),
+    background: linear-gradient(hsla(1, 57%, 54%, 0.35)),
       url("https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
     background-repeat: no-repeat;
     background-size: cover;

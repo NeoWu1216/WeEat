@@ -58,42 +58,58 @@ class Main extends Component {
                     WeEat!
                   </a>
                 </Grid>
-                <Grid item>
-                  <Button
-                    size="large"
-                    variant="contained"
-                    color="primary"
-                    onClick={() => this.handleClick(false)}
-                  >
-                    SIGN UP
-                  </Button>
-                  <Button
-                    color="secondary"
-                    size="large"
-                    onClick={() => this.handleClick(true)}
-                    style={{
-                      marginLeft: "1em",
-                      marginRight: "3em"
-                    }}
-                  >
-                    LOG IN
-                  </Button>
-                </Grid>
               </Grid>
             </div>
             <div className="main-description">
               <Grid
                 container
                 direction="column"
-                alignItems="left"
                 justify="center"
+                alignItems="center"
                 style={{
-                  paddingTop: "1em",
-                  paddingLeft: ".25em"
+                  height: "80%",
+                  width: "100%"
                 }}
               >
                 <Grid item>A place to</Grid>
                 <Grid item>find friends for food!</Grid>
+                <Grid
+                  item
+                  style={{
+                    width: "100%"
+                  }}
+                >
+                  <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    style={{
+                      paddingTop: ".5em",
+                      width: "100%"
+                    }}
+                  >
+                    <Button
+                      className="main-btn-signup"
+                      onClick={() => this.handleClick(false)}
+                    >
+                      SIGN UP
+                    </Button>
+                    <Button
+                      className="main-btn"
+                      color="secondary"
+                      onClick={() => this.handleClick(true)}
+                      style={
+                        {
+                          // marginLeft: "1em",
+                          // marginRight: "3em"
+                        }
+                      }
+                    >
+                      LOG IN
+                    </Button>
+                  </Grid>
+                </Grid>
               </Grid>
             </div>
           </div>
