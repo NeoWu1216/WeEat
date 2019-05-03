@@ -368,16 +368,15 @@ class EatingRoomEntry extends Component {
                       </Button>
                     ) }
 
-                    { getId() === room.user ?
-                    (<Button
+                    <Button
                       size="small"
                       variant="contained"
+                      disabled={getId() !== room.user}
                       color="primary"
                       onClick={e => this.onDelete(e, room._id)}
                     >
                       Delete
-                    </Button>) : 
-                    null}
+                    </Button>
                   </Grid>
                 </Grid>
               </CardContent>
@@ -390,4 +389,5 @@ class EatingRoomEntry extends Component {
 }
 EatingRoomEntry = withRouter(EatingRoomEntry);
 export default withRouter(EatingRoom);
+
 export { EatingRoomList };
