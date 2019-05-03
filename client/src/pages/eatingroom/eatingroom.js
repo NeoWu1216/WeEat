@@ -48,34 +48,34 @@ class EatingRoom extends Component {
     let eatingrooms = all;
     eatingrooms = data.title
       ? eatingrooms.filter(
-        x =>
-          x.title && x.title.toLowerCase().includes(data.title.toLowerCase())
-      )
+          x =>
+            x.title && x.title.toLowerCase().includes(data.title.toLowerCase())
+        )
       : eatingrooms;
     eatingrooms = data.address
       ? eatingrooms.filter(
-        x =>
-          x.address &&
-          x.address.toLowerCase().includes(data.address.toLowerCase())
-      )
+          x =>
+            x.address &&
+            x.address.toLowerCase().includes(data.address.toLowerCase())
+        )
       : eatingrooms;
     eatingrooms = data.restaurant
       ? eatingrooms.filter(
-        x =>
-          x.restaurant &&
-          x.restaurant.toLowerCase().includes(data.restaurant.toLowerCase())
-      )
+          x =>
+            x.restaurant &&
+            x.restaurant.toLowerCase().includes(data.restaurant.toLowerCase())
+        )
       : eatingrooms;
     eatingrooms =
       data.party_size && data.party_size !== "any"
         ? eatingrooms.filter(
-          x => x.party_size && x.party_size === data.party_size
-        )
+            x => x.party_size && x.party_size === data.party_size
+          )
         : eatingrooms;
     eatingrooms = data.date
       ? eatingrooms.filter(
-        x => Math.abs(Date.parse(data.date) - Date.parse(x.date)) < 3600000
-      )
+          x => Math.abs(Date.parse(data.date) - Date.parse(x.date)) < 3600000
+        )
       : eatingrooms;
     this.setState({ eatingrooms });
   };
@@ -91,7 +91,7 @@ class EatingRoom extends Component {
             justify="space-between"
             alignItems="center"
             style={{
-              height: "90%",
+              height: "90%"
             }}
           >
             <Grid
@@ -101,8 +101,7 @@ class EatingRoom extends Component {
                 width: "65%",
                 height: "90%",
                 overflowY: "auto",
-                background: "rgba(0,0,0,0.5)",
-              }}
+                background: "rgba(0,0,0,0.5)"              }}
             >
               <EatingRoomList
                 eatingrooms={this.state.eatingrooms}
@@ -113,7 +112,7 @@ class EatingRoom extends Component {
               item
               style={{
                 width: "34%",
-                height: "80%",
+                height: "525px"
               }}
             >
               <EatingForm onSubmit={this.onSubmit} />
@@ -172,14 +171,18 @@ class EatingRoomEntry extends Component {
     if (room.users === null) room.users = [];
     let localdate = "Invalid date";
     if (room.date) {
+      localdate =
+        new Date(room.date).toLocaleDateString() +
+        " " +
+        new Date(room.date).toLocaleTimeString();
     }
     return (
       <MuiThemeProvider theme={theme}>
+        <Card
           style={{
             margin: "1% auto 0 auto",
             width: "96%",
-            height: "250px",
-
+            height: "250px"
           }}
         >
           <Grid
@@ -284,13 +287,13 @@ class EatingRoomEntry extends Component {
                       >
                         Join
                       </Button>
-                      )}
+                    )}
                   </Grid>
                 </Grid>
               </CardContent>
             </Grid>
           </Grid>
-        {/* </Card> */}
+        </Card>
       </MuiThemeProvider>
     );
   }
