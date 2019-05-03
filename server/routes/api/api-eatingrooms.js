@@ -52,48 +52,37 @@ router.delete('/:id', auth.required, (req, res) => {
   EatingRooms.findById(req.params.id)
     .then(eatingroom => {
       if (eatingroom.user != id) {
-        return res.status(500).send({
-          error: "You r deleting someone else's eating room!",
-        });
+        throw "You r deleting someone else's eating room!";
       }
-    })
-    .catch(err => {
-      return res.status(500).send({
-        error: err,
-      });
-    })
-
-  Users.findById(id,
-    {
-      $pull: { eatingrooms: req.params.id }
-    })
-    .then()
-    .catch(err => {
-      return res.status(500).send({
-        error: err,
-      });
-    })
-
-  EatingRooms.findByIdAndRemove(req.params.id)
-    .then(eatingroom => {
-      if (!eatingroom || eatingroom.length == 0) {
-        return res.status(404).send({
+    }).then(()=>{
+      Users.findByIdAndUpdate(id,
+        {
+          $pull: { eatingrooms: req.params.id }
+        })
+    }).then(()=>{
+      EatingRooms.findByIdAndRemove(req.params.id)
+      .then(eatingroom => {
+        if (!eatingroom || eatingroom.length == 0) {
+          throw "not found"
+        }
+        res.status(200).send({
+          data: {}
+        });
+      })
+    }).catch(err => {
+      if (err == "not found") {
+        res.status(404).send({
           error: "eatingroom not found with id " + req.params.id,
         });
       }
-      res.status(200).send({
-        data: {}
-      });
-    }).catch(err => {
-      if (err.kind === 'ObjectId') {
-        return res.status(404).send({
-          error: err,
+      else {
+        res.status(500).json({
+          error: err
         });
       }
-      return res.status(500).send({
-        error: err,
-      });
-    });
+    })
+
+  
 });
 
 

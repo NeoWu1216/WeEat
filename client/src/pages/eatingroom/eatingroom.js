@@ -337,15 +337,16 @@ class EatingRoomEntry extends Component {
                       </Button>
                     )}
 
-                    <Button
+                    { getId() === room.user ?
+                    (<Button
                       size="small"
                       variant="contained"
-                      disabled={getId() !== room.user}
                       color="primary"
                       onClick={e => this.onDelete(e, room._id)}
                     >
                       Delete
-                    </Button>
+                    </Button>) : 
+                    null}
                   </Grid>
                 </Grid>
               </CardContent>
