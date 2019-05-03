@@ -19,29 +19,37 @@ $alt-text: hsla(34%, 100%, 59%, 1);
     box-sizing: border-box;
   }
   .auth {
-    background: repeating-linear-gradient(45deg, #fa5754, #fa5754 10px, #ea5654 10px, #ea5654 20px);
+    background: repeating-linear-gradient(
+      45deg,
+      #fa5754,
+      #fa5754 10px,
+      #ea5654 10px,
+      #ea5654 20px
+    );
     height: 100%;
     width: 50%;
     float: left;
     box-sizing: border-box;
     display: flex;
     .auth-content {
+      box-shadow: 1px 1px 1px $dark, 2px 2px $dark, 3px 3px $dark, 4px 4px $dark,
+        5px 5px $dark, 6px 6px $dark;
       margin: auto;
       width: 92%;
       height: 92%;
-      border: solid white 8px;
-      border-radius: 3px;
+      border: solid $light 8px;
+      border-radius: 2px;
       background: $primary;
       .logo-title {
         font-family: "Pacifico", cursive;
-        color: white;
+        color: $light;
+        text-shadow: 1px 1px $dark, 2px 2px $dark, 3px 3px $dark, 4px 4px $dark,
+          5px 5px $dark, 6px 6px $dark;
         font-size: 3em;
         width: 100%;
         text-align: center;
         height: 1.4em;
-        // border-bottom: solid $dark 6px;
         border-radius: 5px;
-        text-shadow: gray 2px 0 10px;
       }
       .entry {
         i {

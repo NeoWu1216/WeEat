@@ -1,8 +1,8 @@
 $primary: hsla(1, 94%, 65%, 1);
-$light: hsla(351, 100, 96, 1);
-$dark: hsla(5, 60, 12, 1);
-$secondary: hsla(208, 53, 32, 1);
-$alt-text: hsla(34, 100, 59, 1);
+$light: hsla(351, 100%, 96%, 1);
+$dark: hsla(5, 60%, 12%, 1);
+$secondary: hsla(208, 53%, 32%, 1);
+$alt-text: hsla(34, 100%, 59%, 1);
 
 :local(.eatingroom) {
   color: $dark;
@@ -12,7 +12,7 @@ $alt-text: hsla(34, 100, 59, 1);
     background-size: cover;
     background-attachment: fixed;
     height: 100%;
-    padding: 5em 1em 1em 1em;
+    padding: 3em 1em 1em 1em;
     .eatingroom-list {
       // height: 100%;
       width: 100%;

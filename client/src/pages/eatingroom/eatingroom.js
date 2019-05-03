@@ -96,23 +96,33 @@ class EatingRoom extends Component {
           >
             <Grid
               item
-              container
               style={{
                 width: "65%",
                 height: "90%",
                 overflowY: "auto",
-                background: "rgba(0,0,0,0.5)"              }}
+                background: "hsla(5, 60%, 12%, 0.25)",
+                borderRadius: "3px"
+              }}
             >
-              <EatingRoomList
-                eatingrooms={this.state.eatingrooms}
-                notify={this.notify}
-              />
+              <Grid
+                container
+                direction="column"
+                alignItems="center"
+                justify="center"
+              >
+                <EatingRoomList
+                  eatingrooms={this.state.eatingrooms}
+                  notify={this.notify}
+                />
+              </Grid>
             </Grid>
+
             <Grid
               item
               style={{
                 width: "34%",
-                height: "525px"
+                height: "90%",
+                overflowY: "auto"
               }}
             >
               <EatingForm onSubmit={this.onSubmit} />
@@ -189,7 +199,6 @@ class EatingRoomEntry extends Component {
             container
             direction="row"
             alignItems="center"
-            // justify="center"
             style={{
               height: "100%"
             }}

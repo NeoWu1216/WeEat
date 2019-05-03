@@ -90,23 +90,16 @@ class Main extends Component {
                     }}
                   >
                     <Button
-                      className="main-btn-signup"
+                      className="main-btn login"
+                      onClick={() => this.handleClick(true)}
+                    >
+                      LOG IN
+                    </Button>
+                    <Button
+                      className="main-btn signup"
                       onClick={() => this.handleClick(false)}
                     >
                       SIGN UP
-                    </Button>
-                    <Button
-                      className="main-btn"
-                      color="secondary"
-                      onClick={() => this.handleClick(true)}
-                      style={
-                        {
-                          // marginLeft: "1em",
-                          // marginRight: "3em"
-                        }
-                      }
-                    >
-                      LOG IN
                     </Button>
                   </Grid>
                 </Grid>
