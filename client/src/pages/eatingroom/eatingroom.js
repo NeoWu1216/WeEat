@@ -38,14 +38,14 @@ class EatingRoom extends Component {
   }
 
   notify = (data, ix, mess) => {
-    if (mess === 'join') {
+    if (mess === "join") {
       let { eatingrooms } = this.state;
       eatingrooms[ix] = data;
       this.setState({ eatingrooms });
-    } else if (mess == 'delete') {
-      let { eatingrooms } = this.state
-      eatingrooms.splice(ix)
-      this.setState({eatingrooms})
+    } else if (mess == "delete") {
+      let { eatingrooms } = this.state;
+      eatingrooms.splice(ix);
+      this.setState({ eatingrooms });
     }
   };
 
@@ -105,21 +105,42 @@ class EatingRoom extends Component {
               style={{
                 width: "65%",
                 height: "90%",
-                overflowY: "auto",
                 background: "hsla(5, 60%, 12%, 0.25)",
                 borderRadius: "3px"
               }}
             >
               <Grid
                 container
-                direction="column"
-                alignItems="center"
+                direction="row"
                 justify="center"
+                style={{ width: "100%", height: "100%" }}
               >
-                <EatingRoomList
-                  eatingrooms={this.state.eatingrooms}
-                  notify={this.notify}
-                />
+                <Grid item style={{ width: "100%", height: "auto" }}>
+                  <Grid
+                    container
+                    direction="row"
+                    alignItems="center"
+                    justify="space-between"
+                    style={{ width: "100%" }}
+                  >
+                    <Button className="eatingroom-page-nav">Prev</Button>
+                    <Button className="eatingroom-page-nav">Next</Button>
+                  </Grid>
+                </Grid>
+                <Grid
+                  item
+                  style={{
+                    height: "90%",
+                    marginLeft: "-1%",
+                    width: "98%",
+                    overflowY: "auto"
+                  }}
+                >
+                  <EatingRoomList
+                    eatingrooms={this.state.eatingrooms}
+                    notify={this.notify}
+                  />
+                </Grid>
               </Grid>
             </Grid>
 
@@ -128,7 +149,8 @@ class EatingRoom extends Component {
               style={{
                 width: "34%",
                 height: "90%",
-                overflowY: "auto"
+                overflowY: "auto",
+                overflowX: "hidden"
               }}
             >
               <EatingForm onSubmit={this.onSubmit} />
@@ -172,7 +194,7 @@ class EatingRoomEntry extends Component {
     e.stopPropagation();
     deleteRoom(_id)
       .then(data => {
-        this.props.notify(data, 'delete');
+        this.props.notify(data, "delete");
       })
       .catch(err => {
         alert(getMessage(err));
@@ -184,7 +206,7 @@ class EatingRoomEntry extends Component {
     e.stopPropagation();
     postMember(_id)
       .then(data => {
-        this.props.notify(data, 'join');
+        this.props.notify(data, "join");
       })
       .catch(err => {
         alert(getMessage(err));
@@ -315,15 +337,15 @@ class EatingRoomEntry extends Component {
                       </Button>
                     )}
 
-                      <Button
-                        size="small"
-                        variant="contained"
-                        disabled={getId()!==room.user}
-                        color="primary"
-                        onClick={(e)=>this.onDelete(e, room._id)}
-                      >
-                        Delete
-                      </Button>
+                    <Button
+                      size="small"
+                      variant="contained"
+                      disabled={getId() !== room.user}
+                      color="primary"
+                      onClick={e => this.onDelete(e, room._id)}
+                    >
+                      Delete
+                    </Button>
                   </Grid>
                 </Grid>
               </CardContent>
