@@ -6,6 +6,7 @@ import { getRooms } from '../../api/eatingrooms'
 import Footer from "../../components/footer/footer";
 import { EatingRoomList } from '../../pages/eatingroom/eatingroom'
 
+
 class Eatingroom extends Component {
   constructor(props) {
     super(props);
@@ -36,10 +37,14 @@ class Eatingroom extends Component {
   };
 
   render() {
-    return <EatingRoomList
-      eatingrooms={this.state.eatingrooms}
-      notify={this.notify}
-    />
+    return (
+      <div id="profile_list_container">
+        <EatingRoomList
+          eatingrooms={this.state.eatingrooms}
+          notify={this.notify}
+        />
+      </div>
+    )
   }
 }
 
@@ -60,25 +65,27 @@ class Profile extends Component {
         </button>)
     return (
       <div>
-        <NavBar />
-        <div className="profile">
-          <div className="profile_left">
-            <div className="profile_fields">
-              <img className="avatar" src={avatar} alt="avatar" />
-              <hr />
-              <h3> Name: {name} </h3>
-              <h3> Email : {email} </h3>
-              <h3> Phone number : {phone} </h3>
-              <hr />
-              <h4> Description: {description} </h4>
-              {extra}
+        <div id="profile_bg">
+          <NavBar />
+          <div className="profile">
+            <div className="profile_left">
+              <div className="profile_fields">
+                <img className="avatar" src={avatar} alt="avatar" />
+                <hr />
+                <h3> Name: {name} </h3>
+                <h3> Email : {email} </h3>
+                <h3> Phone number : {phone} </h3>
+                <hr />
+                <h4> Description: {description} </h4>
+                {extra}
+              </div>
+            </div>
+            <div className="profile_right">
+              <Eatingroom />
             </div>
           </div>
-          <div className="profile_right">
-            <Eatingroom/>
-          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
     )
   }
