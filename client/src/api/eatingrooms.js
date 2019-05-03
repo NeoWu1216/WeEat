@@ -34,6 +34,7 @@ export function getRooms() {
         if (participants)
           return Promise.all(participants.map((uid)=>{
             return getUser(uid).then((user)=>{
+              user._id = uid
               data.users.push(user)
             })
           })).then(()=>{
