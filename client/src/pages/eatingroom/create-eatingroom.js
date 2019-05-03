@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom'
 import { postNewRoom } from '../../api/eatingrooms'
 import { getMessage } from '../../api/parser'
 import "./eatingroom.scss";
+import axios from 'axios'
 
 class EatingForm extends Component{
   constructor(props) {
@@ -12,12 +13,20 @@ class EatingForm extends Component{
     this.state = {
     	title: 'First post',
       date: '20:59', // start date
-      address:'Champaign', //meet point
-      restaurant:'Black Dog',
+      party_size: 0
     };
     this.handleChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    let state = this.props.location.state
+    if (state) {
+      this.address = state.location.address1;
+      this.image_url = state.image_url;
+      this.restaurant = state.name;
+    }
+
+    this.selectOptions = [2,3,4,5,6,7,8]
   }
+
   handleInputChange = (e) => {
     console.log(e.target.value)
     this.setState({[e.target.id]:e.target.value})
@@ -28,11 +37,12 @@ class EatingForm extends Component{
     event.preventDefault()
     event.stopPropagation()
     
-    let now = new Date()
-    now.setHours(this.state.date.substr(0,2))
-    now.setMinutes(this.state.date.substr(3,2))
-    postNewRoom({...this.state, date: now.toString()}).then((response)=>{
-      console.log('hello?')
+    let room = this.state 
+    room.address = this.address
+    room.restaurant = this.restaurant
+    room.image_url = this.image_url
+    room.party_size = this.selectOptions[room.party_size]
+    postNewRoom(room).then((response)=>{
       this.props.history.goBack()
       console.log(response)
     }).catch((err)=>{
@@ -40,9 +50,12 @@ class EatingForm extends Component{
     })
   }
   render() {
-    const party='2, 3, 4, 5, 6, 7, 8'
-    const selectOptions = party.split(', ');
-    const selectOptionsList = selectOptions.map((selectOption, index) => {
+    if (!this.restaurant || !this.address)
+      return <h3>Go back</h3>
+    console.log(this.props.location.state)
+
+    
+    const selectOptionsList = this.selectOptions.map((selectOption, index) => {
       return <option key={index} value={index}>{selectOption}</option>
     });
 
@@ -55,15 +68,23 @@ class EatingForm extends Component{
           </div>
           <div className="form-group">
             <label htmlFor="TimeInput">Start From</label>
-            <input id="date" name="start_time" type="time" min="10:00" max="21:00" required value={this.state.date} onChange={this.handleChange} className="form-control" />
+            <input id="date" name="start_time" type="datetime-local" required value={this.state.date} onChange={this.handleChange} className="form-control" />
           </div>
           <div className="form-group">
             <label htmlFor="MeetInput">Meet At</label>
-            <input type="text" id="address" required value={this.state.address} onChange={this.handleChange} className="form-control"/>
+            <p>{this.address}</p>
           </div>
           <div className="form-group">
             <label htmlFor="ResInput">What to Eat?</label>
-            <input type="text" id="restaurant" required value={this.state.restaurant} onChange={this.handleChange} className="form-control" />
+            <p>{this.restaurant}</p>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="SizeInput">Party Size</label><br />
+            <select id="party_size" name="party_size" value={this.state.party_size} onChange={this.handleInputChange}>
+              <option value='' disabled></option>
+              {selectOptionsList}
+            </select>
           </div>
 
           <input type="submit" value="Post Room" className="btn btn-primary" />
@@ -73,4 +94,4 @@ class EatingForm extends Component{
   }
 }
 
-export default EatingForm
+export default withRouter(EatingForm)

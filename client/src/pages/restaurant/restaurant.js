@@ -3,7 +3,7 @@ import './restaurant.scss';
 import axios from 'axios';
 import NavBar from "../../components/navbar/navbar";
 import Footer from "../../components/footer/footer";
-
+import {Redirect, withRouter} from 'react-router-dom'
 
 class Restaurant extends Component {
   render() {
@@ -140,8 +140,8 @@ class Container extends Component {
 class RestaurantList extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
+  
   render() {
     return (
       <div id="list_container">
@@ -154,10 +154,21 @@ class RestaurantList extends Component {
 class RestaurantEntry extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    // this.state = {redirect : false};
   }
+
+  onRedirect = (e) => {
+    let r = this.props.r
+    e.preventDefault()
+    e.stopPropagation()
+    this.props.history.push({pathname: '/create-eatingroom', state: r})
+    // this.setState({redirect: true})
+  }
+
   render() {
     let r = this.props.r
+    // if (this.state.redirect) 
+    //   return <Redirect to={{pathname: '/create-eatingroom', state: r}}/>
     return (
       <div key={r.name}>
         <div className="card">
@@ -174,9 +185,9 @@ class RestaurantEntry extends Component {
                 <li>Price: {r.price}</li><br />
                 <li>Details: <a href={r.url}>Yelp</a></li>
               </ul>
-              <div className="button">
-                <a href="https://www.w3schools.com">WeEat Now!</a>
-              </div>
+              <button className="eating_room_button" onClick={this.onRedirect}>
+                Redirect eating room
+              </button>
             </div>
           </div>
         </div>
@@ -185,4 +196,5 @@ class RestaurantEntry extends Component {
   }
 }
 
-export default Restaurant;
+RestaurantEntry = withRouter(RestaurantEntry)
+export default withRouter(Restaurant);

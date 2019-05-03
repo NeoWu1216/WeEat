@@ -38,9 +38,6 @@ class EatingRoom extends Component {
             </div>
             <div className="eating_room_left">
               <EatingRoomList eatingrooms={this.state.eatingrooms}/>
-              <button className="eating_room_button" onClick={()=>this.props.history.push('create-eatingroom')}>
-                Click me!
-              </button>
             </div>
             
             <div className="eating_room_right">

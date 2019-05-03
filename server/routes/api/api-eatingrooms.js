@@ -21,7 +21,8 @@ router.post('/', auth.required, (req, res) => {
     address: req.body.address,
     restaurant: req.body.restaurant,
     party_size: req.body.party_size,
-    participants: req.body.participants
+    participants: req.body.participants,
+    image_url: req.body.image_url
   });
   // add the eating room to user's list
   Users.findByIdAndUpdate(id,
