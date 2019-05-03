@@ -22,6 +22,10 @@ class EatingForm extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
+  handlePartySizeChange = e => {
+    this.setState({ party_size : e.target.value });
+  };
+
   handleSubmit = event => {
     /*url will be url of api*/
     event.preventDefault();
@@ -123,8 +127,9 @@ class EatingForm extends Component {
                     <div className="entry-dropdown">
                       <Select
                         className=".entry-dropdown"
+                        id = "party_size"
                         value={this.state.party_size}
-                        onChange={this.handleInputChange}
+                        onChange={this.handlePartySizeChange}
                       >
                         {/* <option value="" disabled /> */}
                         {selectOptionsList}

@@ -33,6 +33,7 @@ class EatingRoom extends Component {
     if (!this.state.mounted)
       getRooms({})
         .then(data => {
+          data.sort((a, b)=>(new Date(b.date) - new Date(a.date)))
           this.setState({ eatingrooms: data, all: data, mounted: true });
         })
         .catch(err => alert(getMessage(err)));
@@ -161,9 +162,8 @@ class EatingRoomEntry extends Component {
     if (!room) return null;
     if (room.users === undefined) return null;
     if (room.users === null) room.users = [];
-    let localdate = "Invalid";
+    let localdate = "Invalid date";
     if (room.date) {
-      localdate = new Date(room.date)
       localdate = new Date(room.date).toLocaleDateString() + " " +
                   new Date(room.date).toLocaleTimeString()
     }
