@@ -14,7 +14,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardHeader from "@material-ui/core/CardHeader";
 import { Button } from "@material-ui/core";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-
+import IconButton from "@material-ui/core/IconButton";
+import { getUser } from "../../api/user.js";
 const theme = createMuiTheme({
   palette: {
     primary: { light: "#ffebe", main: "#fa5552" },
@@ -24,29 +25,55 @@ const theme = createMuiTheme({
 class EatingRoom extends Component {
   constructor(props) {
     super(props);
-    this.state = {all:[], eatingrooms:[], mounted: false};
+    this.state = { all: [], eatingrooms: [], mounted: false };
   }
 
   componentDidMount() {
     if (!this.state.mounted)
       getRooms({})
         .then(data => {
-          this.setState({ eatingrooms: data, all:data, mounted: true });
+          this.setState({ eatingrooms: data, all: data, mounted: true });
         })
         .catch(err => alert(getMessage(err)));
   }
 
   onSubmit = data => {
-    console.log(data)
-    let {all} = this.state
-    let eatingrooms = all
-    eatingrooms = data.title ? eatingrooms.filter((x)=>(x.title && x.title.toLowerCase().includes(data.title.toLowerCase()))) : eatingrooms
-    eatingrooms = data.address ? eatingrooms.filter((x)=>(x.address && x.address.toLowerCase().includes(data.address.toLowerCase()))) : eatingrooms
-    eatingrooms = data.restaurant ? eatingrooms.filter((x)=>(x.restaurant && x.restaurant.toLowerCase().includes(data.restaurant.toLowerCase()))) : eatingrooms
-    eatingrooms = (data.party_size && data.party_size!=='any') ? eatingrooms.filter((x)=>(x.party_size && x.party_size == data.party_size)) : eatingrooms
-    eatingrooms = data.date ? eatingrooms.filter((x)=>(Math.abs(Date.parse(data.date)-Date.parse(x.date)) < 3600000)) : eatingrooms
-    console.log('submit',all, eatingrooms.map(x=>x.title))
-    this.setState({eatingrooms})
+    console.log(data);
+    let { all } = this.state;
+    let eatingrooms = all;
+    eatingrooms = data.title
+      ? eatingrooms.filter(
+          x =>
+            x.title && x.title.toLowerCase().includes(data.title.toLowerCase())
+        )
+      : eatingrooms;
+    eatingrooms = data.address
+      ? eatingrooms.filter(
+          x =>
+            x.address &&
+            x.address.toLowerCase().includes(data.address.toLowerCase())
+        )
+      : eatingrooms;
+    eatingrooms = data.restaurant
+      ? eatingrooms.filter(
+          x =>
+            x.restaurant &&
+            x.restaurant.toLowerCase().includes(data.restaurant.toLowerCase())
+        )
+      : eatingrooms;
+    eatingrooms =
+      data.party_size && data.party_size !== "any"
+        ? eatingrooms.filter(
+            x => x.party_size && x.party_size == data.party_size
+          )
+        : eatingrooms;
+    eatingrooms = data.date
+      ? eatingrooms.filter(
+          x => Math.abs(Date.parse(data.date) - Date.parse(x.date)) < 3600000
+        )
+      : eatingrooms;
+    console.log("submit", all, eatingrooms.map(x => x.title));
+    this.setState({ eatingrooms });
   };
 
   render() {
@@ -194,11 +221,17 @@ class EatingRoomEntry extends Component {
                 >
                   <Grid item style={{ width: "70%" }}>
                     <div className="eatingroom-participants">
-                      {room.participants.map(uid =>(<a onClick={()=>this.props.history.push('/profile/'+uid)}>
-                        { (uid === getId()) ? <i class="fas fa-user current-user" /> : <i class="fas fa-user" /> }
-                      </a>
-                      )
-                    )}
+                      {room.participants.map(uid => (
+                        <a
+                          onClick={() =>
+                            this.props.history.push("/profile/" + uid)
+                          }
+                        >
+                          <i class="fas fa-user" />
+
+                          {/* {getUser(uid).then(res=>res.email)} */}
+                        </a>
+                      ))}
                     </div>
                   </Grid>
                   <Grid item>
@@ -223,5 +256,5 @@ class EatingRoomEntry extends Component {
     );
   }
 }
-EatingRoomEntry = withRouter(EatingRoomEntry)
+EatingRoomEntry = withRouter(EatingRoomEntry);
 export default withRouter(EatingRoom);

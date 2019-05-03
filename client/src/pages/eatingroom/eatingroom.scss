@@ -30,8 +30,8 @@ $alt-text: hsla(34, 100, 59, 1);
       display: flex;
       align-items: center;
       font-size: 1.2em;
-      i {
-        width: 8%;
+      a {
+        width: 10%;
       }
       i.current-user {
         color: $alt-text;
