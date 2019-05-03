@@ -36,31 +36,33 @@ class Profile extends Component {
   render() {
     let { name, email, description, avatar, error } = this.state
     return (
-      <div className="edit-profile">
+      <div>
         <NavBar />
-        <div className="edit_form">
-        <img src={avatar} alt="avatar" />
-          <Form error={error !== null}>
-            <Form.Field>
-              <label>Avatar</label>
-              <input id="avatar" value={avatar} onChange={this.onInputChange} />
-            </Form.Field>
-            <Form.Field>
-              <label>Name</label>
-              <input id="name" value={name} onChange={this.onInputChange} />
-            </Form.Field>
-            <Form.Field>
-              <label>Email</label>
-              <input id="email" value={email} onChange={this.onInputChange} />
-            </Form.Field>
-            <Form.Field>
-              <label>Description</label>
-              <textarea id="description" value={description} onChange={this.onInputChange} />
-            </Form.Field>
-          </Form>
-          <Button primary onClick={this.onSubmit} className="submit_button" >
-            Submit Changes
+        <div className="edit-profile">
+          <div className="edit_form">
+            <img src={avatar} alt="avatar" />
+            <Form error={error !== null}>
+              <Form.Field>
+                <label>Avatar</label>
+                <input id="avatar" value={avatar} onChange={this.onInputChange} />
+              </Form.Field>
+              <Form.Field>
+                <label>Name</label>
+                <input id="name" value={name} onChange={this.onInputChange} />
+              </Form.Field>
+              <Form.Field>
+                <label>Email</label>
+                <input id="email" value={email} onChange={this.onInputChange} />
+              </Form.Field>
+              <Form.Field>
+                <label>Description</label>
+                <textarea id="description" value={description} onChange={this.onInputChange} />
+              </Form.Field>
+            </Form>
+            <Button primary onClick={this.onSubmit} className="submit_button" >
+              Submit Changes
           </Button>
+          </div>
         </div>
         <Footer />
       </div>
