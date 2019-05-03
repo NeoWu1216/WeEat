@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import './restaurant.scss';
-import axios from 'axios';
+import React, { Component } from "react";
+import "./restaurant.scss";
+import axios from "axios";
 import NavBar from "../../components/navbar/navbar";
 import Footer from "../../components/footer/footer";
-import { withRouter } from 'react-router-dom'
+import { withRouter } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 class Restaurant extends Component {
   render() {
@@ -15,34 +16,56 @@ class Restaurant extends Component {
           <Footer />
         </div>
       </div>
-    )
+    );
   }
 }
 
-
 class Container extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      location: '',
-      keyword: '',
+      location: "",
+      keyword: "",
       category: 0,
       open_now: false,
       sort_idx: 0,
-      category_map: ['', 'african', 'tradamerican', 'arabian', 'asianfusion', 'baguettes', 'bbq', 'bistros', 'breakfast_brunch', 'burgers', 'cafes', 'chinese', 'hotdogs', 'indpak', 'italian', 'japanese', 'korean', 'mediterranean', 'mexican', 'pizza', 'salad', 'sandwiches', 'thai', 'vegetarian'],
-      sort_map: ['best_match', 'rating', 'review_count', 'distance'],
+      category_map: [
+        "",
+        "african",
+        "tradamerican",
+        "arabian",
+        "asianfusion",
+        "baguettes",
+        "bbq",
+        "bistros",
+        "breakfast_brunch",
+        "burgers",
+        "cafes",
+        "chinese",
+        "hotdogs",
+        "indpak",
+        "italian",
+        "japanese",
+        "korean",
+        "mediterranean",
+        "mexican",
+        "pizza",
+        "salad",
+        "sandwiches",
+        "thai",
+        "vegetarian"
+      ],
+      sort_map: ["best_match", "rating", "review_count", "distance"],
       result: []
     };
 
     this.handleChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
   }
 
   handleInputChange(event) {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
 
     this.setState({
@@ -52,70 +75,106 @@ class Container extends Component {
   }
 
   handleSubmit(event) {
-    axios.get(`http://localhost:8010/proxy/v3/businesses/search`, {
-      headers: {
-        'Authorization': `Bearer ITSKhNoa4exeX_bVQ5_3q44kTeAvTJWOq05ilkdTkTLK7ShsqVpDWL89_5R5O3e3x7paO7-Ugj-rvLUcivOfLxq8v51-TKKnwSGVCHePcGvied7biNPvF3gpKmayXHYx`
-      },
-      params: {
-        categories: this.state.category_map[this.state.category],
-        location: this.state.location,
-        term: this.state.keyword,
-        open_now: this.state.open_now,
-        sort_by: this.state.sort_map[this.state.sort_idx]
-      }
-    }).then((res) => {
-      this.setState({
-        result: res.data.businesses
-      });
-    })
-      .catch((err) => {
-        console.log(err)
+    axios
+      .get(`http://localhost:8010/proxy/v3/businesses/search`, {
+        headers: {
+          Authorization: `Bearer ITSKhNoa4exeX_bVQ5_3q44kTeAvTJWOq05ilkdTkTLK7ShsqVpDWL89_5R5O3e3x7paO7-Ugj-rvLUcivOfLxq8v51-TKKnwSGVCHePcGvied7biNPvF3gpKmayXHYx`
+        },
+        params: {
+          categories: this.state.category_map[this.state.category],
+          location: this.state.location,
+          term: this.state.keyword,
+          open_now: this.state.open_now,
+          sort_by: this.state.sort_map[this.state.sort_idx]
+        }
       })
+      .then(res => {
+        this.setState({
+          result: res.data.businesses
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
 
     event.preventDefault();
-
   }
   handleSubmit2(event) {
     // console.log(this.state.result);
     event.preventDefault();
-
   }
 
   render() {
-    const category_list = 'None, African, American, Arabian, Asian Fusion, Baguettes, Barbeque, Bistros, Breakfast & Brunch, Burgers, Cafes, Chinese, Fast Food, Indian, Italian, Japanese, Korean, Mediterranean, Mexican, Pizza, Salad, Sandwiches, Thai, Vegetarian';
-    const selectOptions = category_list.split(', ');
+    const category_list =
+      "None, African, American, Arabian, Asian Fusion, Baguettes, Barbeque, Bistros, Breakfast & Brunch, Burgers, Cafes, Chinese, Fast Food, Indian, Italian, Japanese, Korean, Mediterranean, Mexican, Pizza, Salad, Sandwiches, Thai, Vegetarian";
+    const selectOptions = category_list.split(", ");
     const selectOptionsList = selectOptions.map((selectOption, index) => {
-      return <option key={index} value={index}>{selectOption}</option>
+      return (
+        <option key={index} value={index}>
+          {selectOption}
+        </option>
+      );
     });
-    const sort_list = 'Best Match, Highest Rating, Most Popular, Nearest'
-    const sortOptions = sort_list.split(', ');
+    const sort_list = "Best Match, Highest Rating, Most Popular, Nearest";
+    const sortOptions = sort_list.split(", ");
     const sortOptionsList = sortOptions.map((selectOption1, index1) => {
-      return <option key={index1} value={index1}>{selectOption1}</option>
+      return (
+        <option key={index1} value={index1}>
+          {selectOption1}
+        </option>
+      );
     });
     return (
       <div id="form_outer">
         <div className="left">
-          <form onSubmit={this.handleSubmit} >
+          <form onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <input type="text" placeholder="Location" name="location" required value={this.state.location} onChange={this.handleChange} className="form-control" id="LocationInput" />
+              <input
+                type="text"
+                placeholder="Location"
+                name="location"
+                required
+                value={this.state.location}
+                onChange={this.handleChange}
+                className="form-control"
+                id="LocationInput"
+              />
             </div>
             <div className="form-group">
-              <input name="keyword" placeholder="Keyword" type="text" value={this.state.keyword} onChange={this.handleChange} className="form-control" id="KeyInput" />
+              <input
+                name="keyword"
+                placeholder="Keyword"
+                type="text"
+                value={this.state.keyword}
+                onChange={this.handleChange}
+                className="form-control"
+                id="KeyInput"
+              />
             </div>
             <div className="form-group">
-              <label htmlFor="CategoryInput">Eating Category</label><br />
+              <label htmlFor="CategoryInput">Eating Category</label>
+              <br />
               <div className="custom-select">
-                <select name="category" value={this.state.category} onChange={this.handleChange}>
-                  <option value='' disabled></option>
+                <select
+                  name="category"
+                  value={this.state.category}
+                  onChange={this.handleChange}
+                >
+                  <option value="" disabled />
                   {selectOptionsList}
                 </select>
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="SortInput">Sort by</label><br />
+              <label htmlFor="SortInput">Sort by</label>
+              <br />
               <div className="custom-select">
-                <select name="sort_idx" value={this.state.sort_idx} onChange={this.handleChange}>
-                  <option value='' disabled></option>
+                <select
+                  name="sort_idx"
+                  value={this.state.sort_idx}
+                  onChange={this.handleChange}
+                >
+                  <option value="" disabled />
                   {sortOptionsList}
                 </select>
               </div>
@@ -127,7 +186,7 @@ class Container extends Component {
           <RestaurantList result={this.state.result} />
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -140,9 +199,11 @@ class RestaurantList extends Component {
   render() {
     return (
       <div id="list_container">
-        {this.props.result.map((r, index) => <RestaurantEntry r={r} key={index} />)}
+        {this.props.result.map((r, index) => (
+          <RestaurantEntry r={r} key={index} />
+        ))}
       </div>
-    )
+    );
   }
 }
 
@@ -153,17 +214,17 @@ class RestaurantEntry extends Component {
     this.state = {};
   }
 
-  onRedirect = (e) => {
-    let r = this.props.r
-    e.preventDefault()
-    e.stopPropagation()
-    this.props.history.push({ pathname: '/create-eatingroom', state: r })
+  onRedirect = e => {
+    let r = this.props.r;
+    e.preventDefault();
+    e.stopPropagation();
+    this.props.history.push({ pathname: "/create-eatingroom", state: r });
     // this.setState({redirect: true})
-  }
+  };
 
   render() {
-    let r = this.props.r
-    // if (this.state.redirect) 
+    let r = this.props.r;
+    // if (this.state.redirect)
     //   return <Redirect to={{pathname: '/create-eatingroom', state: r}}/>
     return (
       <div key={r.name}>
@@ -175,22 +236,32 @@ class RestaurantEntry extends Component {
             <h1>{r.name}</h1>
             <div className="card_right__details">
               <ul>
-                <li>Rating: {r.rating}</li><br />
-                <li>Phone: {r.display_phone}</li><br />
-                <li>Location: {r.location.display_address[0] + " "}{r.location.display_address[1]}</li><br />
-                <li>Price: {r.price}</li><br />
-                <li>Details: <a href={r.url}>Yelp</a></li>
+                <li>Rating: {r.rating}</li>
+                <br />
+                <li>Phone: {r.display_phone}</li>
+                <br />
+                <li>
+                  Location: {r.location.display_address[0] + " "}
+                  {r.location.display_address[1]}
+                </li>
+                <br />
+                <li>Price: {r.price}</li>
+                <br />
+                <li>
+                  Details: <a href={r.url}>Yelp</a>
+                </li>
               </ul>
-              <button className="eating_room_button" onClick={this.onRedirect}>
-                WeEat Now!
-              </button>
+              <Button variant="contained" onClick={this.onRedirect}>
+                make a room
+              </Button>
+              {/* <button className="eating_room_button" /> */}
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-RestaurantEntry = withRouter(RestaurantEntry)
+RestaurantEntry = withRouter(RestaurantEntry);
 export default withRouter(Restaurant);
