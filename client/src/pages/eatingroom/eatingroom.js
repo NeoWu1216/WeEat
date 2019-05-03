@@ -358,3 +358,4 @@ class EatingRoomEntry extends Component {
 }
 EatingRoomEntry = withRouter(EatingRoomEntry);
 export default withRouter(EatingRoom);
+export {EatingRoomList};

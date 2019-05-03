@@ -1,7 +1,48 @@
 import React, { Component } from 'react'
 import NavBar from "../../components/navbar/navbar";
 import { getId } from '../../storage/id'
+import { getMessage } from '../../api/parser'
+import { getRooms } from '../../api/eatingrooms'
 import Footer from "../../components/footer/footer";
+import { EatingRoomList } from '../../pages/eatingroom/eatingroom'
+
+class Eatingroom extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { all: [], eatingrooms: [], mounted: false };
+  }
+
+  componentDidMount() {
+    if (!this.state.mounted)
+      getRooms({})
+        .then(data => {
+          data.sort((a, b) => new Date(b.date) - new Date(a.date));
+          data = data.filter(x => x.user === getId())
+          this.setState({ eatingrooms: data, all: data, mounted: true });
+        })
+        .catch(err => alert(getMessage(err)));
+  }
+
+  notify = (data, ix, mess) => {
+    if (mess === "join") {
+      let { eatingrooms } = this.state;
+      eatingrooms[ix] = data;
+      this.setState({ eatingrooms });
+    } else if (mess == "delete") {
+      let { eatingrooms } = this.state;
+      eatingrooms.splice(ix);
+      this.setState({ eatingrooms });
+    }
+  };
+
+  render() {
+    return <EatingRoomList
+      eatingrooms={this.state.eatingrooms}
+      notify={this.notify}
+    />
+  }
+}
+
 
 class Profile extends Component {
   constructor(props) {
@@ -37,7 +78,7 @@ class Profile extends Component {
             </div>
           </div>
           <div className="profile_right">
-
+            <Eatingroom/>
           </div>
         </div>
         <Footer />
