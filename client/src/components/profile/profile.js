@@ -18,7 +18,7 @@ class Eatingroom extends Component {
       getRooms({})
         .then(data => {
           data.sort((a, b) => new Date(b.date) - new Date(a.date));
-          data = data.filter(x => x.user === getId())
+          data = data.filter(x => x.user === this.props._id)
           this.setState({ eatingrooms: data, all: data, mounted: true });
         })
         .catch(err => alert(getMessage(err)));
@@ -52,7 +52,6 @@ class Eatingroom extends Component {
 class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
 
   render() {
@@ -81,7 +80,7 @@ class Profile extends Component {
               </div>
             </div>
             <div className="profile_right">
-              <Eatingroom />
+              <Eatingroom _id={_id}/>
             </div>
           </div>
           <Footer />
