@@ -1,4 +1,4 @@
-#restaurant_outer {
+#rest_background{
   background-image: url("https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/2096239/1360/816/m1/fpnw/wm1/uqjpga6azzmsalgr0h74sfyp1z6wbpuuomjdvbz37olr43h5z0lwcan4fbgn4ihb-.jpg?1483703240&s=0c6d0f13a8332e966bd509c7d8dfb53c");
   background-size: cover;
   background-position: center center;
@@ -9,43 +9,43 @@
 #form_outer {
   width: 90%;
   padding-top: 10%;
+  form {
+    margin-left: 10%;
+    padding: 30px;
+    width: 70%;
+    overflow: hidden;
+    background: lightblue;
+    border-radius: 10px;
+    label {
+      font-size: 16px;
+      color: black;
+      cursor: pointer;
+    }
+    input {
+      font-size: 15px;
+      margin: 15px 0;
+      padding: 15px 10px;
+      width: 100%;
+      outline: none;
+      border: 1px solid #bbb;
+      border-radius: 20px;
+      display: inline-block;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-transition: 0.2s ease all;
+      -moz-transition: 0.2s ease all;
+      -ms-transition: 0.2s ease all;
+      -o-transition: 0.2s ease all;
+      transition: 0.2s ease all;
+    }
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: cornflowerblue;
+    }
+  }
 }
 
-form {
-  margin-left: 10%;
-  padding: 30px;
-  width: 70%;
-  overflow: hidden;
-  background: lightblue;
-  border-radius: 10px;
-}
-form label {
-  font-size: 16px;
-  color: black;
-  cursor: pointer;
-}
-form input {
-  font-size: 15px;
-  margin: 15px 0;
-  padding: 15px 10px;
-  width: 100%;
-  outline: none;
-  border: 1px solid #bbb;
-  border-radius: 20px;
-  display: inline-block;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: 0.2s ease all;
-  -moz-transition: 0.2s ease all;
-  -ms-transition: 0.2s ease all;
-  -o-transition: 0.2s ease all;
-  transition: 0.2s ease all;
-}
-form input[type="text"]:focus,
-form input[type="password"]:focus {
-  border-color: cornflowerblue;
-}
 input[type="submit"] {
   padding: 5% 30% 5% 30%;
   margin: auto;
@@ -81,6 +81,8 @@ input[type="submit"]:active {
 .right {
   float: right;
   width: 55%;
+  height: auto;
+  min-height: 700px;
 }
 
 .list_container {

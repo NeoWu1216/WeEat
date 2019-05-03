@@ -5,7 +5,8 @@ import Footer from "../../components/footer/footer";
 
 class Profile extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {};
   }
 
   render() {

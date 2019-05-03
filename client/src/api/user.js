@@ -12,8 +12,9 @@ export function getUser(_id) {
 }
 
 export function setUser(_id, data) {
-  if (_id !== getId())
-    throw "Can't set other user!"
+  if (_id !== getId()){
+    throw new Error("Can't set other user!")
+  }
   validate(data, ['name', 'email', 'description'])
   return axios.put(rootUrl+'users/'+_id, data, getAuthHeader())
     .then(getData)

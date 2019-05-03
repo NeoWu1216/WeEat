@@ -18,6 +18,10 @@ npm run server
 
 npm run client
 
+# Run the Yelp api proxy server
+
+lcp --proxyUrl https://api.yelp.com
+
 # Other Info
 
 Server runs on http://localhost:4000 and client on http://localhost:3000
