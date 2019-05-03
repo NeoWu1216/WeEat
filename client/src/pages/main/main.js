@@ -88,7 +88,8 @@ class Main extends Component {
                 alignItems="left"
                 justify="center"
                 style={{
-                  paddingLeft: "1em"
+                  paddingTop: "1em",
+                  paddingLeft: ".25em"
                 }}
               >
                 <Grid item>A place to</Grid>
