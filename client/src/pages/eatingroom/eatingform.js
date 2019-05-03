@@ -1,24 +1,18 @@
 import React, { Component } from "react";
-import NavBar from "../../components/navbar/navbar";
-import Footer from "../../components/footer/footer";
-import { withRouter } from "react-router-dom";
-import { postNewRoom } from "../../api/eatingrooms";
-import { getMessage } from "../../api/parser";
-import styles from "./eatingroom.scss";
 
 class EatingForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    	title: '',
-      address:'', 
-      restaurant:'',
+      title: "",
+      address: "",
+      restaurant: "",
       party_size: 0,
-      date: '',
+      date: ""
     };
     this.handleChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.selectOptions = ['any',2,3,4,5,6,7,8]
+    this.selectOptions = ["any", 2, 3, 4, 5, 6, 7, 8];
   }
   handleInputChange = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -29,16 +23,20 @@ class EatingForm extends Component {
     event.preventDefault();
     event.stopPropagation();
 
-    let party_size = this.selectOptions[this.state.party_size]
-    this.props.onSubmit({...this.state, party_size})
+    let party_size = this.selectOptions[this.state.party_size];
+    this.props.onSubmit({ ...this.state, party_size });
   };
   render() {
     const selectOptionsList = this.selectOptions.map((selectOption, index) => {
-      return <option key={index} value={index}>{selectOption}</option>
+      return (
+        <option key={index} value={index}>
+          {selectOption}
+        </option>
+      );
     });
 
     return (
-      <div className="eating-room">
+      <div className="eatingform">
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="TitleInput">Room Name</label>

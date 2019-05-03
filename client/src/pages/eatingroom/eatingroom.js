@@ -16,6 +16,7 @@ import { Button } from "@material-ui/core";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import { getUser } from "../../api/user.js";
+
 const theme = createMuiTheme({
   palette: {
     primary: { light: "#ffebe", main: "#fa5552" },
@@ -85,19 +86,26 @@ class EatingRoom extends Component {
             container
             direction="row"
             justify="space-between"
-            alignItems="center"
+            // alignItems="center"
           >
             <Grid
               item
               style={{
                 width: "65%",
-                height: "600px",
+                height: "525px",
                 overflowY: "auto"
               }}
             >
               <EatingRoomList eatingrooms={this.state.eatingrooms} />
             </Grid>
-            <Grid item>
+            <Grid
+              item
+              style={{
+                width: "34%",
+                height: "75vh"
+                // overflowY: "auto"
+              }}
+            >
               <EatingForm onSubmit={this.onSubmit} />
             </Grid>
           </Grid>
@@ -111,7 +119,7 @@ class EatingRoom extends Component {
 class EatingRoomList extends Component {
   render() {
     let result = this.props.eatingrooms;
-    console.log(result);
+    // console.log(result);
     return (
       <div className="eatingroom-list">
         {result.map((r, index) => (
@@ -132,7 +140,7 @@ class EatingRoomEntry extends Component {
     e.stopPropagation();
     postMember(_id)
       .then(data => {
-        this.setState({ room: data });
+        // this.setState({ room: data });
       })
       .catch(err => {
         alert(getMessage(err));
@@ -142,8 +150,8 @@ class EatingRoomEntry extends Component {
   render() {
     let { room } = this.state;
     if (!room) return null;
-    if (room.participants === undefined) return null;
-    if (room.participants === null) room.participants = [];
+    if (room.users === undefined) return null;
+    if (room.users === null) room.users = [];
     return (
       <MuiThemeProvider theme={theme}>
         <Card
@@ -219,33 +227,39 @@ class EatingRoomEntry extends Component {
                     paddingTop: "1em"
                   }}
                 >
-                  <Grid item style={{ width: "70%" }}>
+                  <Grid item style={{ width: "50%" }}>
                     <div className="eatingroom-participants">
-                      {room.participants.map(uid => (
+                      {room.users.map(user => (
                         <a
                           onClick={() =>
-                            this.props.history.push("/profile/" + uid)
+                            this.props.history.push("/profile/" + user._id)
                           }
                         >
-                          <i class="fas fa-user" />
-
-                          {/* {getUser(uid).then(res=>res.email)} */}
+                          <img src={user.avatar} alt="user-avatar" />
                         </a>
                       ))}
                     </div>
                   </Grid>
                   <Grid item>
-                    {
-                    room.participants.length === room.party_size ? null :
-                    (<Button
-                      size="small"
-                      variant="outlined"
-                      onClick={e => this.onJoin(e, room._id)}
-                      color="primary"
-                    >
-                      Join
-                    </Button>)
-                    }
+                    {room.users.length === room.party_size ? (
+                      <Button
+                        size="small"
+                        variant="contained"
+                        disabled
+                        color="primary"
+                      >
+                        Full
+                      </Button>
+                    ) : (
+                      <Button
+                        size="small"
+                        variant="outlined"
+                        onClick={e => this.onJoin(e, room._id)}
+                        color="primary"
+                      >
+                        Join
+                      </Button>
+                    )}
                   </Grid>
                 </Grid>
               </CardContent>
