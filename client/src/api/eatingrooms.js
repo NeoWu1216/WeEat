@@ -10,6 +10,15 @@ function postRoom(data) {
     .then(getData)
 }
 
+function getUserInfo(participants) {
+  return Promise.all(participants.map((uid)=>{
+    return getUser(uid).then((user)=>{
+      user._id = uid
+      return user
+    })
+  }))
+}
+
 export function postNewRoom(data) {
   let user = getId()
   data.user = user
@@ -32,12 +41,8 @@ export function getRooms() {
         let {participants} = data
         data.users = []
         if (participants)
-          return Promise.all(participants.map((uid)=>{
-            return getUser(uid).then((user)=>{
-              user._id = uid
-              data.users.push(user)
-            })
-          })).then(()=>{
+          getUserInfo(participants).then((users)=>{
+            data.users = users
             return data
           })
         return data
@@ -46,5 +51,12 @@ export function getRooms() {
 }
 
 export function postMember(_id) {
-  return axios.post(rootUrl+'eatingrooms/join/'+_id, {}, getAuthHeader()).then(getData)
+  return axios.post(rootUrl+'eatingrooms/join/'+_id, {}, getAuthHeader())
+    .then(getData)
+    .then((data)=>{
+      return getUserInfo(data.participants).then((users)=>{
+        data.users = users
+        return data
+      })
+    })
 }
