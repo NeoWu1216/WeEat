@@ -7,6 +7,7 @@ const { Schema } = mongoose;
 const UsersSchema = new Schema({
   name: { type: String },
   email: { type: String, required: true, unique: true },
+  phone: { type: String },
   hash: { type: String },
   salt: { type: String },
   eatingrooms: [{ type: String }],

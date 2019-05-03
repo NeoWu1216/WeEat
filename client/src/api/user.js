@@ -6,8 +6,8 @@ import {getId} from '../storage/id'
 export function getUser(_id) {
   return axios.get(rootUrl+'users/'+_id, getAuthHeader())
     .then(getData)
-    .then(({eatingrooms, email, name, description, avatar})=>(
-      {eatingrooms, email, name, description, avatar}
+    .then(({eatingrooms, email, phone, name, description, avatar})=>(
+      {eatingrooms, email, phone, name, description, avatar}
     ))
 }
 
