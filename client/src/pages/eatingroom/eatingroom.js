@@ -202,14 +202,17 @@ class EatingRoomEntry extends Component {
                     </div>
                   </Grid>
                   <Grid item>
-                    <Button
+                    {
+                    room.participants.length === room.party_size ? null :
+                    (<Button
                       size="small"
                       variant="outlined"
                       onClick={e => this.onJoin(e, room._id)}
                       color="primary"
                     >
                       Join
-                    </Button>
+                    </Button>)
+                    }
                   </Grid>
                 </Grid>
               </CardContent>
