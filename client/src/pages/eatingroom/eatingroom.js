@@ -161,6 +161,12 @@ class EatingRoomEntry extends Component {
     if (!room) return null;
     if (room.users === undefined) return null;
     if (room.users === null) room.users = [];
+    let localdate = "Invalid";
+    if (room.date) {
+      localdate = new Date(room.date)
+      localdate = new Date(room.date).toLocaleDateString() + " " +
+                  new Date(room.date).toLocaleTimeString()
+    }
     return (
       <MuiThemeProvider theme={theme}>
         <Card
@@ -226,7 +232,7 @@ class EatingRoomEntry extends Component {
                   <div className="card-label">
                     <i class="fas fa-calendar-day" />
                   </div>
-                  {room.date}
+                  {localdate}
                 </div>
                 <Grid
                   container
