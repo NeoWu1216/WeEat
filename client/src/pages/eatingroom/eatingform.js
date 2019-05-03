@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import Button from "@material-ui/core/Button";
 
 class EatingForm extends Component {
   constructor(props) {
@@ -135,12 +136,15 @@ class EatingForm extends Component {
                     </div>
                   </div>
                 </Grid>
-                <Grid item>
-                  <input
-                    type="submit"
-                    value="Search"
-                    style={{ margin: "auto" }}
-                  />
+                <Grid item style={{ textAlign: "center" }}>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    className="form-button"
+                    onClick={this.handleSubmit}
+                  >
+                    Search
+                  </Button>
                 </Grid>
               </Grid>
             </form>

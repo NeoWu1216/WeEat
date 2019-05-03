@@ -12,7 +12,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardHeader from "@material-ui/core/CardHeader";
-import { Button } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
@@ -31,18 +31,17 @@ class EatingRoom extends Component {
     if (!this.state.mounted)
       getRooms({})
         .then(data => {
-          data.sort((a, b) => (new Date(b.date) - new Date(a.date)))
+          data.sort((a, b) => new Date(b.date) - new Date(a.date));
           this.setState({ eatingrooms: data, all: data, mounted: true });
         })
         .catch(err => alert(getMessage(err)));
   }
 
   notify = (data, ix) => {
-    let { eatingrooms } = this.state
-    eatingrooms[ix] = data
-    this.setState({ eatingrooms })
-  }
-
+    let { eatingrooms } = this.state;
+    eatingrooms[ix] = data;
+    this.setState({ eatingrooms });
+  };
 
   onSubmit = data => {
     let { all } = this.state;
@@ -105,7 +104,10 @@ class EatingRoom extends Component {
                 background: "rgba(0,0,0,0.5)",
               }}
             >
-              <EatingRoomList eatingrooms={this.state.eatingrooms} notify={this.notify} />
+              <EatingRoomList
+                eatingrooms={this.state.eatingrooms}
+                notify={this.notify}
+              />
             </Grid>
             <Grid
               item
@@ -126,7 +128,7 @@ class EatingRoom extends Component {
 
 class EatingRoomList extends Component {
   notifyParent(data, ix) {
-    this.props.notify(data, ix)
+    this.props.notify(data, ix);
   }
 
   render() {
@@ -134,7 +136,11 @@ class EatingRoomList extends Component {
     return (
       <div className="eatingroom-list">
         {result.map((r, index) => (
-          <EatingRoomEntry r={r} key={index} notify={(data) => this.notifyParent(data, index)} />
+          <EatingRoomEntry
+            r={r}
+            key={index}
+            notify={data => this.notifyParent(data, index)}
+          />
         ))}
       </div>
     );
@@ -151,14 +157,13 @@ class EatingRoomEntry extends Component {
     e.stopPropagation();
     postMember(_id)
       .then(data => {
-        this.props.notify(data)
+        this.props.notify(data);
         // this.setState({ room: data });
       })
       .catch(err => {
         alert(getMessage(err));
       });
   }
-
 
   render() {
     let room = this.props.r;
@@ -167,12 +172,9 @@ class EatingRoomEntry extends Component {
     if (room.users === null) room.users = [];
     let localdate = "Invalid date";
     if (room.date) {
-      localdate = new Date(room.date).toLocaleDateString() + " " +
-        new Date(room.date).toLocaleTimeString()
     }
     return (
       <MuiThemeProvider theme={theme}>
-        <Card
           style={{
             margin: "1% auto 0 auto",
             width: "96%",
@@ -262,23 +264,25 @@ class EatingRoomEntry extends Component {
                   </Grid>
                   <Grid item>
                     {room.users.length === room.party_size ||
-                      room.participants.indexOf(getId()) >= 0 ? (
-                        <Button
-                          size="small"
-                          variant="contained"
-                          disabled
-                          color="primary"
-                        >
-                          {(room.users.length === room.party_size) ? 'Full' : 'Joined'}
-                        </Button>
-                      ) : (
-                        <Button
-                          size="small"
-                          variant="outlined"
-                          onClick={e => this.onJoin(e, room._id)}
-                          color="primary"
-                        >
-                          Join
+                    room.participants.indexOf(getId()) >= 0 ? (
+                      <Button
+                        size="small"
+                        variant="contained"
+                        disabled
+                        color="primary"
+                      >
+                        {room.users.length === room.party_size
+                          ? "Full"
+                          : "Joined"}
+                      </Button>
+                    ) : (
+                      <Button
+                        size="small"
+                        variant="outlined"
+                        onClick={e => this.onJoin(e, room._id)}
+                        color="primary"
+                      >
+                        Join
                       </Button>
                       )}
                   </Grid>
@@ -286,7 +290,7 @@ class EatingRoomEntry extends Component {
               </CardContent>
             </Grid>
           </Grid>
-        </Card>
+        {/* </Card> */}
       </MuiThemeProvider>
     );
   }
