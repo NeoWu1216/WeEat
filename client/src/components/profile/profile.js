@@ -58,16 +58,13 @@ class Profile extends Component {
       extra = (<button className="button1" onClick={onEdit} >
         Edit Profile
         </button>)
-    var imgstyle = {
-      width: "300px",
-    };
     return (
       <div>
         <NavBar />
         <div className="profile">
           <div className="profile_left">
             <div className="profile_fields">
-              <img className="avatar" style={imgstyle} src={avatar} alt="avatar" />
+              <img className="avatar" src={avatar} alt="avatar" />
               <hr />
               <h3> Name: {name} </h3>
               <h3> Email : {email} </h3>
