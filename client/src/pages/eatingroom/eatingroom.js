@@ -12,10 +12,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardHeader from "@material-ui/core/CardHeader";
-import { Button } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import { getUser } from "../../api/user.js";
 
 const theme = createMuiTheme({
   palette: {
@@ -33,18 +31,17 @@ class EatingRoom extends Component {
     if (!this.state.mounted)
       getRooms({})
         .then(data => {
-          data.sort((a, b)=>(new Date(b.date) - new Date(a.date)))
+          data.sort((a, b) => new Date(b.date) - new Date(a.date));
           this.setState({ eatingrooms: data, all: data, mounted: true });
         })
         .catch(err => alert(getMessage(err)));
   }
 
   notify = (data, ix) => {
-    let {eatingrooms} = this.state
-    eatingrooms[ix] = data
-    this.setState({eatingrooms})
-  }
-
+    let { eatingrooms } = this.state;
+    eatingrooms[ix] = data;
+    this.setState({ eatingrooms });
+  };
 
   onSubmit = data => {
     let { all } = this.state;
@@ -103,7 +100,10 @@ class EatingRoom extends Component {
                 overflowY: "auto"
               }}
             >
-              <EatingRoomList eatingrooms={this.state.eatingrooms} notify={this.notify}/>
+              <EatingRoomList
+                eatingrooms={this.state.eatingrooms}
+                notify={this.notify}
+              />
             </Grid>
             <Grid
               item
@@ -124,7 +124,7 @@ class EatingRoom extends Component {
 
 class EatingRoomList extends Component {
   notifyParent(data, ix) {
-    this.props.notify(data, ix)
+    this.props.notify(data, ix);
   }
 
   render() {
@@ -132,7 +132,11 @@ class EatingRoomList extends Component {
     return (
       <div className="eatingroom-list">
         {result.map((r, index) => (
-          <EatingRoomEntry r={r} key={index} notify={(data)=>this.notifyParent(data,index)}/>
+          <EatingRoomEntry
+            r={r}
+            key={index}
+            notify={data => this.notifyParent(data, index)}
+          />
         ))}
       </div>
     );
@@ -148,7 +152,7 @@ class EatingRoomEntry extends Component {
     e.stopPropagation();
     postMember(_id)
       .then(data => {
-        this.props.notify(data)
+        this.props.notify(data);
         // this.setState({ room: data });
       })
       .catch(err => {
@@ -156,7 +160,6 @@ class EatingRoomEntry extends Component {
       });
   }
 
-  
   render() {
     let room = this.props.r;
     if (!room) return null;
@@ -164,8 +167,10 @@ class EatingRoomEntry extends Component {
     if (room.users === null) room.users = [];
     let localdate = "Invalid date";
     if (room.date) {
-      localdate = new Date(room.date).toLocaleDateString() + " " +
-                  new Date(room.date).toLocaleTimeString()
+      localdate =
+        new Date(room.date).toLocaleDateString() +
+        " " +
+        new Date(room.date).toLocaleTimeString();
     }
     return (
       <MuiThemeProvider theme={theme}>
@@ -265,7 +270,9 @@ class EatingRoomEntry extends Component {
                         disabled
                         color="primary"
                       >
-                        {(room.users.length === room.party_size) ? 'Full' : 'Joined'}
+                        {room.users.length === room.party_size
+                          ? "Full"
+                          : "Joined"}
                       </Button>
                     ) : (
                       <Button

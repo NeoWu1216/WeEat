@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
+import Button from "@material-ui/core/Button";
 
 class EatingForm extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class EatingForm extends Component {
   };
 
   handlePartySizeChange = e => {
-    this.setState({ party_size : e.target.value });
+    this.setState({ party_size: e.target.value });
   };
 
   handleSubmit = event => {
@@ -127,7 +127,7 @@ class EatingForm extends Component {
                     <div className="entry-dropdown">
                       <Select
                         className=".entry-dropdown"
-                        id = "party_size"
+                        id="party_size"
                         value={this.state.party_size}
                         onChange={this.handlePartySizeChange}
                       >
@@ -137,12 +137,15 @@ class EatingForm extends Component {
                     </div>
                   </div>
                 </Grid>
-                <Grid item>
-                  <input
-                    type="submit"
-                    value="Search"
-                    className="btn btn-primary"
-                  />
+                <Grid item style={{ textAlign: "center" }}>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    className="form-button"
+                    onClick={this.handleSubmit}
+                  >
+                    Search
+                  </Button>
                 </Grid>
               </Grid>
             </form>

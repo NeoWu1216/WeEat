@@ -104,6 +104,11 @@ $alt-text: hsla(34, 100, 59, 1);
           }
         }
       }
+      .form-button {
+        background: $alt-text;
+        color: $dark;
+        // width: ;
+      }
     }
   }
 }
