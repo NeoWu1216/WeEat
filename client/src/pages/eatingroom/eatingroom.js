@@ -142,8 +142,8 @@ class EatingRoomEntry extends Component {
   render() {
     let { room } = this.state;
     if (!room) return null;
-    if (room.participants === undefined) return null;
-    if (room.participants === null) room.participants = [];
+    if (room.users === undefined) return null;
+    if (room.users === null) room.users = [];
     return (
       <MuiThemeProvider theme={theme}>
         <Card
@@ -221,13 +221,13 @@ class EatingRoomEntry extends Component {
                 >
                   <Grid item style={{ width: "70%" }}>
                     <div className="eatingroom-participants">
-                      {room.participants.map(uid => (
+                      {room.users.map(user => (
                         <a
                           onClick={() =>
-                            this.props.history.push("/profile/" + uid)
+                            this.props.history.push("/profile/" + user._id)
                           }
                         >
-                          <i class="fas fa-user" />
+                          <img width={20} height={20} src={user.avatar} />
 
                           {/* {getUser(uid).then(res=>res.email)} */}
                         </a>
@@ -236,7 +236,9 @@ class EatingRoomEntry extends Component {
                   </Grid>
                   <Grid item>
                     {
-                    room.participants.length === room.party_size ? null :
+                    (room.users.length === room.party_size || 
+                     room.participants.indexOf(getId()) >= 0)
+                      ? null :
                     (<Button
                       size="small"
                       variant="outlined"
