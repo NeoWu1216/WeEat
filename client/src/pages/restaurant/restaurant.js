@@ -104,7 +104,7 @@ class Container extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="CategoryInput">Eating Category</label><br />
-              <div id="select_style">
+              <div className="custom-select">
                 <select name="category" value={this.state.category} onChange={this.handleChange}>
                   <option value='' disabled></option>
                   {selectOptionsList}
@@ -113,17 +113,11 @@ class Container extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="SortInput">Sort by</label><br />
-              <div id="select_style">
+              <div className="custom-select">
                 <select name="sort_idx" value={this.state.sort_idx} onChange={this.handleChange}>
                   <option value='' disabled></option>
                   {sortOptionsList}
                 </select>
-              </div>
-            </div>
-            <div className="form-group">
-              <input name="open_now" type="checkbox" value={this.state.open_now} onChange={this.handleChange} className="form-control" id="OpenInput" />
-              <div id='open'>
-                <label htmlFor="OpenInput">Open Now?</label>
               </div>
             </div>
             <input type="submit" value="Search" className="btn btn-primary" />
@@ -186,7 +180,7 @@ class RestaurantEntry extends Component {
                 <li>Details: <a href={r.url}>Yelp</a></li>
               </ul>
               <button className="eating_room_button" onClick={this.onRedirect}>
-                Redirect eating room
+                WeEat Now!
               </button>
             </div>
           </div>
