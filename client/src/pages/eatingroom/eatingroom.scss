@@ -62,7 +62,7 @@ $alt-text: hsla(34, 100%, 59%, 1);
       form {
         height: 100%;
         .form-title {
-          font-size: 3.5em;
+          font-size: 3em;
           text-align: center;
         }
       }
@@ -83,7 +83,6 @@ $alt-text: hsla(34, 100%, 59%, 1);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px auto;
     margin: 0 auto;
     label {
       float: left;
@@ -98,12 +97,12 @@ $alt-text: hsla(34, 100%, 59%, 1);
       display: flex;
       justify-content: center;
       align-content: center;
-      width: 65%;
+      width: 60%;
       float: right;
       border-radius: 50px;
       background-color: $light;
       color: $dark;
-      height: 30px;
+      height: 25px;
       input {
         width: 90%;
         background: none;
