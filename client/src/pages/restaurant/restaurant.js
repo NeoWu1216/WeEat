@@ -251,7 +251,17 @@ class RestaurantEntry extends Component {
                   Details: <a href={r.url}>Yelp</a>
                 </li>
               </ul>
-              <Button variant="contained" onClick={this.onRedirect}>
+              <Button
+                variant="contained"
+                onClick={this.onRedirect}
+                size="small"
+                style={{
+                  background: "hsla(208, 53%, 32%, 1)",
+                  color: "hsla(351, 100%, 96%, 1)",
+                  float: "right",
+                  marginTop: "10px"
+                }}
+              >
                 make a room
               </Button>
               {/* <button className="eating_room_button" /> */}
