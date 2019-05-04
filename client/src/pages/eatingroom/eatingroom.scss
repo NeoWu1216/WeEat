@@ -62,7 +62,7 @@ $alt-text: hsla(34, 100%, 59%, 1);
       form {
         height: 100%;
         .form-title {
-          font-size: 3em;
+          font-size: 3.5em;
           text-align: center;
         }
       }
@@ -72,17 +72,18 @@ $alt-text: hsla(34, 100%, 59%, 1);
       }
     }
   }
-  .form-group.details {
-    background: rebeccapurple;
-    // margin: 5 auto;
-    height: 100%;
-  }
+  // .form-group.details {
+  //   background: rebeccapurple;
+  //   // margin: 5 auto;
+  //   height: 100%;
+  // }
   .form-group {
     height: 100%;
     width: 90%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 50px auto;
     margin: 0 auto;
     label {
       float: left;
@@ -97,12 +98,12 @@ $alt-text: hsla(34, 100%, 59%, 1);
       display: flex;
       justify-content: center;
       align-content: center;
-      width: 60%;
+      width: 65%;
       float: right;
       border-radius: 50px;
       background-color: $light;
       color: $dark;
-      height: 25px;
+      height: 30px;
       input {
         width: 90%;
         background: none;
@@ -135,12 +136,10 @@ $alt-text: hsla(34, 100%, 59%, 1);
       width: 60%;
       border-radius: 3px;
       height: 90%;
-      background: $primary;
+      background: $dark;
       .title {
         margin: 0.25em 0;
         font-size: 3em;
-        text-shadow: 1px 1px $dark, 2px 2px $dark, 3px 3px $dark, 4px 4px $dark,
-          5px 5px $primary, 6px 6px $primary;
       }
       .post-room {
         color: light;
