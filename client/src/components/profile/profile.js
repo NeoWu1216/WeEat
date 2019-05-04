@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import NavBar from "../../components/navbar/navbar";
-import { getId } from '../../storage/id'
-import { getMessage } from '../../api/parser'
-import { getRooms } from '../../api/eatingrooms'
+import { getId } from "../../storage/id";
+import { getMessage } from "../../api/parser";
+import { getRooms } from "../../api/eatingrooms";
 import Footer from "../../components/footer/footer";
-import { EatingRoomList } from '../../pages/eatingroom/eatingroom'
-import styles from '../../pages/profile/profile.scss'
+import { EatingRoomList } from "../../pages/eatingroom/eatingroom";
+import styles from "../../pages/profile/profile.scss";
 
 class Eatingroom extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Eatingroom extends Component {
       getRooms({})
         .then(data => {
           data.sort((a, b) => new Date(b.date) - new Date(a.date));
-          data = data.filter(x => x.user === this.props._id)
+          data = data.filter(x => x.user === this.props._id);
           this.setState({ eatingrooms: data, all: data, mounted: true });
         })
         .catch(err => alert(getMessage(err)));
@@ -33,6 +33,10 @@ class Eatingroom extends Component {
       let { eatingrooms } = this.state;
       eatingrooms.splice(ix);
       this.setState({ eatingrooms });
+    } else if (mess == "leave") {
+      let { eatingrooms } = this.state;
+      eatingrooms[ix] = data;
+      this.setState({ eatingrooms });
     }
   };
 
@@ -44,10 +48,9 @@ class Eatingroom extends Component {
           notify={this.notify}
         />
       </div>
-    )
+    );
   }
 }
-
 
 class Profile extends Component {
   constructor(props) {
@@ -55,13 +58,17 @@ class Profile extends Component {
   }
 
   render() {
-    let { _id, name, email, phone, description, avatar, onEdit } = this.props
-    description = description ? description : "This user haven't posted anything"
-    let extra = null
+    let { _id, name, email, phone, description, avatar, onEdit } = this.props;
+    description = description
+      ? description
+      : "This user haven't posted anything";
+    let extra = null;
     if (getId() === _id)
-      extra = (<button className="button1" onClick={onEdit} >
-        Edit Profile
-        </button>)
+      extra = (
+        <button className="button1" onClick={onEdit}>
+          Edit Profile
+        </button>
+      );
     return (
       <div className={styles.profile}>
         <div id="profile_bg">
@@ -80,13 +87,13 @@ class Profile extends Component {
               </div>
             </div>
             <div className="profile_right">
-              <Eatingroom _id={_id}/>
+              <Eatingroom _id={_id} />
             </div>
           </div>
           <Footer />
         </div>
       </div>
-    )
+    );
   }
 }
 

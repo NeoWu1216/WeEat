@@ -3,7 +3,12 @@ import NavBar from "../../components/navbar/navbar";
 import Footer from "../../components/footer/footer";
 import EatingForm from "./eatingform";
 import { withRouter } from "react-router-dom";
-import { getRooms, postMember, deleteRoom, deleteMember } from "../../api/eatingrooms";
+import {
+  getRooms,
+  postMember,
+  deleteRoom,
+  deleteMember
+} from "../../api/eatingrooms";
 import { getMessage } from "../../api/parser";
 import { getId } from "../../storage/id";
 import styles from "./eatingroom.scss";
@@ -58,34 +63,34 @@ class EatingRoom extends Component {
     let eatingrooms = all;
     eatingrooms = data.title
       ? eatingrooms.filter(
-        x =>
-          x.title && x.title.toLowerCase().includes(data.title.toLowerCase())
-      )
+          x =>
+            x.title && x.title.toLowerCase().includes(data.title.toLowerCase())
+        )
       : eatingrooms;
     eatingrooms = data.address
       ? eatingrooms.filter(
-        x =>
-          x.address &&
-          x.address.toLowerCase().includes(data.address.toLowerCase())
-      )
+          x =>
+            x.address &&
+            x.address.toLowerCase().includes(data.address.toLowerCase())
+        )
       : eatingrooms;
     eatingrooms = data.restaurant
       ? eatingrooms.filter(
-        x =>
-          x.restaurant &&
-          x.restaurant.toLowerCase().includes(data.restaurant.toLowerCase())
-      )
+          x =>
+            x.restaurant &&
+            x.restaurant.toLowerCase().includes(data.restaurant.toLowerCase())
+        )
       : eatingrooms;
     eatingrooms =
       data.party_size && data.party_size !== "any"
         ? eatingrooms.filter(
-          x => x.party_size && x.party_size === data.party_size
-        )
+            x => x.party_size && x.party_size === data.party_size
+          )
         : eatingrooms;
     eatingrooms = data.date
       ? eatingrooms.filter(
-        x => Math.abs(Date.parse(data.date) - Date.parse(x.date)) < 3600000
-      )
+          x => Math.abs(Date.parse(data.date) - Date.parse(x.date)) < 3600000
+        )
       : eatingrooms;
     this.setState({ eatingrooms });
   };
@@ -119,22 +124,10 @@ class EatingRoom extends Component {
                 justify="center"
                 style={{ width: "100%", height: "100%" }}
               >
-                <Grid item style={{ width: "100%", height: "auto" }}>
-                  <Grid
-                    container
-                    direction="row"
-                    alignItems="center"
-                    justify="space-between"
-                    style={{ width: "100%" }}
-                  >
-                    <Button className="eatingroom-page-nav">Prev</Button>
-                    <Button className="eatingroom-page-nav">Next</Button>
-                  </Grid>
-                </Grid>
                 <Grid
                   item
                   style={{
-                    height: "90%",
+                    height: "98%",
                     marginLeft: "-1%",
                     width: "98%",
                     overflowY: "auto"
@@ -227,7 +220,7 @@ class EatingRoomEntry extends Component {
         this.props.notify(data, "leave");
       })
       .catch(err => {
-        console.log(err.response)
+        console.log(err.response);
         alert(getMessage(err));
       });
   }
@@ -333,20 +326,18 @@ class EatingRoomEntry extends Component {
                     </div>
                   </Grid>
                   <Grid item>
-                    {
-                      getId() === room.user ? null : 
-                      room.participants.indexOf(getId()) >= 0 ?
-                      (
-                        <Button
-                          size="small"
-                          variant="outlined"
-                          onClick={e => this.onLeave(e, room._id)}
-                          color="primary"
-                        >
-                          Leave
-                        </Button>
-                      ) :
-                      room.users.length === room.party_size ? (
+                    {getId() === room.user ? null : room.participants.indexOf(
+                        getId()
+                      ) >= 0 ? (
+                      <Button
+                        size="small"
+                        variant="outlined"
+                        onClick={e => this.onLeave(e, room._id)}
+                        color="primary"
+                      >
+                        Leave
+                      </Button>
+                    ) : room.users.length === room.party_size ? (
                       <Button
                         size="small"
                         variant="contained"
@@ -366,17 +357,17 @@ class EatingRoomEntry extends Component {
                       >
                         Join
                       </Button>
-                    ) }
-
-                    <Button
-                      size="small"
-                      variant="contained"
-                      disabled={getId() !== room.user}
-                      color="primary"
-                      onClick={e => this.onDelete(e, room._id)}
-                    >
-                      Delete
-                    </Button>
+                    )}
+                    {getId() !== room.user ? null : (
+                      <Button
+                        size="small"
+                        variant="contained"
+                        color="primary"
+                        onClick={e => this.onDelete(e, room._id)}
+                      >
+                        Delete
+                      </Button>
+                    )}
                   </Grid>
                 </Grid>
               </CardContent>
